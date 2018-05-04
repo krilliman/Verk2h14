@@ -1,0 +1,37 @@
+@model BookCave.Models.ViewModels.RegisterViewModel
+
+<h1>Register</h1>
+
+<form asp-action="Register" asp-controller="Account" class="form-horizontal">
+    <div class="form-group">
+        <input type="email" asp-for="Email" class="form-control" placeholder="Enter email...">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Name" class="form-control" placeholder="Enter name...">
+    </div>
+    <div class="form-group">
+        <input type="password" asp-for="Password" class="form-control" placeholder="Enter password...">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Address" class="form-control" placeholder="Enter Address Here(Optional)">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="AddressLine" class="form-control" placeholder="Enter AddressLine Here(Optional)">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="PostalCode" class="form-control" placeholder="Enter postal code Here(Optional)">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="State" class="form-control" placeholder="Enter state Here(Optional)">
+    </div>
+    <div class="form-group">
+        <input type="text" asp-for="Country" class="form-control" placeholder="Enter country Here(Optional)">
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Image</label>
+        <input type="file" asp-for="Image" class="form-control" accept=".png,.jpg,.jepg" id="UserPhoto">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-defualt">Register</button>
+    </div>
+</form>

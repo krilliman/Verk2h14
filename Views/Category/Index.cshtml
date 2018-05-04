@@ -1,0 +1,10 @@
+@model List<BookCave.Models.ViewModels.CategoryViewModel>
+
+<div class="jumbotron">
+    <ul>
+        @foreach(var category in @Model)
+        {
+            <li><a asp-action="SubCategories" asp-controller="Category" asp-route-id="@category.Id">@category.Name</a></li>
+        }
+    </ul>
+</div>    
