@@ -22,16 +22,11 @@ namespace BookCave.Services
 
 
         
-        /*
         public List<BookViewModel> GetAllBooks()
-        {
-           
-            Þetta er dæmi um hvernig við tölum við sambærlegt repo sem nær i bækunar fyrir okkur
-             
-            var books = _bookRepo.GetAllBooks();
-            return books;
+        {    
+            var Book = _bookRepo.GetAllBooks();
+            return Book;
             
         }
-        */
     }
 }
