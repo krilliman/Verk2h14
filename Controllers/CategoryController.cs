@@ -25,7 +25,7 @@ namespace BookCave.Controllers
         
         public IActionResult SubCategories(int id)
         {
-            var subCategory = _categoryService.GetAllSubCategoires(id);
+            var subCategory = _categoryService.GetAllSubCategories(id);
             return View(subCategory);
         }
         

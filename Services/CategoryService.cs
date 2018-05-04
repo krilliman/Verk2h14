@@ -16,13 +16,13 @@ namespace BookCave.Services
 
         public List<CategoryViewModel> GetAllCategories()
         {
-            var Categories = _categoryRepo.AllCategorys();
+            var Categories = _categoryRepo.AllCategories();
             return Categories;
         }
 
-        public List<SubCategoryViewModel> GetAllSubCategoires(int id)
+        public List<SubCategoryViewModel> GetAllSubCategories(int id)
         {
-            var SubCategories = _categoryRepo.GetAllSubCategory(id);
+            var SubCategories = _categoryRepo.GetAllSubCategories(id);
             return SubCategories;
         }
 
