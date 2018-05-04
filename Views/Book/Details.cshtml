@@ -5,3 +5,28 @@
     <p>@Model.Description</p>
     <p>@Model.Rating</p>
 </div>
+
+<!-- This is the Area where you type in your comment and your rating for the book -->
+<div Id="RateArea">
+    <form asp-action="SaveRate" asp-controller="Book" >
+        <label asp-for="Comment">Comment</label>
+        <textarea asp-for="Comment">Enter comment here...</textarea>
+        <label asp-for="Rate">Rate</label>
+        <input type="radio" asp-for="Rate" value=1>1
+        <input type="radio" asp-for="Rate" value=2>2
+        <input type="radio" asp-for="Rate" value=3>3
+        <input type="radio" asp-for="Rate" value=4>4
+        <input type="radio" asp-for="Rate" value=5>5
+        <input type="hidden" name="BookId" value=@Model.Id asp-for="BookId">
+        <input type="submit" value="Rate">
+    </form>
+</div>
+
+<!-- Prints out all the ratings in the model -->
+<div id="RatedArea">
+    <div>
+        @foreach(var book in @Model.Ratings)
+        {
+            <p>@book.Id , @book.Comment , @book.Rate</p>
+        }
+    </div>
