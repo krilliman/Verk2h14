@@ -14,5 +14,12 @@ namespace BookCave.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult AddToCart(int BookId)
+        {
+
+            return View();
+        }
     }
 }

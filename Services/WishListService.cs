@@ -13,5 +13,9 @@ namespace BookCave.Services
         {
             _bookRepo = new WishListRepo();
         }
+        public void AddToWishList(int BookId)
+        {
+            
+        }
     }
 }
