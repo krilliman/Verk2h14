@@ -1,7 +1,10 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
-    <div>
-        @foreach(var book in @Model)
-        {
-            <p>@book.Id , @book.Name , @book.Rating.ToString("0.0")</p>
-        }
-    </div>
+<div>
+    @foreach(var book in @Model)
+    {   
+        <div>
+            <a asp-action="Details" asp-controller="Book" asp-route-id="@book.Id">@book.Name</a>
+            <p>Book Rateing: @book.Rating.ToString("0.0")</p>
+        </div>
+    }
+</div>
