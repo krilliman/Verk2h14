@@ -14,12 +14,10 @@ namespace BookCave.Services
             _profileRepo = new ProfileRepo();
         }
 
-        /*
-        public UserViewModel GetUser(string Email)
+        public WishListViewModel GetMyWishList(int Id)
         {
-            var User = _profileRepo.GetUser(Email);
-            return User;
-        } 
-        */
+            var MyWishList = _profileRepo.GetMyWishList(Id);
+            return MyWishList;
+        }
     }
 }

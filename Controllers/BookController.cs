@@ -15,11 +15,13 @@ namespace BookCave.Controllers
     {
         private BookService _bookService;
         private RatingService _ratingService;
+        private WishListService _wishListService;
 
         public BookController()
         {
             _bookService = new BookService();
             _ratingService = new RatingService();
+            _wishListService = new WishListService();
         }
        public IActionResult Details(int id)
        {
@@ -28,6 +30,18 @@ namespace BookCave.Controllers
            Book.Ratings = ratings;
            return View(Book);
        }
+
+        [HttpPost]
+        public IActionResult AddToWishList(int BookId, int WishListId)
+        {
+            var WishListItem = new WishListItem()
+            {
+                BookId = BookId,
+                WishListId = WishListId
+            };
+            _wishListService.AddToWishList(WishListItem);
+            return RedirectToAction("Details", "Book", new { id = BookId });
+        }
 
 
 

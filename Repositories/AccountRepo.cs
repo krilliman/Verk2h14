@@ -15,7 +15,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public void AddUserToTable(RegisterViewModel Model)
+        public int AddUserToTable(RegisterViewModel Model)
         {
             /*
             Here I fetch the id of the last registerd user and create a Id for the Lists in our
@@ -41,6 +41,7 @@ namespace BookCave.Repositories
             };
             _db.UserInformationTable.Add(UserInfo);
             _db.SaveChanges();
+            return NextId;
         }
     }
 }

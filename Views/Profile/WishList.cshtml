@@ -1,0 +1,11 @@
+@await Html.PartialAsync("_ProfilePartial")
+@model BookCave.Models.ViewModels.WishListViewModel
+<h2>WishList</h2>
+<div class="col-sm-8 jumbotron">
+    <ul>
+        @foreach(var Book in @Model.Items)
+        {
+            <li><a asp-action="Details" asp-controller="Book" asp-route-id="@Book.BookId">@Book.BookName</a></li>
+        }
+    </ul>
+</div>

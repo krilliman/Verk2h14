@@ -39,11 +39,12 @@ namespace BookCave.Controllers
 
             if(result.Succeeded)
             {
-                _accountService.AddUserToTable(model);
+                var UserTableID = _accountService.AddUserToTable(model);
                 //the user is successfuly registered
                 // Add the concatenated first and last name as fullName claims
-
+                Console.WriteLine("ID: " + UserTableID);
                 await _userManager.AddClaimAsync(user, new Claim("Email", $"{model.Email}"));
+                await _userManager.AddClaimAsync(user, new Claim("Id", $"{UserTableID}"));
                 await _signInManager.SignInAsync(user, false);
 
 

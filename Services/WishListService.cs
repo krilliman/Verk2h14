@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Models.EntityModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -7,15 +8,15 @@ namespace BookCave.Services
     public class WishListService
     {
 
-        private WishListRepo _bookRepo;
+        private WishListRepo _wishListRepo;
 
         public WishListService()
         {
-            _bookRepo = new WishListRepo();
+            _wishListRepo = new WishListRepo();
         }
-        public void AddToWishList(int BookId)
+        public void AddToWishList(WishListItem Model)
         {
-            
+            _wishListRepo.AddToWishList(Model);
         }
     }
 }

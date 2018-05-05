@@ -14,10 +14,11 @@ namespace BookCave.Services
             _accountRepo = new AccountRepo();
         }
 
-        public void AddUserToTable(RegisterViewModel Model)
+        public int AddUserToTable(RegisterViewModel Model)
         {
-            _accountRepo.AddUserToTable(Model);
+            var UserTableID = _accountRepo.AddUserToTable(Model);
+            return UserTableID;
         }
-        
+
     }
 }
