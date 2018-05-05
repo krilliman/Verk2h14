@@ -39,6 +39,9 @@
     font-family: sans-serif;
 }
 
+#Test{
+    height: 100px;
+}
 
 #sidebar{
     position: fixed;

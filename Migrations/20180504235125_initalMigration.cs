@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BookCave.Migrations
 {
-    public partial class updatedDatabase : Migration
+    public partial class initalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,9 +61,10 @@ namespace BookCave.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Isbn = table.Column<int>(nullable: false),
+                    Isbn = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     PublishDate = table.Column<DateTime>(nullable: false),
+                    PublisherId = table.Column<int>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
                     Stock = table.Column<int>(nullable: false),
                     SubcategoryID = table.Column<int>(nullable: false),
@@ -76,17 +77,31 @@ namespace BookCave.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CardInformationListTable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CardInformationItemId1 = table.Column<int>(nullable: false),
+                    CardInformationItemId2 = table.Column<int>(nullable: false),
+                    CardInformationItemId3 = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CardInformationListTable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CardInformationTable",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CardHolder = table.Column<string>(nullable: true),
+                    CardInformationListId = table.Column<int>(nullable: false),
                     CardNumber = table.Column<string>(nullable: true),
-                    Cvc = table.Column<int>(nullable: false),
                     ExpireMonth = table.Column<int>(nullable: false),
-                    ExpireYear = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    ExpireYear = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,6 +116,7 @@ namespace BookCave.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BookId = table.Column<int>(nullable: false),
                     CartId = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -113,8 +129,7 @@ namespace BookCave.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
@@ -132,6 +147,34 @@ namespace BookCave.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CategoryTable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItemTable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BookId = table.Column<int>(nullable: false),
+                    OrderListId = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItemTable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderListTable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderListTable", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -178,6 +221,23 @@ namespace BookCave.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserInformationTable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AddressBookId = table.Column<int>(nullable: false),
+                    CardInformationListId = table.Column<int>(nullable: false),
+                    CartId = table.Column<int>(nullable: false),
+                    Username = table.Column<string>(nullable: true),
+                    WishListId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserInformationTable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WishListItemTable",
                 columns: table => new
                 {
@@ -189,6 +249,18 @@ namespace BookCave.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WishListItemTable", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WishListTable",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WishListTable", x => x.Id);
                 });
         }
 
@@ -207,6 +279,9 @@ namespace BookCave.Migrations
                 name: "BookTable");
 
             migrationBuilder.DropTable(
+                name: "CardInformationListTable");
+
+            migrationBuilder.DropTable(
                 name: "CardInformationTable");
 
             migrationBuilder.DropTable(
@@ -219,6 +294,12 @@ namespace BookCave.Migrations
                 name: "CategoryTable");
 
             migrationBuilder.DropTable(
+                name: "OrderItemTable");
+
+            migrationBuilder.DropTable(
+                name: "OrderListTable");
+
+            migrationBuilder.DropTable(
                 name: "PublisherTable");
 
             migrationBuilder.DropTable(
@@ -228,10 +309,13 @@ namespace BookCave.Migrations
                 name: "SubCategoryTable");
 
             migrationBuilder.DropTable(
-                name: "WishList");
+                name: "UserInformationTable");
 
             migrationBuilder.DropTable(
                 name: "WishListItemTable");
+
+            migrationBuilder.DropTable(
+                name: "WishListTable");
         }
     }
 }

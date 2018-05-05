@@ -27,7 +27,6 @@ namespace BookCave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            Console.WriteLine("Test");
             if(!ModelState.IsValid){ return View();} //nota error handling fyrir okkar verk
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
@@ -36,19 +35,16 @@ namespace BookCave.Controllers
 
             if(result.Succeeded)
             {
-                Console.WriteLine("enters Succeeded");
                 //the user is successfuly registered
                 // Add the concatenated first and last name as fullName claims
 
                 await _userManager.AddClaimAsync(user, new Claim("Email", $"{model.Email}"));
                 await _signInManager.SignInAsync(user, false);
 
-                Console.WriteLine("Register Successful");
 
                 return RedirectToAction("Index", "Home");
             }
 
-            Console.WriteLine("Register Not Successful");
             return View();
 
         }
