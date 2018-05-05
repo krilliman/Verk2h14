@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
 using BookCave.Models.ViewModels;
+using BookCave.Models.EntityModels;
 
 namespace BookCave.Repositories
 {
@@ -40,7 +42,16 @@ namespace BookCave.Repositories
                             Rating = Cg.Rating 
                         }).ToList();
             return Books;
+        }  
+        public void UpdateRating(List<RateViewModel> ratings)
+        {
+            var book = ratings[0].BookId;
+            var totalrating = ratings.Average(i=>i.Rate);
+            Book TheBook = (from B in _db.BookTable
+                                     where B.Id == book
+                                     select B).FirstOrDefault();
+            TheBook.Rating = totalrating;
+            _db.SaveChanges();
         }
-         
     }
 }

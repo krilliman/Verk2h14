@@ -2,6 +2,6 @@
     <div>
         @foreach(var book in @Model)
         {
-            <p>@book.Id , @book.Name , @book.Rating</p>
+            <p>@book.Id , @book.Name , @book.Rating.ToString("0.0")</p>
         }
     </div>

@@ -26,5 +26,9 @@ namespace BookCave.Services
             return Book;
             
         }
+        public void UpdateRating(List<RateViewModel> ratings)
+        {
+            _bookRepo.UpdateRating(ratings);
+        }
     }
 }

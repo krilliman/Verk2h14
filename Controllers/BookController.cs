@@ -59,6 +59,8 @@ namespace BookCave.Controllers
            var Book = _bookService.GetBook(Model.BookId);
            //Sends the request to the RatingService
            _ratingService.SaveRate(NewRate);
+           var ratings = _ratingService.GetRatings(Model.BookId);
+           _bookService.UpdateRating(ratings);
            return RedirectToAction("Details", "Book", new { id = Book.Id });
        }
     }
