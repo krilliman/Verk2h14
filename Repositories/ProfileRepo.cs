@@ -14,11 +14,24 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        /*
-        public UserViewModel GetUser(string email)
+        public WishListViewModel GetMyWishList(int Id)
         {
-            var user = (from user in _db.)
+            /*
+            Here im fetching all WishListItems with wishListId equal to Id, 
+            then i create a list out of it and make the List in WishListViewModel
+            be equal to that list and return the WishListViewModel up to the controller.
+             */
+            var ListItems = (from Wl in _db.WishListItemTable
+                            join Bk in _db.BookTable on Wl.BookId equals Bk.Id
+                            where Wl.WishListId == Id
+                            select new WishListItemViewModel
+                            {
+                                Id = Wl.Id,
+                                BookId = Bk.Id,
+                                BookName = Bk.Name
+                            }).ToList();
+            var MyWishList = new WishListViewModel(){Id = Id, Items = ListItems};
+            return MyWishList;
         }
-        */
     }
 }

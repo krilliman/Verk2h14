@@ -18,7 +18,28 @@ namespace BookCave.Controllers
             _profileService = new ProfileService();
         }
 
-        public IActionResult Index(string id)
+        public IActionResult Index(int Id)
+        {
+            return View();
+        }
+        public IActionResult PaymentInformation(int Id)
+        {
+            return View();
+        }
+        public IActionResult WishList(int Id)
+        {
+            var MyWishList = _profileService.GetMyWishList(Id);
+            return View(MyWishList);
+        }
+        public IActionResult OrderHistory(int Id)
+        {
+            return View();
+        }
+        public IActionResult AddressBook(int Id)
+        {
+            return View();
+        }
+        public IActionResult Edit(int Id)
         {
             return View();
         }

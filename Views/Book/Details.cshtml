@@ -1,3 +1,10 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models.ViewModels
+@using BookCave.Models.EntityModels
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
 @model BookCave.Models.ViewModels.BookViewModel
 
 <div class="jumbotron">
@@ -5,20 +12,35 @@
     <p>@Model.Description</p>
     <p>@Model.Rating</p>
 </div>
+<!-- 
+<form asp-action="AddToWisList" asp-controller="Book">
+    <img src="~/images/WishList.png">
+</form>
+-->
+<form asp-action="AddToWishList" asp-controller="Book">
+    <input type="hidden" name="BookId" value="@Model.Id">
+    <input type="hidden" name="WishListId" value="@claim">
+    <input type="submit" value="AddToWishList" class="btn btn-default">
+</form>
 
 <!-- This is the Area where you type in your comment and your rating for the book -->
 <div Id="RateArea">
     <form asp-action="SaveRate" asp-controller="Book" >
-        <label asp-for="Comment">Comment</label>
-        <textarea asp-for="Comment">Enter comment here...</textarea>
-        <label asp-for="Rate">Rate</label>
-        <input type="radio" asp-for="Rate" value=1>1
-        <input type="radio" asp-for="Rate" value=2>2
-        <input type="radio" asp-for="Rate" value=3>3
-        <input type="radio" asp-for="Rate" value=4>4
-        <input type="radio" asp-for="Rate" value=5>5
-        <input type="hidden" name="BookId" value=@Model.Id asp-for="BookId">
-        <input type="submit" value="Rate">
+        <div class="form-group">
+            <label asp-for="Comment">Comment</label>
+            <textarea asp-for="Comment" class="form-control">Enter comment here...</textarea>
+            <div class="form-check from-check-inline">
+                <label class="form-check input"> Rate
+                    <input type="radio" class="form-check-input" asp-for="Rate" value=1>1
+                    <input type="radio" class="form-check-input" asp-for="Rate" value=2>2
+                    <input type="radio" class="form-check-input" asp-for="Rate" value=3>3
+                    <input type="radio" class="form-check-input" asp-for="Rate" value=4>4
+                    <input type="radio" class="form-check-input" asp-for="Rate" value=5>5
+                </label>
+            </div>
+            <input type="hidden" name="BookId" value=@Model.Id asp-for="BookId">
+            <input type="submit" value="Rate" class="btn btn-default">
+        </div>
     </form>
 </div>
 
@@ -27,6 +49,6 @@
     <div>
         @foreach(var book in @Model.Ratings)
         {
-            <p>@book.Id , @book.Comment , @book.Rate</p>
+            <p>@book.Id: @book.Comment , @book.Rate</p>
         }
     </div>
