@@ -16,7 +16,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<CategoryViewModel> AllCategorys()
+        public List<CategoryViewModel> AllCategories()
         {
             var Categories = (from cg in _db.CategoryTable
                             select new CategoryViewModel
@@ -27,7 +27,7 @@ namespace BookCave.Repositories
             return Categories;
         }
 
-        public List<SubCategoryViewModel> GetAllSubCategory(int id)
+        public List<SubCategoryViewModel> GetAllSubCategories(int id)
         {
             var SubCategorys = (from sc in _db.SubCategoryTable
                                 where sc.CategoryId == id

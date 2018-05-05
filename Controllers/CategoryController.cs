@@ -17,20 +17,30 @@ namespace BookCave.Controllers
         {
             _categoryService = new CategoryService();
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
-            var Categorys = _categoryService.GetAllCategories();
-            return View(Categorys);
+            var Categories = _categoryService.GetAllCategories();
+            return View(Categories);
         }
+
         public IActionResult SubCategories(int id)
         {
-            var subCategory = _categoryService.GetAllSubCategoires(id);
+            var subCategory = _categoryService.GetAllSubCategories(id);
             return View(subCategory);
         }
+
         public IActionResult AllInSubCategory(int id)
         {
             var books = _categoryService.GetAllBooks(id);
             return View(books);  
+        }
+        public IActionResult AllCategories()
+        {
+            var MainCategoriesList = _categoryService.GetAllCategories();
+            return Json(MainCategoriesList);
+        
         }
     }
 }
