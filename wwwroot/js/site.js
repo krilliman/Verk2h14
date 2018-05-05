@@ -38,8 +38,7 @@ $("#payment-info").click(function(){
 
 
 
-
-
+})
 
 
 
