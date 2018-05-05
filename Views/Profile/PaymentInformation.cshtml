@@ -1,1 +1,29 @@
 @await Html.PartialAsync("_ProfilePartial")
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models.ViewModels
+@using BookCave.Models.EntityModels
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
+@model BookCave.Models.ViewModels.PaymentListViewModel
+<div class="col-sm-6">
+    <h4>Payment1</h4>
+    <div class="jumbotron">
+        <ul>
+            <li>@Model.Address1.CardNumber</li>
+            <li>@Model.Address1.CardHolder</li>
+            <li>@Model.Address1.ExpireMonth</li>
+            <li>@Model.Address1.ExpireYear</li>
+        </ul>
+    </div>
+    <h4>Payment2</h4>
+    <div class="jumbotron">
+
+    </div>
+    <h4>Payment3</h4>
+    <div class="jumbotron">
+
+    </div>
+</div>
+
