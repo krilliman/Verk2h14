@@ -1,4 +1,7 @@
 // Write your JavaScript code.
+
+$( document ).ready(function() {
+
 $("#payment-info").click(function(){
     console.log("clicked");
     $.get("PaymentIfno" , function(data, status){
@@ -13,3 +16,30 @@ $("#payment-info").click(function(){
         console.log(err);
     })
 })
+
+    $("#cat-link").one("click", function () {
+        $.get("Category/AllCategories", function(data, status) {
+            var catList = "testlinkFromJS";
+            $("#cat-list").append(catList);
+            
+            for (var i = 0; i < data.length; i++) {
+                var category = "<li>" + data[i].name + "</li>";
+                $("#cat-list").append(category);
+            }
+            // $("#cat-link").prop('disabled', true);
+        })
+        .fail(function(err) {
+            alert("err");
+        })
+    })
+    
+
+
+
+
+
+
+
+
+
+
