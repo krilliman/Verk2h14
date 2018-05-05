@@ -20,7 +20,6 @@ namespace BookCave.Controllers
 
         public IActionResult Index(string id)
         {
-            Console.WriteLine("ID:" + id);
             return View();
         }
     }

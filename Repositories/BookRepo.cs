@@ -28,7 +28,7 @@ namespace BookCave.Repositories
             return Book;
         }
 
-        /*
+        
         public List<BookViewModel> GetAllBooks()
         {
             var Books = (from Cg in _db.BookTable
@@ -41,6 +41,6 @@ namespace BookCave.Repositories
                         }).ToList();
             return Books;
         }
-         */
+         
     }
 }

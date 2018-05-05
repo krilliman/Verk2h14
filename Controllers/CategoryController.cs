@@ -22,18 +22,15 @@ namespace BookCave.Controllers
             var Categorys = _categoryService.GetAllCategories();
             return View(Categorys);
         }
-        
         public IActionResult SubCategories(int id)
         {
             var subCategory = _categoryService.GetAllSubCategories(id);
             return View(subCategory);
         }
-        
         public IActionResult AllInSubCategory(int id)
         {
             var books = _categoryService.GetAllBooks(id);
             return View(books);  
         }
-        
     }
 }

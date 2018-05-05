@@ -4,7 +4,7 @@
     <ul>
         @foreach(var book in Model)
         {
-            <li><a asp-action="Details" asp-action="Book" asp-route-id="@book.Id">@book.Name</a></li>
+            <li><a asp-action="Details" asp-controller="Book" asp-route-id="@book.Id">@book.Name</a></li>
         }
     </ul>
 </div>
