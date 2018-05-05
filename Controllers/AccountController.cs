@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models.EntityModels;
 using BookCave.Models.ViewModels;
+using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,13 @@ namespace BookCave.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private AccountService _accountService;
 
         public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _accountService = new AccountService();
         }
         public IActionResult register()
         {
@@ -33,8 +36,10 @@ namespace BookCave.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
+
             if(result.Succeeded)
             {
+                _accountService.AddUserToTable(model);
                 //the user is successfuly registered
                 // Add the concatenated first and last name as fullName claims
 
