@@ -19,9 +19,6 @@ $("#payment-info").click(function(){
 
     $("#cat-link").one("click", function () {
         $.get("Category/AllCategories", function(data, status) {
-            var catList = "testlinkFromJS";
-            $("#cat-list").append(catList);
-            
             for (var i = 0; i < data.length; i++) {
                 var category = "<li>" + data[i].name + "</li>";
                 $("#cat-list").append(category);
