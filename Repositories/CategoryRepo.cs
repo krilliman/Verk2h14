@@ -30,7 +30,7 @@ namespace BookCave.Repositories
         public List<SubCategoryViewModel> GetAllSubCategories(int id)
         {
             var SubCategorys = (from sc in _db.SubCategoryTable
-                                where sc.CategoryId == id
+                                where sc.CategoryID == id
                                 select new SubCategoryViewModel
                                 {
                                     Id = sc.Id,
@@ -43,13 +43,14 @@ namespace BookCave.Repositories
         {
             Console.WriteLine("entering get all books");
             var books = (from Bk in _db.BookTable
-                        where Bk.SubcategoryID == id
+                        where Bk.SubCategoryID == id
                         select new BookViewModel
                         {
                             Id = Bk.Id,
                             Name = Bk.Name,
                             Description = Bk.Description,
-                            Rating = Bk.Rating
+                            Rating = Bk.Rating,
+                            SubCategoryID = Bk.SubCategoryID
                         }).ToList();
             return books;
         }
@@ -64,7 +65,7 @@ namespace BookCave.Repositories
                                 {
                                     Id = sc.Id,
                                     Name = sc.Name,
-                                    CategoryId = sc.CategoryId
+                                    CategoryID = sc.CategoryID
                                 }).ToList();
             return SubCategorys;
         }
@@ -78,7 +79,8 @@ namespace BookCave.Repositories
                             Id = Bk.Id,
                             Name = Bk.Name,
                             Description = Bk.Description,
-                            Rating = Bk.Rating
+                            Rating = Bk.Rating,
+                            SubCategoryID = Bk.SubCategoryID
                         }).ToList();
             return books;
         }
