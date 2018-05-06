@@ -32,6 +32,11 @@ namespace BookCave.Services
             return books;
         }
 
+        public List<AllCategoriesViewModel> GetAllCategoriesList(){
+            var ListOfMainAndSubCategories = _categoryRepo.GetAllCategoriesList();
+            return ListOfMainAndSubCategories;
+        }
+
       
     }
 }

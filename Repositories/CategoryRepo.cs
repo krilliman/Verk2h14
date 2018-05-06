@@ -54,5 +54,24 @@ namespace BookCave.Repositories
             return books;
         }
 
+        public List<AllCategoriesViewModel> GetAllCategoriesList(){
+
+            var allCategoriesList = (from c in _db.CategoryTable
+                                    join sc in _db.SubCategoryTable on c.Id equals sc.Id
+                                    select new AllCategoriesViewModel{
+                                        Id = c.Id,
+                                        Name = c.Name,
+                                        SubCategories = (from x in _db.SubCategoryTable
+                                            where x.CategoryId == c.Id
+                                            select new SubCategoryViewModel{
+                                            Id = x.Id,
+                                            Name = x.Name,
+                                        }).ToList(),
+                                    }).ToList();
+            return allCategoriesList;
+
+
+        }
+
     }
 }

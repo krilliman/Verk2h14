@@ -1,10 +1,18 @@
-@model List<BookCave.Models.ViewModels.CategoryViewModel>
+@model List<BookCave.Models.ViewModels.AllCategoriesViewModel>
+
 
 <div class="jumbotron">
     <ul>
         @foreach(var category in @Model)
         {
-            <li><a asp-action="SubCategories" asp-controller="Category" asp-route-id="@category.Id">@category.Name</a></li>
+            <li><a id="cat-link-@category.Id" asp-action="SubCategories" asp-controller="Category" asp-route-id="@category.Id">@category.Name</a>
+                <ul class="subcategory-table" id="cat-table-@category.Id">
+                @foreach(var s in category.SubCategories)
+                {
+                    <li><a asp-action="AllInSubCategory" asp-controller="Category" asp-route-id="@s.Id">---@s.Name</a></li>
+                }
+                </ul>
+            </li>
         }
     </ul>
 </div>    
