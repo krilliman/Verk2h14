@@ -4,6 +4,11 @@ $("#CreatePayment").click(function(){
     $("#AddPaymentDiv").show();
     $("#CreatePayment").hide();
 })
+$("#CreateAddress").click(function(){
+    console.log("clicked");
+    $("#AddAddressDiv").show();
+    $("#CreateAddress").hide();
+})
 $(document).ready(function () {
 
     $("#payment-info").click(function () {

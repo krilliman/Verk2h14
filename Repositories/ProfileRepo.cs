@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
@@ -52,7 +53,25 @@ namespace BookCave.Repositories
                             }).ToList();
             var List = new PaymentListViewModel()
             {
-                Addresses = ListItems
+                Payments = ListItems
+            };
+            return List;
+        }
+        public AddressListViewModel GetMyAddressBook(int Id)
+        {
+            var ListItems = (from Ab in _db.AddressTable
+                            where Ab.UserId == Id
+                            select new AddressViewModel
+                            {
+                                Id = Ab.Id,
+                                StreetLine = Ab.StreetLine,
+                                PostalCode = Ab.PostalCode,
+                                Country = Ab.Country
+                            }).ToList();
+
+            var List = new AddressListViewModel()
+            {
+                AddressBook = ListItems
             };
             return List;
         }
@@ -74,6 +93,19 @@ namespace BookCave.Repositories
             _db.SaveChanges();
             return Model.NewPayment.UserId;
         }
+        public int AddAddress(AddressListViewModel Model)
+        {
+            var Address = new Address
+            {
+                UserId = Model.NewAddress.UserId,
+                StreetLine = Model.NewAddress.StreetLine,
+                PostalCode = Model.NewAddress.PostalCode,
+                Country = Model.NewAddress.Country,
+            };
+            _db.Add(Address);
+            _db.SaveChanges();
+            return Model.NewAddress.UserId;
+        }
         public void DeletePayment(int PaymentId)
         {
             /*
@@ -90,6 +122,22 @@ namespace BookCave.Repositories
                             ExpireYear = Pm.ExpireYear
                         }).FirstOrDefault();
             _db.Remove(Payment);
+            _db.SaveChanges();
+        }
+        public void DeleteAddress(int AddressId)
+        {
+            var Address = (from Ad in _db.AddressTable
+                            where Ad.Id == AddressId
+                            select new Address
+                            {
+                                Id = Ad.Id,
+                                UserId = Ad.UserId,
+                                StreetLine = Ad.StreetLine,
+                                PostalCode = Ad.PostalCode,
+                                Country = Ad.Country
+                            }).FirstOrDefault();
+            Console.WriteLine("AddressStreetLine" + Address.StreetLine);
+            _db.Remove(Address);
             _db.SaveChanges();
         }
     }

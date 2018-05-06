@@ -33,5 +33,19 @@ namespace BookCave.Services
         {
             _profileRepo.DeletePayment(PaymentId);
         }
+        public void DeleteAddress(int AddressId)
+        {
+            _profileRepo.DeleteAddress(AddressId);
+        }
+        public AddressListViewModel GetMyAddressBook(int Id)
+        {
+            var MyAddressBook = _profileRepo.GetMyAddressBook(Id);
+            return MyAddressBook;
+        }
+        public int AddAddress(AddressListViewModel Model)
+        {
+            var UserId = _profileRepo.AddAddress(Model);
+            return UserId;
+        }
     }
 }

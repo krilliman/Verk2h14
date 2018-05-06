@@ -8,30 +8,30 @@
 }
 @model BookCave.Models.ViewModels.PaymentListViewModel
 <div class="col-sm-6">
-    @for(var i = 1; i <= @Model.Addresses.Count;i++)
+    @for(var i = 1; i <= @Model.Payments.Count;i++)
         {  
             <div class="jumbotron">
                 <h3>Payment Information @i</h3>
                 <ul>
-                    <li>Card Number: @Model.Addresses[i-1].CardNumber</li>
-                    <li>Card Holder: @Model.Addresses[i-1].CardHolder</li>
-                    <li>Expires: @Model.Addresses[i-1].ExpireMonth / @Model.Addresses[i-1].ExpireYear</li>
+                    <li>Card Number: @Model.Payments[i-1].CardNumber</li>
+                    <li>Card Holder: @Model.Payments[i-1].CardHolder</li>
+                    <li>Expires: @Model.Payments[i-1].ExpireMonth / @Model.Payments[i-1].ExpireYear</li>
                 </ul>
                 <form asp-action="DeletePayment" asp-controller="Profile">
-                    <input type="hidden" name="PaymentId" value="@Model.Addresses[i-1].Id">
-                    <input type="hidden" name="UserID" value="@claim">
+                    <input type="hidden" name="PaymentId" value="@Model.Payments[i-1].Id">
+                    <input type="hidden" name="UserId" value="@claim">
                     <input type="submit" class="btn btn-default" value="Delete">
                 </form>
             </div>
         }
     <button class="btn btn-default" id="CreatePayment">Add Payment</button>
     <div class="jumbotron" hidden id="AddPaymentDiv">
-        <form asp-action="AddPayment" asp-controller="Profile" class="form-horizontal" class="from-control">
+        <form asp-action="AddPayment" asp-controller="Profile" class="form-horizontal" class="form-control">
             <div class="form-group">
-                <input type="text" asp-for="@Model.NewPayment.CardNumber" placeholder="Enter Card Number" class="from-control">
+                <input type="text" asp-for="@Model.NewPayment.CardNumber" placeholder="Enter Card Number" class="form-control">
             </div>
             <div class="form-group">
-                <input type="text" asp-for="@Model.NewPayment.CardHolder" placeholder="Enter Card Holder Name" class="from-control">
+                <input type="text" asp-for="@Model.NewPayment.CardHolder" placeholder="Enter Card Holder Name" class="form-control">
             </div>
             <div class="form-group">
                 <label for="ExpireMonth">ExpireMonth</label>
@@ -51,7 +51,7 @@
                     <option value='12'>December</option>
                 </select> 
             </div>
-            <div class="from-group">
+            <div class="form-group">
                 <label for="ExpireYear">ExpireYear</label>
                 <select name='ExpireYear' asp-for="@Model.NewPayment.ExpireYear">
                     <option value=''>Year</option>

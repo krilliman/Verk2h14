@@ -26,10 +26,6 @@ namespace BookCave.Controllers
         public IActionResult PaymentInformation(int Id)
         {
             var MyPaymentList = _profileService.GetMyPaymentList(Id);
-            foreach (var item in MyPaymentList.Addresses)
-            {
-                Console.WriteLine(item.CardHolder);
-            }
             
             return View(MyPaymentList);
         }
@@ -44,7 +40,8 @@ namespace BookCave.Controllers
         }
         public IActionResult AddressBook(int Id)
         {
-            return View();
+            var MyAddressBook = _profileService.GetMyAddressBook(Id);
+            return View(MyAddressBook);
         }
         public IActionResult Edit(int Id)
         {
@@ -61,6 +58,17 @@ namespace BookCave.Controllers
             _profileService.DeletePayment(PaymentId);
             return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
         }
+        public IActionResult DeleteAddress(int AddressId, int UserId)
+        {
+            _profileService.DeleteAddress(AddressId);
+            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+        }
+        public IActionResult AddAddress(AddressListViewModel Model)
+        {
+            var UserId = _profileService.AddAddress(Model);
+            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+        }
+
        
     }
 }
