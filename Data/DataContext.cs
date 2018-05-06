@@ -20,7 +20,7 @@ namespace BookCave.Data
         public DbSet<OrderList> OrderListTable { get; set; }
         public DbSet<Publisher> PublisherTable { get; set;} 
         public DbSet<Rating> RatingTable { get; set;}   
-        public DbSet<SubCatagory> SubCategoryTable { get; set; }
+        public DbSet<SubCategory> SubCategoryTable { get; set; }
         public DbSet<UserInformation> UserInformationTable { get; set; }
         public DbSet<WishListItem> WishListItemTable { get; set;}
         public DbSet<WishList> WishListTable { get; set;}  

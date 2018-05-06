@@ -22,12 +22,12 @@ namespace BookCave.Repositories
             be equal to that list and return the WishListViewModel up to the controller.
              */
             var ListItems = (from Wl in _db.WishListItemTable
-                            join Bk in _db.BookTable on Wl.BookId equals Bk.Id
+                            join Bk in _db.BookTable on Wl.BookId equals Bk.ID
                             where Wl.WishListId == Id
                             select new WishListItemViewModel
                             {
                                 Id = Wl.Id,
-                                BookId = Bk.Id,
+                                BookId = Bk.ID,
                                 BookName = Bk.Name
                             }).ToList();
             var MyWishList = new WishListViewModel(){Id = Id, Items = ListItems};

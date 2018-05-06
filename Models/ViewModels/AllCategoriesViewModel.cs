@@ -4,8 +4,8 @@ namespace BookCave.Models.ViewModels
 {
     public class AllCategoriesViewModel
     {
-        public List<CategoryViewModel> MainCategories { get; set; }
-        public List<SubCategoryViewModel> SubCategories { get; set; }
-        public List<BookViewModel> Books { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public List<SubCategoryWithBooksViewModel> SubCategories { get; set; }
     }
 }
