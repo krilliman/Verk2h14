@@ -43,13 +43,6 @@ namespace BookCave.Controllers
         
         }
 
-        // public IActionResult AllSubCategories(int id)
-        // {
-        //     var CategoriesList = _categoryService.GetAllSubCategories(id);
-        //     return Json(CategoriesList);
-        
-        // }
-
         public IActionResult AllCategoriesList()
         {
             var CategoriesList = _categoryService.GetAllCategoriesList();
