@@ -21,7 +21,7 @@ namespace BookCave.Repositories
             var Categories = (from cg in _db.CategoryTable
                             select new CategoryViewModel
                             {
-                                Id = cg.Id,
+                                ID = cg.ID,
                                 Name = cg.Name
                             }).ToList();
             return Categories;
@@ -33,7 +33,7 @@ namespace BookCave.Repositories
                                 where sc.CategoryID == id
                                 select new SubCategoryViewModel
                                 {
-                                    Id = sc.Id,
+                                    ID = sc.ID,
                                     Name = sc.Name
                                 }).ToList();
             return SubCategorys;
@@ -46,7 +46,7 @@ namespace BookCave.Repositories
                         where Bk.SubCategoryID == id
                         select new BookViewModel
                         {
-                            Id = Bk.Id,
+                            ID = Bk.ID,
                             Name = Bk.Name,
                             Description = Bk.Description,
                             Rating = Bk.Rating,
@@ -63,7 +63,7 @@ namespace BookCave.Repositories
             var SubCategorys = (from sc in _db.SubCategoryTable
                                 select new SubCategoryViewModel
                                 {
-                                    Id = sc.Id,
+                                    ID = sc.ID,
                                     Name = sc.Name,
                                     CategoryID = sc.CategoryID
                                 }).ToList();
@@ -76,7 +76,7 @@ namespace BookCave.Repositories
             var books = (from Bk in _db.BookTable
                         select new BookViewModel
                         {
-                            Id = Bk.Id,
+                            ID = Bk.ID,
                             Name = Bk.Name,
                             Description = Bk.Description,
                             Rating = Bk.Rating,
@@ -86,31 +86,31 @@ namespace BookCave.Repositories
         }
 
 
-        // public List<AllCategoriesViewModel> GetAllCategoriesList(){
+        public List<AllCategoriesViewModel> GetAllCategoriesList(){
 
-        //     var allCategoriesList = (from c in _db.CategoryTable
-        //                             join sc in _db.SubCategoryTable on c.Id equals sc.Id
-        //                             select new AllCategoriesViewModel{
-        //                                 Id = c.Id,
-        //                                 Name = c.Name,
-        //                                 SubCategories = (from x in _db.SubCategoryTable
-        //                                     where x.CategoryId == c.Id
-        //                                     select new SubCategoryAndBooksViewModel{
-        //                                     Id = x.Id,
-        //                                     Name = x.Name,
-        //                                     BookList = (from b in _db.BookTable
-        //                                             where b.SubcategoryID == x.Id
-        //                                             select new BookViewModel{
-        //                                                 Id = b.Id,
-        //                                                 Name = b.Name,
-        //                                                 Description = b.Description,
-        //                                                 Rating = b.Rating}).OrderByDescending(b => b.Rating).Take(2).ToList(),
-        //                                 }).ToList(),
-        //                             }).ToList();
-        //     return allCategoriesList;
+            var allCategoriesList = (from c in _db.CategoryTable
+                                    join sc in _db.SubCategoryTable on c.ID equals sc.ID
+                                    select new AllCategoriesViewModel{
+                                        ID = c.ID,
+                                        Name = c.Name,
+                                        SubCategories = (from x in _db.SubCategoryTable
+                                            where x.CategoryID == c.ID
+                                            select new SubCategoryWithBooksViewModel{
+                                            ID = x.ID,
+                                            Name = x.Name,
+                                            BookList = (from b in _db.BookTable
+                                                    where b.SubCategoryID == x.ID
+                                                    select new BookViewModel{
+                                                        ID = b.ID,
+                                                        Name = b.Name,
+                                                        Description = b.Description,
+                                                        Rating = b.Rating}).OrderByDescending(b => b.Rating).Take(2).ToList(),
+                                        }).ToList(),
+                                    }).ToList();
+            return allCategoriesList;
 
 
-        // }
+         }
 
     }
 }

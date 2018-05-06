@@ -22,7 +22,7 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            AllCategoriesViewModel Categories = AllCategoriesList();
+            var Categories = AllCategoriesList();
             return View(Categories);
         }
 
@@ -44,7 +44,7 @@ namespace BookCave.Controllers
         
         }
 
-        public AllCategoriesViewModel AllCategoriesList()
+        public List<AllCategoriesViewModel> AllCategoriesList()
         {
             var CategoriesList = _categoryService.GetAllCategoriesList();
             return Json(CategoriesList);

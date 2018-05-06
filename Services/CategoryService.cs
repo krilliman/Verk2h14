@@ -33,24 +33,11 @@ namespace BookCave.Services
         }
 
 // test below - villi
-        public List<SubCategoryViewModel> GetAllSubCategoriesList()
+        public List<AllCategoriesViewModel> GetAllCategoriesList()
         {
-            var SubCategories = _categoryRepo.GetAllSubCategoriesList();
-            return SubCategories;
+            var AllCategoriesList = _categoryRepo.GetAllCategoriesList();
+            return AllCategoriesList;
         }
 
-        public List<BookViewModel> GetAllBooksList()
-        {
-            var books = _categoryRepo.GetAllBooksList();
-            return books;
-        }
-
-
-        // public List<AllCategoriesViewModel> GetAllCategoriesList(){
-        //     var ListOfMainAndSubCategories = _categoryRepo.GetAllCategoriesList();
-        //     return ListOfMainAndSubCategories;
-        // }
-
-      
     }
 }

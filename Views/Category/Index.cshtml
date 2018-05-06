@@ -1,20 +1,20 @@
-@model BookCave.Models.ViewModels.AllCategoriesViewModel
+@model List<BookCave.Models.ViewModels.AllCategoriesViewModel>
 @using BookCave.Models.ViewModels;
 
 
 <div class="jumbotron">
     <ul>
-        @foreach(CategoryViewModel mc in @Model.MainCategories)
+        @foreach(var mc in @Model)
         {
-            <li><a id="cat-link-@mc.Id" asp-action="SubCategories" asp-controller="Category" asp-route-id="@mc.Id"><strong>@mc.Name</strong></a>
-                <ul class="subcategory-table" id="cat-table-@mc.Id">
-                @foreach(var s in @Model.SubCategories.Where(s => s.CategoryID == mc.Id))
+            <li><a id="cat-link-@mc.ID" asp-action="SubCategories" asp-controller="Category" asp-route-id="@mc.ID"><strong>@mc.Name</strong></a>
+                <ul class="subcategory-table" id="cat-table-@mc.ID">
+                @foreach(var s in @mc.SubCategories)
                 {
-                    <li><a asp-action="AllInSubCategory" asp-controller="Category" asp-route-id="@s.Id"> -- @s.Name</a>
-                        <ul class="subcategory-book-table" id="cat--book-table-@s.Id">
-                        @foreach(var b in @Model.Books.Where(b => b.SubCategoryID == s.Id))
+                    <li><a asp-action="AllInSubCategory" asp-controller="Category" asp-route-id="@s.ID"> -- @s.Name</a>
+                        <ul class="subcategory-book-table" id="cat--book-table-@s.ID">
+                        @foreach(var b in s.BookList)
                             {
-                                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@b.Id"> ------ @b.Name</a></li>
+                                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID"> ------ @b.Name</a></li>
                             }
                         </ul>
                         
