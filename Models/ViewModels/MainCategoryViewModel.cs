@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Models.ViewModels
 {
-    public class SubCategoryViewModel
+    public class MainCategoryViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int CategoryID { get; set; }
-        public List<BookViewModel> BookList { get; set; }
+        public List<SubCategoryViewModel> SubCategories { get; set; }
     }
 }
