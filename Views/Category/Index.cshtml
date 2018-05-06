@@ -6,11 +6,19 @@
     <ul>
         @foreach(CategoryViewModel mc in @Model.MainCategories)
         {
-            <li><a id="cat-link-@mc.Id" asp-action="SubCategories" asp-controller="Category" asp-route-id="@mc.Id">@mc.Name</a>
+            <li><a id="cat-link-@mc.Id" asp-action="SubCategories" asp-controller="Category" asp-route-id="@mc.Id"><strong>@mc.Name</strong></a>
                 <ul class="subcategory-table" id="cat-table-@mc.Id">
-                @foreach(var s in @Model.SubCategories.Where(s => s.CategoryId == mc.Id))
+                @foreach(var s in @Model.SubCategories.Where(s => s.CategoryID == mc.Id))
                 {
-                    <li><a asp-action="AllInSubCategory" asp-controller="Category" asp-route-id="@s.Id">---@s.Name</a></li>
+                    <li><a asp-action="AllInSubCategory" asp-controller="Category" asp-route-id="@s.Id"> -- @s.Name</a>
+                        <ul class="subcategory-book-table" id="cat--book-table-@s.Id">
+                        @foreach(var b in @Model.Books.Where(b => b.SubCategoryID == s.Id))
+                            {
+                                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@b.Id"> ------ @b.Name</a></li>
+                            }
+                        </ul>
+                        
+                    </li>
                 }
                 </ul>
             </li>

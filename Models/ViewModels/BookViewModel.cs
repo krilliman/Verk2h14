@@ -13,5 +13,6 @@ namespace BookCave.Models.ViewModels
         public double Rate { get; set; }
         public int UserId {get; set; }
         public List<RateViewModel> Ratings {get; set; }
+        public int SubCategoryID { get; set; }
     }
 }
