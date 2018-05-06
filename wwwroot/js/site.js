@@ -1,5 +1,9 @@
 // Write your JavaScript code.
-
+$("#CreatePayment").click(function(){
+    console.log("clicked");
+    $("#AddPaymentDiv").show();
+    $("#CreatePayment").hide();
+})
 $(document).ready(function () {
 
     $("#payment-info").click(function () {
@@ -41,6 +45,7 @@ $(document).ready(function () {
         .fail(function (err) {
             alert(err);
         })
+   
 })
 
 

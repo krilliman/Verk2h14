@@ -8,6 +8,7 @@ namespace  BookCave.Models.EntityModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string Isbn { get; set; }
+        public byte[] Image { get; set; }
         public int AuthorId { get; set; }
         public double TotalPrice { get; set; }
         public double Rating { get; set; }

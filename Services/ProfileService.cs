@@ -19,5 +19,19 @@ namespace BookCave.Services
             var MyWishList = _profileRepo.GetMyWishList(Id);
             return MyWishList;
         }
+        public PaymentListViewModel GetMyPaymentList(int Id)
+        {
+            var MyPaymentList = _profileRepo.GetMyPaymentList(Id);
+            return MyPaymentList;
+        }
+        public int AddPayment(PaymentListViewModel Model)
+        {
+            var UserId =_profileRepo.AddPayment(Model);
+            return UserId;
+        }
+        public void DeletePayment(int PaymentId)
+        {
+            _profileRepo.DeletePayment(PaymentId);
+        }
     }
 }

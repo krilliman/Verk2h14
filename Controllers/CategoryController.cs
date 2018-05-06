@@ -47,7 +47,6 @@ namespace BookCave.Controllers
         {
             var CategoriesList = _categoryService.GetAllCategoriesList();
             return Json(CategoriesList);
-        
         }
 
     }

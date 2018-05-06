@@ -4,9 +4,7 @@ namespace BookCave.Models.EntityModels
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public int CardInformationListId { get; set; }
-        public int AddressBookId { get;set; }
-        public int WishListId { get; set; }
-        public int CartId { get; set; }
+        public byte[] ProfileImage { get; set; }
+        public string Description { get; set; }
     }
 }

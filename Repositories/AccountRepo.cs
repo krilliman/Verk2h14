@@ -33,11 +33,7 @@ namespace BookCave.Repositories
             }
             var UserInfo = new UserInformation()
             {
-                Username = Model.Email,
-                CardInformationListId = NextId,
-                AddressBookId = NextId,
-                WishListId = NextId,
-                CartId = NextId
+                Username = Model.Email
             };
             _db.UserInformationTable.Add(UserInfo);
             _db.SaveChanges();

@@ -14,7 +14,6 @@ namespace BookCave.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private AccountService _accountService;
-
         public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
@@ -41,8 +40,7 @@ namespace BookCave.Controllers
             {
                 var UserTableID = _accountService.AddUserToTable(model);
                 //the user is successfuly registered
-                // Add the concatenated first and last name as fullName claims
-                Console.WriteLine("ID: " + UserTableID);
+                // Add the concatenated Id and Email as claims
                 await _userManager.AddClaimAsync(user, new Claim("Email", $"{model.Email}"));
                 await _userManager.AddClaimAsync(user, new Claim("Id", $"{UserTableID}"));
                 await _signInManager.SignInAsync(user, false);

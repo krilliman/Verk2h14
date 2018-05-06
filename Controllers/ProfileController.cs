@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -24,7 +25,13 @@ namespace BookCave.Controllers
         }
         public IActionResult PaymentInformation(int Id)
         {
-            return View();
+            var MyPaymentList = _profileService.GetMyPaymentList(Id);
+            foreach (var item in MyPaymentList.Addresses)
+            {
+                Console.WriteLine(item.CardHolder);
+            }
+            
+            return View(MyPaymentList);
         }
         public IActionResult WishList(int Id)
         {
@@ -43,5 +50,17 @@ namespace BookCave.Controllers
         {
             return View();
         }
+
+        public IActionResult AddPayment(PaymentListViewModel Model)
+        {
+            var UserId = _profileService.AddPayment(Model);
+            return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
+        }
+        public IActionResult DeletePayment(int PaymentId, int UserId)
+        {
+            _profileService.DeletePayment(PaymentId);
+            return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
+        }
+       
     }
 }
