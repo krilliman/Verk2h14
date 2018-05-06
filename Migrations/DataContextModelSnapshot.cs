@@ -31,27 +31,11 @@ namespace BookCave.Migrations
 
                     b.Property<string>("StreetLine");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("AddressTable");
-                });
-
-            modelBuilder.Entity("BookCave.Models.EntityModels.AddressBook", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address1");
-
-                    b.Property<string>("Address2");
-
-                    b.Property<string>("Address3");
-
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AddressBookTable");
+                    b.ToTable("AddressTable");
                 });
 
             modelBuilder.Entity("BookCave.Models.EntityModels.Author", b =>
@@ -74,6 +58,8 @@ namespace BookCave.Migrations
                     b.Property<int>("AuthorId");
 
                     b.Property<string>("Description");
+
+                    b.Property<byte[]>("Image");
 
                     b.Property<string>("Isbn");
 
@@ -105,43 +91,17 @@ namespace BookCave.Migrations
 
                     b.Property<string>("CardHolder");
 
-                    b.Property<int>("CardInformationListId");
-
                     b.Property<string>("CardNumber");
 
                     b.Property<int>("ExpireMonth");
 
                     b.Property<int>("ExpireYear");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.ToTable("CardInformationTable");
-                });
-
-            modelBuilder.Entity("BookCave.Models.EntityModels.CardInformationList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CardInformationItemId1");
-
-                    b.Property<int>("CardInformationItemId2");
-
-                    b.Property<int>("CardInformationItemId3");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CardInformationListTable");
-                });
-
-            modelBuilder.Entity("BookCave.Models.EntityModels.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CartTable");
                 });
 
             modelBuilder.Entity("BookCave.Models.EntityModels.CartItem", b =>
@@ -151,11 +111,11 @@ namespace BookCave.Migrations
 
                     b.Property<int>("BookId");
 
-                    b.Property<int>("CartId");
-
                     b.Property<double>("Price");
 
                     b.Property<int>("Quantity");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -181,25 +141,17 @@ namespace BookCave.Migrations
 
                     b.Property<int>("BookId");
 
-                    b.Property<int>("OrderListId");
+                    b.Property<int>("OrderId");
 
                     b.Property<double>("Price");
 
                     b.Property<int>("Quantity");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.ToTable("OrderItemTable");
-                });
-
-            modelBuilder.Entity("BookCave.Models.EntityModels.OrderList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderListTable");
                 });
 
             modelBuilder.Entity("BookCave.Models.EntityModels.Publisher", b =>
@@ -251,29 +203,15 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AddressBookId");
+                    b.Property<string>("Description");
 
-                    b.Property<int>("CardInformationListId");
-
-                    b.Property<int>("CartId");
+                    b.Property<byte[]>("ProfileImage");
 
                     b.Property<string>("Username");
-
-                    b.Property<int>("WishListId");
 
                     b.HasKey("Id");
 
                     b.ToTable("UserInformationTable");
-                });
-
-            modelBuilder.Entity("BookCave.Models.EntityModels.WishList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WishListTable");
                 });
 
             modelBuilder.Entity("BookCave.Models.EntityModels.WishListItem", b =>
@@ -283,7 +221,7 @@ namespace BookCave.Migrations
 
                     b.Property<int>("BookId");
 
-                    b.Property<int>("WishListId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 

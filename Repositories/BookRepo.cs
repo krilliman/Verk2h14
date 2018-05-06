@@ -19,10 +19,10 @@ namespace BookCave.Repositories
         public BookViewModel GetBook(int id)
         {
             var Book = (from Bk in _db.BookTable
-                        where Bk.ID == id
+                        where Bk.Id == id
                         select new BookViewModel
                         {
-                            ID = Bk.ID,
+                            Id = Bk.Id,
                             Name = Bk.Name,
                             Description = Bk.Description,
                             Rating = Bk.Rating
@@ -36,7 +36,7 @@ namespace BookCave.Repositories
             var Books = (from Cg in _db.BookTable
                         select new BookViewModel
                         {
-                            ID = Cg.ID,
+                            Id = Cg.Id,
                             Name = Cg.Name,
                             Description = Cg.Description,
                             Rating = Cg.Rating 
@@ -48,7 +48,7 @@ namespace BookCave.Repositories
             var book = ratings[0].BookId;
             var totalrating = ratings.Average(i=>i.Rate);
             Book TheBook = (from B in _db.BookTable
-                                     where B.ID == book
+                                     where B.Id == book
                                      select B).FirstOrDefault();
             TheBook.Rating = totalrating;
             _db.SaveChanges();

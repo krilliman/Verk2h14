@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -24,7 +25,9 @@ namespace BookCave.Controllers
         }
         public IActionResult PaymentInformation(int Id)
         {
-            return View();
+            var MyPaymentList = _profileService.GetMyPaymentList(Id);
+            
+            return View(MyPaymentList);
         }
         public IActionResult WishList(int Id)
         {
@@ -37,11 +40,35 @@ namespace BookCave.Controllers
         }
         public IActionResult AddressBook(int Id)
         {
-            return View();
+            var MyAddressBook = _profileService.GetMyAddressBook(Id);
+            return View(MyAddressBook);
         }
         public IActionResult Edit(int Id)
         {
             return View();
         }
+
+        public IActionResult AddPayment(PaymentListViewModel Model)
+        {
+            var UserId = _profileService.AddPayment(Model);
+            return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
+        }
+        public IActionResult DeletePayment(int PaymentId, int UserId)
+        {
+            _profileService.DeletePayment(PaymentId);
+            return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
+        }
+        public IActionResult DeleteAddress(int AddressId, int UserId)
+        {
+            _profileService.DeleteAddress(AddressId);
+            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+        }
+        public IActionResult AddAddress(AddressListViewModel Model)
+        {
+            var UserId = _profileService.AddAddress(Model);
+            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+        }
+
+       
     }
 }

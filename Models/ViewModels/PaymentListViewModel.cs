@@ -1,10 +1,11 @@
+using System.Collections.Generic;
+using BookCave.Models.InputModels;
+
 namespace BookCave.Models.ViewModels
 {
     public class PaymentListViewModel
     {
-        public string Id { get; set; }
-        public PaymentInfoViewModel Address1 {get; set;}
-        public PaymentInfoViewModel Address2 {get; set;}
-        public PaymentInfoViewModel Address3 {get; set;}
+        public List<PaymentInfoViewModel> Payments {get; set;}
+        public PaymentInfoInputModel NewPayment { get; set; }        
     }
 }

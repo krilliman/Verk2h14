@@ -1,8 +1,7 @@
-namespace BookCave.Models.EntityModels
+namespace BookCave.Models.InputModels
 {
-    public class Address
+    public class AddressInputModel
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
         public string StreetLine { get; set; }
         public int PostalCode { get; set; }

@@ -37,13 +37,11 @@ namespace BookCave.Controllers
             var WishListItem = new WishListItem()
             {
                 BookId = BookId,
-                WishListId = WishListId
+                UserId = WishListId
             };
             _wishListService.AddToWishList(WishListItem);
             return RedirectToAction("Details", "Book", new { id = BookId });
         }
-
-
 
        [HttpPost]
         //This is called when somebody submits a rating for a book.
@@ -61,7 +59,7 @@ namespace BookCave.Controllers
            _ratingService.SaveRate(NewRate);
            var ratings = _ratingService.GetRatings(Model.BookId);
            _bookService.UpdateRating(ratings);
-           return RedirectToAction("Details", "Book", new { id = Book.ID });
+           return RedirectToAction("Details", "Book", new { id = Book.Id });
        }
     }
 }

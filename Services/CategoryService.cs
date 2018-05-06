@@ -14,22 +14,43 @@ namespace BookCave.Services
             _categoryRepo = new CategoryRepo();
         }
 
-        public List<MainCategoryViewModel> GetMainCategoryList(int? id)
+        public List<CategoryViewModel> GetAllCategories()
         {
-            var MainCategories = _categoryRepo.GetMainCategoryList(id);
-            return MainCategories;
+            var Categories = _categoryRepo.AllCategories();
+            return Categories;
         }
 
-        public List<SubCategoryViewModel> GetSubCategoryList(int? id)
+        public List<SubCategoryViewModel> GetAllSubCategories(int id)
         {
-            var SubCategories = _categoryRepo.GetSubCategoryList(id);
+            var SubCategories = _categoryRepo.GetAllSubCategories(id);
             return SubCategories;
         }
 
-        public List<BookViewModel> GetBookList(int? id)
+        public List<BookViewModel> GetAllBooks(int id)
         {
             var books = _categoryRepo.GetAllBooks(id);
             return books;
         }
+
+// test below - villi
+        public List<SubCategoryViewModel> GetAllSubCategoriesList()
+        {
+            var SubCategories = _categoryRepo.GetAllSubCategoriesList();
+            return SubCategories;
+        }
+
+        public List<BookViewModel> GetAllBooksList()
+        {
+            var books = _categoryRepo.GetAllBooksList();
+            return books;
+        }
+
+
+        // public List<AllCategoriesViewModel> GetAllCategoriesList(){
+        //     var ListOfMainAndSubCategories = _categoryRepo.GetAllCategoriesList();
+        //     return ListOfMainAndSubCategories;
+        // }
+
+      
     }
 }

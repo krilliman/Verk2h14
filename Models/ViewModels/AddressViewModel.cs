@@ -1,9 +1,8 @@
-namespace BookCave.Models.EntityModels
+namespace BookCave.Models.ViewModels
 {
-    public class Address
+    public class AddressViewModel
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public string StreetLine { get; set; }
         public int PostalCode { get; set; }
         public string Country { get; set; }

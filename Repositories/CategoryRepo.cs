@@ -16,76 +16,99 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<MainCategoryViewModel> GetMainCategoryList(int? id)
+        public List<CategoryViewModel> AllCategories()
         {
-            if(id != null){
-                 var Categories = (from cg in _db.CategoryTable
-                    select new MainCategoryViewModel
-                    {
-                        ID = cg.ID,
-                        Name = cg.Name
-                    }).ToList();
-                return Categories;
-            }else{
-                var Categories = (from cg in _db.CategoryTable
-                    select new MainCategoryViewModel
-                    {
-                        ID = cg.ID,
-                        Name = cg.Name
-                    }).ToList();
-                return Categories;
-            }
+            var Categories = (from cg in _db.CategoryTable
+                            select new CategoryViewModel
+                            {
+                                Id = cg.Id,
+                                Name = cg.Name
+                            }).ToList();
+            return Categories;
         }
 
-        public List<SubCategoryViewModel> GetSubCategoryList(int? id)
+        public List<SubCategoryViewModel> GetAllSubCategories(int id)
         {
-            if(id != null){
-                            var SubCategorys = (from sc in _db.SubCategoryTable
-                                where sc.CategoryID == id
+            var SubCategorys = (from sc in _db.SubCategoryTable
+                                where sc.CategoryId == id
                                 select new SubCategoryViewModel
                                 {
-                                    ID = sc.ID,
+                                    Id = sc.Id,
                                     Name = sc.Name
                                 }).ToList();
             return SubCategorys;
-            }else{
-                var SubCategorys = (from sc in _db.SubCategoryTable
-                    select new SubCategoryViewModel
-                    {
-                        ID = sc.ID,
-                        Name = sc.Name
-                    }).ToList();
-                return SubCategorys;
-            }
         }
 
-
-        public List<BookViewModel> GetAllBooks(int? id)
+        public List<BookViewModel> GetAllBooks(int id)
         {
-            if(id != null){
-                var books = (from Bk in _db.BookTable
-                        where Bk.SubCategoryID == id
+            Console.WriteLine("entering get all books");
+            var books = (from Bk in _db.BookTable
+                        where Bk.SubcategoryID == id
                         select new BookViewModel
                         {
-                            ID = Bk.ID,
+                            Id = Bk.Id,
                             Name = Bk.Name,
                             Description = Bk.Description,
-                            Rating = Bk.Rating,
-                            SubCategoryID = Bk.SubCategoryID
+                            Rating = Bk.Rating
                         }).ToList();
             return books;
-            }else{
-                var books = (from Bk in _db.BookTable
-                        select new BookViewModel
-                        {
-                            ID = Bk.ID,
-                            Name = Bk.Name,
-                            Description = Bk.Description,
-                            Rating = Bk.Rating,
-                            SubCategoryID = Bk.SubCategoryID
-                        }).ToList();
-            return books;
-            }
         }
+
+
+//test below - villi
+
+        public List<SubCategoryViewModel> GetAllSubCategoriesList()
+        {
+            var SubCategorys = (from sc in _db.SubCategoryTable
+                                select new SubCategoryViewModel
+                                {
+                                    Id = sc.Id,
+                                    Name = sc.Name,
+                                    CategoryId = sc.CategoryId
+                                }).ToList();
+            return SubCategorys;
+        }
+
+        public List<BookViewModel> GetAllBooksList()
+        {
+            Console.WriteLine("entering get all books");
+            var books = (from Bk in _db.BookTable
+                        select new BookViewModel
+                        {
+                            Id = Bk.Id,
+                            Name = Bk.Name,
+                            Description = Bk.Description,
+                            Rating = Bk.Rating
+                        }).ToList();
+            return books;
+        }
+
+
+        // public List<AllCategoriesViewModel> GetAllCategoriesList(){
+
+        //     var allCategoriesList = (from c in _db.CategoryTable
+        //                             join sc in _db.SubCategoryTable on c.Id equals sc.Id
+        //                             select new AllCategoriesViewModel{
+        //                                 Id = c.Id,
+        //                                 Name = c.Name,
+        //                                 SubCategories = (from x in _db.SubCategoryTable
+        //                                     where x.CategoryId == c.Id
+        //                                     select new SubCategoryAndBooksViewModel{
+        //                                     Id = x.Id,
+        //                                     Name = x.Name,
+        //                                     BookList = (from b in _db.BookTable
+        //                                             where b.SubcategoryID == x.Id
+        //                                             select new BookViewModel{
+        //                                                 Id = b.Id,
+        //                                                 Name = b.Name,
+        //                                                 Description = b.Description,
+        //                                                 Rating = b.Rating}).OrderByDescending(b => b.Rating).Take(2).ToList(),
+        //                                 }).ToList(),
+        //                             }).ToList();
+        //     return allCategoriesList;
+
+
+        // }
+
     }
 }

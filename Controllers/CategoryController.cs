@@ -20,65 +20,35 @@ namespace BookCave.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int? id)
+        public IActionResult Index()
         {
-            var AllCategories = GetFullList(id);
-            return View(AllCategories);
+            AllCategoriesViewModel Categories = AllCategoriesList();
+            return View(Categories);
         }
 
-        public IActionResult SubCategory(int? id)
+        public IActionResult SubCategories(int id)
         {
-            var SubCategories = GetSubCategoryList(id);
-            return View(SubCategories); ///etta er json utaf testi
+            var subCategory = _categoryService.GetAllSubCategories(id);
+            return View(subCategory);
         }
 
-        public IActionResult Books(int? id)
+        public IActionResult AllInSubCategory(int id)
         {
-            var books = _categoryService.GetBookList(id);
+            var books = _categoryService.GetAllBooks(id);
             return View(books);  
         }
-
-// Þessi föll sækja hina og þessa lista
-        public List<MainCategoryViewModel> GetFullList(int? id) //
+        public IActionResult AllCategories()
         {
-            var MainAndSubCategories = (from m in GetMainCategoryList(id)
-                                        select new MainCategoryViewModel
-                                        {
-                                            ID = m.ID,
-                                            Name = m.Name,
-                                            SubCategories = (from s in GetSubCategoryList(m.ID)
-                                                            select new SubCategoryViewModel{
-                                                                ID = s.ID,
-                                                                Name = s.Name,
-                                                                BookList = (from b in GetBookList(s.ID)
-                                                                select b).ToList()
-                                                            }).ToList()
-                                        }).ToList();
-            return MainAndSubCategories;
+            var mainCategoriesList = _categoryService.GetAllCategories();
+            return Json(mainCategoriesList);
+        
         }
 
-//Hér fyrir neðan eru föll til að sækja lista í Service
-        public List<MainCategoryViewModel> GetMainCategoryList(int? id){
-            var MainCategories = _categoryService.GetMainCategoryList(id);
-            return MainCategories;
-        }
-
-        public List<SubCategoryViewModel> GetSubCategoryList(int? id){
-            var SubCategories = _categoryService.GetSubCategoryList(id);
-            return SubCategories;
-        }
-
-        public List<BookViewModel> GetBookList(int? id){
-            var BookList = _categoryService.GetBookList(id);
-            return BookList;
-        }
-
-        public IActionResult SubCategoryJson(int? id)
+        public AllCategoriesViewModel AllCategoriesList()
         {
-            var SubCategories = GetSubCategoryList(id).OrderBy(s => s.Name);
-            return Json(SubCategories); ///etta er json utaf testi
+            var CategoriesList = _categoryService.GetAllCategoriesList();
+            return Json(CategoriesList);
         }
-
 
     }
 }

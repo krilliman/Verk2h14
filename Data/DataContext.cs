@@ -8,22 +8,17 @@ namespace BookCave.Data
     {
 
         public DbSet<Address> AddressTable { get; set; }
-        public DbSet<AddressBook> AddressBookTable { get; set;}
-        public DbSet<Cart> CartTable { get; set;}
         public DbSet<Author> AuthorTable { get; set;}
         public DbSet<Book> BookTable { get; set; }
         public DbSet<CardInformation> CardInformationTable { get; set;}
-        public DbSet<CardInformationList> CardInformationListTable { get; set;}
         public DbSet<CartItem> CartItemTable { get; set;}
         public DbSet<Category> CategoryTable  { get; set;}   
         public DbSet<OrderItem> OrderItemTable { get; set; }
-        public DbSet<OrderList> OrderListTable { get; set; }
         public DbSet<Publisher> PublisherTable { get; set;} 
         public DbSet<Rating> RatingTable { get; set;}   
-        public DbSet<SubCategory> SubCategoryTable { get; set; }
+        public DbSet<SubCatagory> SubCategoryTable { get; set; }
         public DbSet<UserInformation> UserInformationTable { get; set; }
         public DbSet<WishListItem> WishListItemTable { get; set;}
-        public DbSet<WishList> WishListTable { get; set;}  
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
