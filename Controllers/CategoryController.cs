@@ -73,5 +73,12 @@ namespace BookCave.Controllers
             return BookList;
         }
 
+        public IActionResult SubCategoryJson(int? id)
+        {
+            var SubCategories = GetSubCategoryList(id).OrderBy(s => s.Name);
+            return Json(SubCategories); ///etta er json utaf testi
+        }
+
+
     }
 }
