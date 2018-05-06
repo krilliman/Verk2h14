@@ -29,9 +29,6 @@ $(document).ready(function () {
                         for (var i = 0; i < subData.length; i++) {
                             var subCategory = "<li><a href=\"/Category/SubCategories/" + subData[i].id + "\" >" + subData[i].name + "</a></li>"; // held thetta thurfi ad vera svona thvi aspdotid hledst bara a fyrsta loadi?
                             $("#cat-list").append(category);
-
-
-
                         }
                     })
                 })
@@ -40,25 +37,6 @@ $(document).ready(function () {
             .fail(function (err) {
                 alert(err);
             })
-    })
-    // asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-    $.get("../../Category/AllCategories", function (data, status) {
-        for (var i = 0; i < data.length; i++) {
-            var category = "<li><a href=\"/Category/SubCategories/" + data[i].id + "\" >" + data[i].name + "</a></li>"; // held thetta thurfi ad vera svona thvi aspdotid hledst bara a fyrsta loadi?
-            $("#cat-link-@data.id").append(category);
-
-            $.get("../../Category/AllSubCategories/@data[i].id", function (subData, status) {
-                for (var i = 0; i < subData.length; i++) {
-                    var subCategory = "<li><a href=\"/Category/SubCategories/" + subData[i].id + "\" >" + subData[i].name + "</a></li>"; // held thetta thurfi ad vera svona thvi aspdotid hledst bara a fyrsta loadi?
-                    $("#cat-table-@data.id").append(category);
-
-
-
-                }
-            })
-
-        }
     })
         .fail(function (err) {
             alert(err);
