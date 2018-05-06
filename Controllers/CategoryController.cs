@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -21,7 +22,7 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var Categories = _categoryService.GetAllCategoriesList();
+            AllCategoriesViewModel Categories = AllCategoriesList();
             return View(Categories);
         }
 
@@ -38,16 +39,18 @@ namespace BookCave.Controllers
         }
         public IActionResult AllCategories()
         {
-            var MainCategoriesList = _categoryService.GetAllCategories();
-            return Json(MainCategoriesList);
+            var mainCategoriesList = _categoryService.GetAllCategories();
+            return Json(mainCategoriesList);
         
         }
 
-        public IActionResult AllCategoriesList()
+        public AllCategoriesViewModel AllCategoriesList()
         {
-            var CategoriesList = _categoryService.GetAllCategoriesList();
-            return Json(CategoriesList);
-        
+            AllCategoriesViewModel everything = new AllCategoriesViewModel();
+            everything.MainCategories = _categoryService.GetAllCategories();
+            everything.SubCategories = _categoryService.GetAllSubCategoriesList();
+            everything.Books = _categoryService.GetAllBooksList();
+            return everything;
         }
 
     }
