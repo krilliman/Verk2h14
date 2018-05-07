@@ -25,7 +25,7 @@ namespace BookCave.Repositories
              */
             var ListItems = (from Wl in _db.WishListItemTable
                             join Bk in _db.BookTable on Wl.BookId equals Bk.ID
-                            where Wl.WishListId == Id
+                            where Wl.Id == Id
                             select new WishListItemViewModel
                             {
                                 Id = Wl.Id,

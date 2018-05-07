@@ -39,53 +39,55 @@ namespace BookCave.Repositories
 
         public List<SubCategoryViewModel> GetSubCategoryList(int? id)
         {
+            List<SubCategoryViewModel> SubCategoryList;
             if(id != null){
-                            var SubCategorys = (from sc in _db.SubCategoryTable
-                                where sc.CategoryID == id
-                                select new SubCategoryViewModel
-                                {
-                                    ID = sc.ID,
-                                    Name = sc.Name
-                                }).ToList();
-            return SubCategorys;
-            }else{
-                var SubCategorys = (from sc in _db.SubCategoryTable
+                SubCategoryList = (from s in _db.SubCategoryTable
+                    where s.CategoryID == id
                     select new SubCategoryViewModel
                     {
-                        ID = sc.ID,
-                        Name = sc.Name
+                        ID = s.ID,
+                        Name = s.Name,
+                        CategoryID = s.CategoryID,
                     }).ToList();
-                return SubCategorys;
+            }else{
+                SubCategoryList = (from s in _db.SubCategoryTable
+                    select new SubCategoryViewModel
+                    {
+                        ID = s.ID,
+                        Name = s.Name,
+                        CategoryID = s.CategoryID,
+                    }).ToList();
             }
+                return SubCategoryList;
         }
 
 
         public List<BookViewModel> GetAllBooks(int? id)
         {
+            List<BookViewModel> books;
             if(id != null){
-                var books = (from Bk in _db.BookTable
-                        where Bk.SubCategoryID == id
+                books = (from b in _db.BookTable
+                        where b.SubCategoryID == id
                         select new BookViewModel
                         {
-                            ID = Bk.ID,
-                            Name = Bk.Name,
-                            Description = Bk.Description,
-                            Rating = Bk.Rating,
-                            SubCategoryID = Bk.SubCategoryID
+                            ID = b.ID,
+                            Name = b.Name,
+                            Description = b.Description,
+                            Rating = b.Rating,
+                            SubCategoryID = b.SubCategoryID
                         }).ToList();
-            return books;
             }else{
-                var books = (from Bk in _db.BookTable
+                books = (from b in _db.BookTable
                         select new BookViewModel
                         {
-                            ID = Bk.ID,
-                            Name = Bk.Name,
-                            Description = Bk.Description,
-                            Rating = Bk.Rating,
-                            SubCategoryID = Bk.SubCategoryID
+                            ID = b.ID,
+                            Name = b.Name,
+                            Description = b.Description,
+                            Rating = b.Rating,
+                            SubCategoryID = b.SubCategoryID
                         }).ToList();
-            return books;
             }
+            return books;
         }
     }
 }
