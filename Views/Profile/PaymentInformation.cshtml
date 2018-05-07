@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="ExpireMonth">ExpireMonth</label>
-                <select name='ExpireMonth' asp-for="@Model.NewPayment.ExpireMonth">
+                <select asp-for="@Model.NewPayment.ExpireMonth">
                     <option value=''>Month</option>
                     <option value='01'>January</option>
                     <option value='02'>February</option>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="ExpireYear">ExpireYear</label>
-                <select name='ExpireYear' asp-for="@Model.NewPayment.ExpireYear">
+                <select asp-for="@Model.NewPayment.ExpireYear">
                     <option value=''>Year</option>
                     <option value='2018'>2018</option>
                     <option value='2019'>2019</option>
