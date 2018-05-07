@@ -2,9 +2,9 @@
 
 <div class="jumbotron">
     <ul>
-        @foreach(var book in Model)
+        @foreach(var b in Model)
         {
-            <li><a asp-action="Details" asp-controller="Book" asp-route-id="@book.Id">@book.Name</a></li>
+            <li><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">@b.Name</a></li>
         }
     </ul>
 </div>

@@ -28,7 +28,7 @@ namespace BookCave.Controllers
 
         public IActionResult SubCategory(int? id)
         {
-            var SubCategories = GetSubCategoryList(id);
+            var SubCategories = GetSubCategoryAndChildList(id);
             return View(SubCategories); ///etta er json utaf testi
         }
 
@@ -77,6 +77,11 @@ namespace BookCave.Controllers
         public List<BookViewModel> GetBookList(int? id){
             var BookList = _categoryService.GetBookList(id);
             return BookList;
+        }
+
+        public JsonResult GetMainCategoryListJson(){
+            var MainCategories = _categoryService.GetMainCategoryList(null);
+            return Json(MainCategories);
         }
 
     }

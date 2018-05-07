@@ -18,23 +18,24 @@ namespace BookCave.Repositories
 
         public List<MainCategoryViewModel> GetMainCategoryList(int? id)
         {
+            List<MainCategoryViewModel> Categories;
             if(id != null){
-                 var Categories = (from cg in _db.CategoryTable
+                 Categories = (from c in _db.CategoryTable
+                    where c.ID == id
                     select new MainCategoryViewModel
                     {
-                        ID = cg.ID,
-                        Name = cg.Name
+                        ID = c.ID,
+                        Name = c.Name
                     }).ToList();
-                return Categories;
             }else{
-                var Categories = (from cg in _db.CategoryTable
+                Categories = (from c in _db.CategoryTable
                     select new MainCategoryViewModel
                     {
-                        ID = cg.ID,
-                        Name = cg.Name
+                        ID = c.ID,
+                        Name = c.Name
                     }).ToList();
-                return Categories;
             }
+                return Categories;
         }
 
         public List<SubCategoryViewModel> GetSubCategoryList(int? id)
