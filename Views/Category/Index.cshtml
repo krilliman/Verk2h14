@@ -6,11 +6,11 @@
     <ul>
         @foreach(var m in @Model)
         {
-            <li><a id="cat-link-@mc.ID" asp-action="SubCategories" asp-controller="Category" asp-route-id="@mc.ID"><strong>@mc.Name</strong></a>
-                <ul class="subcategory-table" id="cat-table-@mc.ID">
-                @foreach(var s in @mc.SubCategories)
+            <li><a id="cat-link-@m.ID" asp-action="Index" asp-controller="Category" asp-route-id="@m.ID"><strong>@m.Name</strong></a>
+                <ul class="subcategory-table" id="cat-table-@m.ID">
+                @foreach(var s in @m.SubCategories)
                 {
-                    <li><a asp-action="AllInSubCategory" asp-controller="Category" asp-route-id="@s.ID"> -- @s.Name</a>
+                    <li><a asp-action="SubCategory" asp-controller="Category" asp-route-id="@s.ID"> -- @s.Name</a>
                         <ul class="subcategory-book-table" id="cat--book-table-@s.ID">
                         @foreach(var b in s.BookList)
                             {

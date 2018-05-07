@@ -18,7 +18,7 @@
 </form>
 -->
 <form asp-action="AddToWishList" asp-controller="Book">
-    <input type="hidden" name="BookId" value="@Model.Id">
+    <input type="hidden" name="BookId" value="@Model.ID">
     <input type="hidden" name="WishListId" value="@claim">
     <input type="submit" value="AddToWishList" class="btn btn-default">
 </form>
@@ -38,7 +38,7 @@
                     <input type="radio" class="form-check-input" asp-for="Rate" value=5>5
                 </label>
             </div>
-            <input type="hidden" name="BookId" value=@Model.Id asp-for="BookId">
+            <input type="hidden" name="BookId" value=@Model.ID asp-for="BookId">
             <input type="submit" value="Rate" class="btn btn-default">
         </div>
     </form>
