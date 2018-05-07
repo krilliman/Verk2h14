@@ -19,5 +19,10 @@ namespace BookCave.Services
             return _bookRepo.AddToCart(BookId, Quantity);
              
         }
+        public string CreateString(List<string> Cart)
+        {
+            return _bookRepo.CreateString(Cart);
+        }
+        
     }
 }

@@ -23,23 +23,18 @@ namespace BookCave.Controllers
         }
         public IActionResult Index()
         {
-            var Test = Request.Cookies["Cart"];
-            var ListOfWords = new List<string>();
             var Cart = new CartViewModel();
             var CartList = new List<CartItemViewModel>();
             double CartTotal = 0.0;
 
-            ListOfWords.AddRange(Test.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
-            foreach (var item in ListOfWords)
-            {   
-                Console.WriteLine(item);
-            }
-            foreach(var item in ListOfWords)
+            var ListOfWords = SplitItems();
+            for(var i = 0; i < ListOfWords.Count();i++)
             {
                 var ListOfVars = new List<string>();
-                ListOfVars.AddRange(item.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+                ListOfVars.AddRange(ListOfWords[0].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
                 var CartItem = new CartItemViewModel()
                 {
+                    Id = i+1,
                     BookId = Int32.Parse(ListOfVars[0]),
                     Price = Double.Parse(ListOfVars[1]),
                     Quantity = Int32.Parse(ListOfVars[2]),
@@ -48,7 +43,6 @@ namespace BookCave.Controllers
                 CartList.Add(CartItem);
                 CartTotal += CartItem.TotalPrice;
             }
-
             Cart.Cart = CartList;
             Cart.CartTotalPrice = CartTotal;
             return View(Cart);
@@ -58,18 +52,27 @@ namespace BookCave.Controllers
         public IActionResult AddToCart(int BookId, int Quantity)
         {
             var CartItem = _cartService.AddToCart(BookId, Quantity);
-            var Test = Request.Cookies["Cart"];
-            Test += CartItem;
-            Response.Cookies.Append("Cart", Test, _options);
+            var Cart = Request.Cookies["Cart"];
+            Cart += CartItem;
+            Response.Cookies.Append("Cart", Cart, _options);
             _options.Expires = DateTime.Now.AddDays(3);
-            /* 
-            var GetLength = Request.Cookies["Cart"].Count();
-            if(GetLength == 0)
-            {
-
-            }
-            */
+            return RedirectToAction("Details", "Book", new {id = BookId}) ;
+        }
+        public IActionResult DeleteFromCart(int CartItemId)
+        {
+            var Cart = SplitItems();
+            Cart.RemoveAt(CartItemId);
+            var UpdatedCart = _cartService.CreateString(Cart);
+            Response.Cookies.Append("Cart", UpdatedCart, _options);
             return RedirectToAction("Index", "Cart");
+        }
+
+        public List<string> SplitItems()
+        {
+            var Cart = Request.Cookies["Cart"];
+            var ListOfWords = new List<string>();
+            ListOfWords.AddRange(Cart.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
+            return ListOfWords;
         }
     }
 } 

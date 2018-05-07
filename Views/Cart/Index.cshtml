@@ -19,6 +19,10 @@
                 <li>Quantity: @Model.Cart[i-1].Quantity</li>
                 <li>TotalPrice: @Model.Cart[i-1].TotalPrice</li>
             </ul>
+            <form asp-action="DeleteFromCart" asp-controller="Cart">
+                <input type="hidden" name="CartItemId">
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
         </div>
     }
     <p>Cart Total Price: @Model.CartTotalPrice</p>
