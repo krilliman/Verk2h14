@@ -9,6 +9,20 @@ $("#CreateAddress").click(function(){
     $("#AddAddressDiv").show();
     $("#CreateAddress").hide();
 })
+/*
+$("#AddToWishList").click(function(){
+    $.get("AddToWishList", function(data, status){
+        if(data == 0){
+            var MarkUp = "RemoveFromWishList";
+        }
+        else{
+            var MarkUp = "AddToWishList";
+        }
+        $("#AddToWishList").value(MarkUp);
+        $("#AddToWishList").toggleClass("WishListButton");
+    })
+})
+*/
 $(document).ready(function () {
 
     $("#payment-info").click(function () {

@@ -86,3 +86,6 @@ li a:hover{
     font-family:Verdana, Geneva, sans-serif;
     cursor:pointer;
 }
+#WishListButton{
+    background-color: #151719;
+}

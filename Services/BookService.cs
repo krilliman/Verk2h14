@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Models.EntityModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -29,6 +30,14 @@ namespace BookCave.Services
         public void UpdateRating(List<RateViewModel> ratings)
         {
             _bookRepo.UpdateRating(ratings);
+        }
+        public void AddToWishList(WishListItem Model)
+        {
+            _bookRepo.AddToWishList(Model);
+        }
+        public bool CheckIfInWishList(int UserId, int BookId)
+        {
+            return _bookRepo.CheckIfInWishList(UserId, BookId);
         }
     }
 }

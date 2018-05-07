@@ -17,10 +17,38 @@
     <img src="~/images/WishList.png">
 </form>
 -->
-<form asp-action="AddToWishList" asp-controller="Book">
+@if(@claim != null)
+{
+    <form asp-action="AddToWishList" asp-controller="Book">
+        <input type="hidden" name="BookId" value="@Model.ID">
+        <input type="hidden" name="WishListId" value="@claim">
+        @if(Model.WishListToggle == true)
+        {
+            <input type="submit" value="RemoveFromWishList" class="btn btn-default">
+        }
+        else
+        {
+            <input type="submit" value="AddToWishList" class="btn btn-default">
+        }
+    </form>
+}
+
+<br>
+<form asp-action="AddToCart" asp-controller="Cart" class="from-group">
     <input type="hidden" name="BookId" value="@Model.ID">
-    <input type="hidden" name="WishListId" value="@claim">
-    <input type="submit" value="AddToWishList" class="btn btn-default">
+    <label for="Quantity">Quantity</label>
+    <select name="Quantity" class="form-group">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    <input type="submit" value="Add To Cart" class="btn btn-default">
 </form>
 
 <!-- This is the Area where you type in your comment and your rating for the book -->

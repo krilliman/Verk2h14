@@ -25,7 +25,7 @@ namespace BookCave.Repositories
              */
             var ListItems = (from Wl in _db.WishListItemTable
                             join Bk in _db.BookTable on Wl.BookId equals Bk.ID
-                            where Wl.Id == Id
+                            where Wl.UserId == Id
                             select new WishListItemViewModel
                             {
                                 Id = Wl.Id,
@@ -136,7 +136,6 @@ namespace BookCave.Repositories
                                 PostalCode = Ad.PostalCode,
                                 Country = Ad.Country
                             }).FirstOrDefault();
-            Console.WriteLine("AddressStreetLine" + Address.StreetLine);
             _db.Remove(Address);
             _db.SaveChanges();
         }

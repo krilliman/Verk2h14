@@ -1,0 +1,26 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models.ViewModels
+@using BookCave.Models.EntityModels
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
+
+@model BookCave.Models.ViewModels.CartViewModel
+<div class="col-sm-4">
+    @for(var i = 1; i <= @Model.Cart.Count;i++)
+    {
+        <div class="jumbotron">
+            <h3>item @i</h3>
+            <ul>
+                <li>Vantar nafn ekki dæma</li>
+                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@Model.Cart[i-1].BookId" asp-route-userid="@claim">link</a></li>
+                <li>Price: @Model.Cart[i-1].Price</li>
+                <li>Quantity: @Model.Cart[i-1].Quantity</li>
+                <li>TotalPrice: @Model.Cart[i-1].TotalPrice</li>
+            </ul>
+        </div>
+    }
+    <p>Cart Total Price: @Model.CartTotalPrice</p>
+
+</div>
