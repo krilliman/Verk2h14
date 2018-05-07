@@ -22,7 +22,7 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult Index(int? id)
         {
-            var AllCategories = GetFullList(id);
+            var AllCategories = GetMainCategoryAndChildLists(id);
             return View(AllCategories);
         }
 
@@ -39,22 +39,28 @@ namespace BookCave.Controllers
         }
 
 // Þessi föll sækja hina og þessa lista
-        public List<MainCategoryViewModel> GetFullList(int? id) //
+        public List<MainCategoryViewModel> GetMainCategoryAndChildLists(int? id) //
         {
             var MainAndSubCategories = (from m in GetMainCategoryList(id)
                                         select new MainCategoryViewModel
                                         {
                                             ID = m.ID,
                                             Name = m.Name,
-                                            SubCategories = (from s in GetSubCategoryList(m.ID)
-                                                            select new SubCategoryViewModel{
-                                                                ID = s.ID,
-                                                                Name = s.Name,
-                                                                BookList = (from b in GetBookList(s.ID)
-                                                                select b).ToList()
-                                                            }).ToList()
+                                            SubCategories = GetSubCategoryAndChildList(m.ID),
                                         }).ToList();
             return MainAndSubCategories;
+        }
+
+        public  List<SubCategoryViewModel> GetSubCategoryAndChildList(int? id)
+        {
+            var SubCategoriesAndBooks = (from s in GetSubCategoryList(id)
+                                                    select new SubCategoryViewModel
+                                                    {
+                                                        ID = s.ID,
+                                                        Name = s.Name,
+                                                        BookList = (GetBookList(s.ID)),
+                                                    }).ToList();
+            return SubCategoriesAndBooks;
         }
 
 //Hér fyrir neðan eru föll til að sækja lista í Service
