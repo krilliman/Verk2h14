@@ -3,7 +3,7 @@
     @foreach(var book in @Model)
     {   
         <div>
-            <a asp-action="Details" asp-controller="Book" asp-route-id="@book.ID">@book.Name</a>
+            <a asp-action="Details" asp-controller="Book" asp-route-id="@book.ID" asp-route-userid="1">@book.Name</a>
             <p>Book Rateing: @book.Rating.ToString("0.0")</p>
         </div>
     }

@@ -14,9 +14,6 @@ namespace BookCave.Services
         {
             _wishListRepo = new WishListRepo();
         }
-        public void AddToWishList(WishListItem Model)
-        {
-            _wishListRepo.AddToWishList(Model);
-        }
+      
     }
 }

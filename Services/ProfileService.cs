@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Models.EntityModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -29,6 +30,7 @@ namespace BookCave.Services
             var UserId =_profileRepo.AddPayment(Model);
             return UserId;
         }
+        
         public void DeletePayment(int PaymentId)
         {
             _profileRepo.DeletePayment(PaymentId);

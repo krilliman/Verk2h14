@@ -14,5 +14,6 @@ namespace BookCave.Models.ViewModels
         public int UserId {get; set; }
         public List<RateViewModel> Ratings {get; set; }
         public int SubCategoryID { get; set; }
+        public bool WishListToggle { get; set; }
     }
 }

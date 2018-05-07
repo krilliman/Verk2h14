@@ -53,5 +53,29 @@ namespace BookCave.Repositories
             TheBook.Rating = totalrating;
             _db.SaveChanges();
         }
+        public void AddToWishList(WishListItem Model)
+        {  
+
+            var Book = _db.WishListItemTable.SingleOrDefault(b => b.BookId == Model.BookId);
+            
+            if(Book == null)
+            {
+                _db.WishListItemTable.Add(Model);
+            }
+            else
+            {
+                _db.Remove(Book);
+            }
+            _db.SaveChanges();
+        }
+        
+        public bool CheckIfInWishList(int UserId, int BookId)
+        {
+            var Book = _db.WishListItemTable.SingleOrDefault(b => b.UserId == UserId && b.BookId == BookId);
+            
+            if(Book == null){return false;}
+            return true;
+        }
+         
     }
 }
