@@ -35,6 +35,24 @@ namespace BookCave.Services
 
         // Þessi föll sækja hina og þessa lista
 
+        public CategoryIndexViewModel GetIndexViewModel()
+        {
+            var IndexViewModel = new CategoryIndexViewModel{
+                                    BOTW = (from b in _categoryRepo.GetAllBooks(null)
+                                            select b).OrderByDescending(x => x.Views).FirstOrDefault(),
+                                    UserFav = (from b in _categoryRepo.GetAllBooks(null)
+                                            select b).OrderByDescending(x => x.Rating).Take(1).FirstOrDefault(),
+                                    NewestRelease = (from b in _categoryRepo.GetAllBooks(null)
+                                            select b).OrderByDescending(b => b.PublishDate.ToUniversalTime()).FirstOrDefault(),
+                                    CheapestBook = (from b in _categoryRepo.GetAllBooks(null)
+                                            select b).OrderBy(x => x.TotalPrice).FirstOrDefault(),
+                                    Top10AllCategories = GetMainCategoryTop10List(),
+                                    Top10SubCategories = GetSubCategoryViewModel(null),
+                                    
+            };
+            return IndexViewModel;
+        }
+
         public List<MainCategoryTop10ListViewModel> GetMainCategoryTop10List()
         {
             var MainCategoriesWithTop10Books = (from m in GetMainCategoryList(null)
@@ -44,10 +62,40 @@ namespace BookCave.Services
                                                     Name = m.Name,
                                                     Top10Books = (from b in GetBookList(null)
                                                                 where b.MainCategoryID == m.ID
-                                                                select b).OrderByDescending(x => x.Rating).Take(10).ToList()
+                                                                select b).OrderByDescending(x => x.Rating).Take(4).ToList()
                                                 }).ToList();
-            // Hérna bryndís!!! h'ernaaaaaaaaaaaaaaaa!!!
-            return MainCategoriesWithTop10Books; // Muna ad breyta thessu
+            return MainCategoriesWithTop10Books; 
+        }
+
+
+        public List<SubCategoryViewModel> GetSubCategoryViewModel(int? id)
+        {
+            if(id != null){
+                var SubCategoryViewModelWithTop10 = (from s in GetSubCategoryList(id)
+                                                where s.ID == id
+                                                select new SubCategoryViewModel
+                                                {
+                                                    ID = s.ID,
+                                                    Name = s.Name,
+                                                    Top10Books = (from b in GetBookList(s.ID)
+                                                                select b).OrderByDescending(x => x.Rating).Take(4).ToList(),
+                                                    BookList = (from b in GetBookList(s.ID)
+                                                                select b).OrderBy(x => x.Name).ToList()
+                                                }).ToList();
+            return SubCategoryViewModelWithTop10;
+            }else{
+                var SubCategoryViewModelWithTop10 = (from s in GetSubCategoryList(id)
+                                                select new SubCategoryViewModel
+                                                {
+                                                    ID = s.ID,
+                                                    Name = s.Name,
+                                                    Top10Books = (from b in GetBookList(s.ID)
+                                                                select b).OrderByDescending(x => x.Rating).Take(4).ToList(),
+                                                    BookList = (from b in GetBookList(s.ID)
+                                                                select b).OrderBy(x => x.Name).ToList()
+                                                }).ToList();
+            return SubCategoryViewModelWithTop10;
+            } 
         }
 
         public List<MainCategoryViewModel> GetMainCategoryAndChildLists(int? id) //

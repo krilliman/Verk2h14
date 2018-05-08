@@ -15,7 +15,7 @@ namespace BookCave.Models.ViewModels
         public double TotalPrice { get; set; }
         public int Stock { get; set; }
         public double Rating { get; set; }
-        //public int Views { get; set; }
+        public int Views { get; set; }
         public DateTime PublishDate { get; set; }
         public int PublisherID { get; set; }
         public string Isbn { get; set; }

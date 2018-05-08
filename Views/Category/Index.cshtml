@@ -1,35 +1,45 @@
-@model List<BookCave.Models.ViewModels.MainCategoryTop10ListViewModel>
-@using BookCave.Models.ViewModels;
+@model BookCave.Models.ViewModels.CategoryIndexViewModel;
 
 
 <div class="jumbotron">
-    <ul class="Thumbnail">
-        @foreach(var m in @Model)
+    <ul>
+        <li>
+           Book of the week @Model.BOTW.Name
+        </li>
+        <li>
+            User Favorite @Model.UserFav.Name
+        </li>
+        <li>
+            Newest release @Model.NewestRelease.Name
+        </li>
+        <li>
+            Best deal @Model.CheapestBook.Name
+        </li>
+        @foreach(var m in @Model.Top10AllCategories)
         {
-            <div class="thumbnails">
-                <li class="span4"><a id="cat-link-@m.ID" asp-action="SubCategory" asp-controller="Category" asp-route-id="@m.ID"><h3>@m.Name</h3></a>
-                    <ul class="subcategory-table" id="cat-table-@m.ID">
-                    
-                    
-                        @foreach(var b in @m.Top10Books)
-                        {
-                            <ul class="thumbnails">
-                                <li class="span4">
-                                    <div class="thumbnail">
-                                        <img data-src="holder.js/300x200" alt="HerKemurMynd">
-                                        <h3>@b.Name</h3>
-                                        <p>@b.Author</p>
-                                    </div>
-                                </li>
-                                
-                                </ul>
-
-
-
-                    }
-                    </ul>
-                </li>
-            </div>
+            <ul>
+            <li>@m.Name</li>
+            <ul>
+                @foreach(var b in m.Top10Books)
+                {
+                    <li>@b.Name</li>
+                    <li>@b.Author</li>
+                }
+            </ul>
+            </ul>
+        }
+        @foreach(var m in @Model.Top10SubCategories)
+        {
+            <ul>
+            <li>@m.Name</li>
+            <ul>
+                @foreach(var b in m.Top10Books)
+                {
+                    <li>@b.Name</li>
+                    <li>@b.Author</li>
+                }
+            </ul>
+            </ul>
         }
     </ul>
-</div>    
+</div>

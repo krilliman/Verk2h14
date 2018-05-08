@@ -60,6 +60,14 @@ $(document).ready(function () {
     })
 
 
+    /////////////
+
+    $('#testTop10-carousel').carousel({
+        pause: "hover",
+        interval: 4000,
+      });
+
+
     $("#cat-link").one("click", function () {
         $.get("../../Category/GetMainCategoryListJson", function (data, status) {
             for (var i = 0; i < data.length; i++) {
@@ -70,11 +78,7 @@ $(document).ready(function () {
             .fail(function (err) {
                 alert(err);
             })
-    })
-        .fail(function (err) {
-            alert(err);
-        })
-   
+    })   
 })
 
 
