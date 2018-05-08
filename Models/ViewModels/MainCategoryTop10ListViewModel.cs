@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace BookCave.Models.ViewModels
 {
-    public class MainCategoryTop10List
+    public class MainCategoryTop10ListViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<SubCategoryViewModel> MyProperty { get; set; }
+        public List<BookViewModel> Top10Books { get; set; }
     }
 }

@@ -35,10 +35,19 @@ namespace BookCave.Services
 
         // Þessi föll sækja hina og þessa lista
 
-        public List<MainCategoryTop10List> GetMainCategoryTop10List()
+        public List<MainCategoryTop10ListViewModel> GetMainCategoryTop10List()
         {
+            var MainCategoriesWithTop10Books = (from m in GetMainCategoryList(null)
+                                                select new MainCategoryTop10ListViewModel
+                                                {
+                                                    ID = m.ID,
+                                                    Name = m.Name,
+                                                    Top10Books = (from b in GetBookList(null)
+                                                                where b.MainCategoryID == m.ID
+                                                                select b).OrderByDescending(x => x.Rating).Take(10).ToList()
+                                                }).ToList();
             // Hérna bryndís!!! h'ernaaaaaaaaaaaaaaaa!!!
-            return null; // Muna ad breyta thessu
+            return MainCategoriesWithTop10Books; // Muna ad breyta thessu
         }
 
         public List<MainCategoryViewModel> GetMainCategoryAndChildLists(int? id) //

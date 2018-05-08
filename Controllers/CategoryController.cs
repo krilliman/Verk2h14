@@ -22,7 +22,7 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult Index(int? id)
         {
-            var AllCategories = _categoryService.GetMainCategoryAndChildLists(null);
+            var AllCategories = _categoryService.GetMainCategoryTop10List();
             return View(AllCategories);
         }
 

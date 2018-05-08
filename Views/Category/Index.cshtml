@@ -1,27 +1,35 @@
-@model List<BookCave.Models.ViewModels.MainCategoryViewModel>
+@model List<BookCave.Models.ViewModels.MainCategoryTop10ListViewModel>
 @using BookCave.Models.ViewModels;
 
 
 <div class="jumbotron">
-    <ul>
+    <ul class="Thumbnail">
         @foreach(var m in @Model)
         {
-            <li><a id="cat-link-@m.ID" asp-action="Index" asp-controller="Category" asp-route-id="@m.ID"><strong>@m.Name</strong></a>
-                <ul class="subcategory-table" id="cat-table-@m.ID">
-                @foreach(var s in @m.SubCategories)
-                {
-                    <li><a asp-action="SubCategory" asp-controller="Category" asp-route-id="@s.ID"> -- @s.Name</a>
-                        <ul class="subcategory-book-table" id="cat--book-table-@s.ID">
-                        @foreach(var b in s.BookList)
-                            {
-                                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID"> ------ @b.Name</a></li>
-                            }
-                        </ul>
-                        
-                    </li>
-                }
-                </ul>
-            </li>
+            <div class="thumbnails">
+                <li class="span4"><a id="cat-link-@m.ID" asp-action="SubCategory" asp-controller="Category" asp-route-id="@m.ID"><h3>@m.Name</h3></a>
+                    <ul class="subcategory-table" id="cat-table-@m.ID">
+                    
+                    
+                        @foreach(var b in @m.Top10Books)
+                        {
+                            <ul class="thumbnails">
+                                <li class="span4">
+                                    <div class="thumbnail">
+                                        <img data-src="holder.js/300x200" alt="HerKemurMynd">
+                                        <h3>@b.Name</h3>
+                                        <p>@b.Author</p>
+                                    </div>
+                                </li>
+                                
+                                </ul>
+
+
+
+                    }
+                    </ul>
+                </li>
+            </div>
         }
     </ul>
 </div>    
