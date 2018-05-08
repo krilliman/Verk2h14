@@ -1,0 +1,44 @@
+@model BookCave.Models.ViewModels.CompleteOrderViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Cart</h3>
+            @foreach(var CartItem in @Model.Cart.Cart)
+            {
+                <div class=" jumbotron">
+                    <ul>
+                        <li>Id: @CartItem.BookId</li>
+                        <li>Price: @CartItem.Price</li>
+                        <li>Quantity: @CartItem.Quantity</li>
+                        <li>TotalPrice: @CartItem.TotalPrice<li>
+                    </ul>
+                </div>
+            }
+            <p>TotalPrice: @Model.Cart.CartTotalPrice</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Address Info</h3>
+            <div id="UserAddress" class="form-group jumbotron">
+                <ul>
+                    <li>StreetLane: @Model.UserAddress.StreetLine</li>
+                    <li>PostalCode: @Model.UserAddress.PostalCode</li>
+                    <li>Country: @Model.UserAddress.Country</li>
+                </ul>
+            </div>
+            <h3>Payment Info</h3>
+            <div class="form-group jumbotron">
+                <li>Card Number: @Model.UserPayment.CardNumber</li>
+                <li>Card Holder: @Model.UserPayment.CardHolder</li>
+                <li>Expires: @Model.UserPayment.ExpireMonth / @Model.UserPayment.ExpireYear</li>
+            </div>
+        <form asp-action="OrderComfirmed" asp-action="Cart">
+            <label for="Cvc">Enter Cvc</label>
+            <input type="text" asp-for="@Model.Cvc" class="form-control">
+            <input type="hidden" asp-for="@Model.UserId" value="@Model.Cart.UserId">
+            <input type="hidden" asp-for="@Model.TotalPrice" value="@Model.Cart.CartTotalPrice">
+            <input type="submit" value="Pay" class="btn btn-success">
+        </form>
+        </div>
+    </div>
+    </div>
+</div>

@@ -9,6 +9,25 @@ $("#CreateAddress").click(function(){
     $("#AddAddressDiv").show();
     $("#CreateAddress").hide();
 })
+
+$("#MyPayments").click(function(){
+    console.log("PaymentButton clicked")
+    $("#UserPayments").show();
+    $("#NewPayment").hide();
+
+})
+$("#ToggleNewPayment").click(function(){
+    $("#NewPayment").show();
+    $("#UserPayments").hide();
+})
+$("#MyAddresses").click(function(){
+    $("#UserAddresses").show();
+    $("#NewAddress").hide();
+})
+$("#ToggleNewAddress").click(function(){
+    $("#UserAddresses").hide();
+    $("#NewAddress").show();
+})
 /*
 $("#AddToWishList").click(function(){
     $.get("AddToWishList", function(data, status){

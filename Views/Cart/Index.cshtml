@@ -26,5 +26,10 @@
         </div>
     }
     <p>Cart Total Price: @Model.CartTotalPrice</p>
-
+    <form asp-action="Checkout" asp-controller="Cart">
+        <input type="hidden" asp-for="@Model.UserId" value="@claim">
+        <input type="hidden" asp-for="@Model.CartTotalPrice" value="@Model.CartTotalPrice">
+        <input type="submit" value="Check Out" class="btn btn-success">
+    </form>
 </div>
+

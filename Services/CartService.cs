@@ -7,21 +7,33 @@ namespace BookCave.Services
     public class CartService
     {
 
-        private CartRepo _bookRepo;
+        private CartRepo _cartRepo;
 
         public CartService()
         {
-            _bookRepo = new CartRepo();
+            _cartRepo = new CartRepo();
         }
 
         public string AddToCart(int BookId, int Quantity)
         {
-            return _bookRepo.AddToCart(BookId, Quantity);
+            return _cartRepo.AddToCart(BookId, Quantity);
              
         }
         public string CreateString(List<string> Cart)
         {
-            return _bookRepo.CreateString(Cart);
+            return _cartRepo.CreateString(Cart);
+        }
+        public CheckOutViewModel CheckOut(CartViewModel Model)
+        {
+            return _cartRepo.CheckOut(Model);
+        }
+        public AddressViewModel GetAddressById(int AddressId)
+        {
+            return _cartRepo.GetAddressById(AddressId);
+        }
+        public PaymentInfoViewModel GetPaymentById(int PaymentId)
+        {
+            return _cartRepo.GetPaymentById(PaymentId);
         }
         
     }

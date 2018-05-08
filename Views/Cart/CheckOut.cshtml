@@ -1,0 +1,126 @@
+@model BookCave.Models.ViewModels.CheckOutViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Cart</h3>
+            @foreach(var CartItem in @Model.Cart.Cart)
+            {
+                <div class=" jumbotron">
+                    <ul>
+                        <li>Id: @CartItem.BookId</li>
+                        <li>Price: @CartItem.Price</li>
+                        <li>Quantity: @CartItem.Quantity</li>
+                        <li>TotalPrice: @CartItem.TotalPrice<li>
+                    </ul>
+                </div>
+            }
+            <p>TotalPrice: @Model.Cart.CartTotalPrice</p>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-4">
+                <button class="btn btn-default" id="MyPayments">My Payments</button>
+                <button class="btn btn-default" id="ToggleNewPayment">New Payment</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default" id="MyAddresses">My Addresses</button>
+                <button class="btn btn-default" id="ToggleNewAddress">New Address</button>
+            </div>
+            <br>
+            <div id="CheckOutFormDiv" style="margin-top:50px">
+                <form asp-action="CompletePayment" asp-controller="Cart" class="form-horizontal" class="form-control">
+                    <div id="UserPayments" class="form-group">
+                        <fieldset>
+                            <ul>
+                            @for(int i = 1; i <= @Model.UserPayments.Payments.Count; i++)
+                            {
+                                <li>
+                                    <p>Payment @i <input type="radio" name="PaymentId" value="@Model.UserPayments.Payments[i-1].Id" class="form-check-input"></p>
+                                    <ul>
+                                        <div class="jumbotron">
+                                            <li>ID: @Model.UserPayments.Payments[i-1].Id</li>
+                                            <li>CardNumber: @Model.UserPayments.Payments[i-1].CardNumber</li>
+                                            <li>CardHolder: @Model.UserPayments.Payments[i-1].CardHolder</li>
+                                            <li>ExpireMonth: @Model.UserPayments.Payments[i-1].ExpireMonth</li>
+                                            <li>ExpireYear: @Model.UserPayments.Payments[i-1].ExpireYear</li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            }
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div id="NewPayment" hidden>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserPayments.NewPayment.CardNumber" placeholder="Enter Card Number" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserPayments.NewPayment.CardHolder" placeholder="Enter Card Holder Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="ExpireMonth">ExpireMonth</label>
+                            <select asp-for="@Model.UserPayments.NewPayment.ExpireMonth">
+                                <option value=''>Month</option>
+                                <option value='01'>January</option>
+                                <option value='02'>February</option>
+                                <option value='03'>March</option>
+                                <option value='04'>April</option>
+                                <option value='05'>May</option>
+                                <option value='06'>June</option>
+                                <option value='07'>July</option>
+                                <option value='08'>August</option>
+                                <option value='09'>September</option>
+                                <option value='10'>October</option>
+                                <option value='11'>November</option>
+                                <option value='12'>December</option>
+                            </select> 
+                        </div>
+                        <div class="form-group">
+                            <label for="ExpireYear">ExpireYear</label>
+                            <select asp-for="@Model.UserPayments.NewPayment.ExpireYear">
+                                <option value=''>Year</option>
+                                <option value='2018'>2018</option>
+                                <option value='2019'>2019</option>
+                                <option value='2020'>2020</option>
+                                <option value='2021'>2021</option>
+                            </select> 
+                        </div>
+                    </div><br>
+                    <div id="UserAddresses" class="form-group">
+                        <fieldset>
+                            <ul>
+                            @for(int i = 1; i <= @Model.UserAddresses.AddressBook.Count; i++)
+                            {
+                                <li>
+                                    <p>Address @i <input type="radio" name="AddressId"  value="@Model.UserAddresses.AddressBook[i-1].Id" class="form-check-input" id=""></p>
+                                    <ul>
+                                        <div class="jumbotron">
+                                            <li>ID: @Model.UserAddresses.AddressBook[i-1].Id</li>
+                                            <li>StreetLine: @Model.UserAddresses.AddressBook[i-1].StreetLine</li>
+                                            <li>PostalCode: @Model.UserAddresses.AddressBook[i-1].PostalCode</li>
+                                            <li>Country: @Model.UserAddresses.AddressBook[i-1].Country</li>
+                                         </div>
+                                    </ul>
+                                </li>
+                            }
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div id="NewAddress" hidden>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.StreetLine" placeholder="Enter SteetLine" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.PostalCode" placeholder="Enter PostalCode" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.Country" placeholder="Enter Country" class="form-control">
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="@Model.ExtraInfo.UserId" value="@Model.Cart.UserId">
+                    <input type="hidden" asp-for="@Model.ExtraInfo.CartTotal" value="@Model.Cart.CartTotalPrice">
+                    <input type="submit" value="Pay" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

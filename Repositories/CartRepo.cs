@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
@@ -50,6 +51,67 @@ namespace BookCave.Repositories
                 }
             }
             return RetVal;
+        }
+        public CheckOutViewModel CheckOut(CartViewModel Model)
+        {
+            var Addresses = (from Ab in _db.AddressTable
+                            where Ab.UserId == Model.UserId
+                            select new AddressViewModel
+                            {
+                                Id = Ab.Id,
+                                StreetLine = Ab.StreetLine,
+                                PostalCode = Ab.PostalCode,
+                                Country = Ab.Country
+                            }).ToList();
+            var Payments = (from Pm in _db.CardInformationTable
+                            where Pm.UserId == Model.UserId
+                            select new PaymentInfoViewModel
+                            {
+                                Id = Pm.Id,
+                                CardNumber = Pm.CardNumber,
+                                CardHolder = Pm.CardHolder,
+                                ExpireMonth = Pm.ExpireMonth,
+                                ExpireYear = Pm.ExpireYear
+                            }).ToList();
+            var AddressBook = new AddressListViewModel(){AddressBook = Addresses};
+            var PaymentBook = new PaymentListViewModel(){Payments = Payments};
+
+            var CheckOutModel = new CheckOutViewModel()
+            {
+                Cart = Model,
+                UserAddresses = AddressBook,
+                UserPayments = PaymentBook
+            };
+
+            return CheckOutModel;
+        }
+        public AddressViewModel GetAddressById(int AddressId)
+        {
+            Console.WriteLine("AddressID: " + AddressId);
+            var Address = (from Ad in _db.AddressTable
+                            where Ad.Id == AddressId
+                            select new AddressViewModel
+                            {
+                                Id = Ad.Id,
+                                StreetLine = Ad.StreetLine,
+                                PostalCode = Ad.PostalCode,
+                                Country = Ad.Country
+                            }).FirstOrDefault();
+            return Address;
+        }
+        public PaymentInfoViewModel GetPaymentById(int PaymentId)
+        {
+            var Payment = (from Pm in _db.CardInformationTable
+                            where Pm.Id == PaymentId
+                            select new PaymentInfoViewModel
+                            {
+                                Id = Pm.Id,
+                                CardNumber = Pm.CardNumber,
+                                CardHolder = Pm.CardHolder,
+                                ExpireMonth = Pm.ExpireMonth,
+                                ExpireYear = Pm.ExpireYear
+                            }).FirstOrDefault();
+            return Payment;
         }
     }
 }
