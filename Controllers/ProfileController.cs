@@ -37,7 +37,8 @@ namespace BookCave.Controllers
         }
         public IActionResult OrderHistory(int Id)
         {
-            return View();
+            var Orders = _profileService.GetAllOrders(Id);
+            return View(Orders);
         }
         public IActionResult AddressBook(int Id)
         {

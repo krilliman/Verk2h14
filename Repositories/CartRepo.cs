@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Data;
+using BookCave.Models.EntityModels;
 using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 
@@ -112,6 +113,39 @@ namespace BookCave.Repositories
                                 ExpireYear = Pm.ExpireYear
                             }).FirstOrDefault();
             return Payment;
+        }
+        public void AddOrder(CompleteOrderViewModel Model)
+        {
+            
+            var Cart = Model.Cart.Cart;
+            foreach(var CartItem in Cart)
+            {
+                int OrderID;
+                if(_db.OrderTable.Count() == 0)
+                {
+                    OrderID = 1;
+                }
+                else
+                {
+                    OrderID = _db.OrderTable.Last().Id +1;
+                }
+                var OrderItem = new OrderItem()
+                {
+                    
+                    OrderId = OrderID,
+                    BookId = CartItem.BookId,
+                    Quantity = CartItem.Quantity,
+                    Price = CartItem.TotalPrice
+                };
+                _db.Add(OrderItem);
+            }
+            var Order = new Order()
+            {
+                UserId = Model.UserId,
+                OrderPrice = Model.TotalPrice
+            };
+            _db.Add(Order);
+            _db.SaveChanges();
         }
     }
 }

@@ -55,5 +55,9 @@ namespace BookCave.Services
 
             return Information;
         }
+        public List<OrdersViewModel> GetAllOrders(int Id)
+        {
+            return _profileRepo.GetAllOrders(Id);
+        }
     }
 }
