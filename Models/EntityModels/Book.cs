@@ -15,6 +15,7 @@ namespace  BookCave.Models.EntityModels
         public int Views { get; set; }
         public DateTime PublishDate { get; set; }
         public int Stock { get; set; }
+        public int MainCategoryID { get; set; }
         public int SubCategoryID { get; set; }
         public int PublisherId { get; set; }
     }

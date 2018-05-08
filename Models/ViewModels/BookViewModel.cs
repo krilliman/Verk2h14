@@ -6,19 +6,19 @@ namespace BookCave.Models.ViewModels
     public class BookViewModel
     {
         public int ID { get; set; }
+        public int MainCategoryID { get; set; }
+        public int SubCategoryID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Isbn { get; set; }
-        public byte[] Image { get; set; }
         public string Author { get; set; }
+        public string Description { get; set; }
+        public byte[] Image { get; set; }
         public double TotalPrice { get; set; }
+        public int Stock { get; set; }
         public double Rating { get; set; }
         //public int Views { get; set; }
         public DateTime PublishDate { get; set; }
-        public int Stock { get; set; }
-        public int MainCategoryID { get; set; }
-        public int SubCategoryID { get; set; }
         public int PublisherID { get; set; }
+        public string Isbn { get; set; }
 
         // ma alveg kommenta eitthvad ef 
         public List<RateViewModel> Ratings {get; set; } // hvad gerir thetta?

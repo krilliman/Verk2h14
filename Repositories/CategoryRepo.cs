@@ -72,20 +72,40 @@ namespace BookCave.Repositories
                         select new BookViewModel
                         {
                             ID = b.ID,
+                            MainCategoryID = b.MainCategoryID,
+                            SubCategoryID = b.SubCategoryID,
                             Name = b.Name,
+                            Author = (from a in _db.AuthorTable
+                                        where a.Id == b.AuthorId
+                                        select a.Name).FirstOrDefault(),
                             Description = b.Description,
+                            Image = b.Image,
+                            TotalPrice = b.TotalPrice,
                             Rating = b.Rating,
-                            SubCategoryID = b.SubCategoryID
+                            //views ef thad a ad vera her,
+                            PublishDate = b.PublishDate,
+                            Stock = b.Stock,
+                            Isbn = b.Isbn,
                         }).ToList();
             }else{
                 books = (from b in _db.BookTable
                         select new BookViewModel
                         {
                             ID = b.ID,
+                            MainCategoryID = b.MainCategoryID,
+                            SubCategoryID = b.SubCategoryID,
                             Name = b.Name,
+                            Author = (from a in _db.AuthorTable
+                                        where a.Id == b.AuthorId
+                                        select a.Name).FirstOrDefault(),
                             Description = b.Description,
+                            Image = b.Image,
+                            TotalPrice = b.TotalPrice,
                             Rating = b.Rating,
-                            SubCategoryID = b.SubCategoryID
+                            //views ef thad a ad vera her,
+                            PublishDate = b.PublishDate,
+                            Stock = b.Stock,
+                            Isbn = b.Isbn,
                         }).ToList();
             }
             return books;
