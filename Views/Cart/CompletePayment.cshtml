@@ -1,4 +1,12 @@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models.ViewModels
+@using BookCave.Models.EntityModels
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
 @model BookCave.Models.ViewModels.CompleteOrderViewModel
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">
@@ -34,7 +42,7 @@
         <form asp-action="OrderComfirmed" asp-action="Cart">
             <label for="Cvc">Enter Cvc</label>
             <input type="text" asp-for="@Model.Cvc" class="form-control">
-            <input type="hidden" asp-for="@Model.UserId" value="@Model.Cart.UserId">
+            <input type="hidden" asp-for="@Model.UserId" value="@claim">
             <input type="hidden" asp-for="@Model.TotalPrice" value="@Model.Cart.CartTotalPrice">
             <input type="submit" value="Pay" class="btn btn-success">
         </form>

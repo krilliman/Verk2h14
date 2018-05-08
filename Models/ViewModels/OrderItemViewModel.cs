@@ -1,8 +1,7 @@
-namespace BookCave.Models.EntityModels
+namespace BookCave.Models.ViewModels
 {
-    public class OrderItem
+    public class OrderItemViewModel
     {
-        public int Id { get; set; }
         public int BookId { get; set; }
         public int OrderId { get; set; }
         public int Quantity { get; set; }

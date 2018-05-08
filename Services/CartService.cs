@@ -35,6 +35,9 @@ namespace BookCave.Services
         {
             return _cartRepo.GetPaymentById(PaymentId);
         }
-        
+        public void AddOrder(CompleteOrderViewModel Model)
+        {
+            _cartRepo.AddOrder(Model);
+        }
     }
 }

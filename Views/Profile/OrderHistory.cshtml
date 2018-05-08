@@ -1,1 +1,27 @@
 @await Html.PartialAsync("_ProfilePartial")
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
+@using BookCave.Models.ViewModels;
+@using BookCave.Models.EntityModels;
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
+@model List<BookCave.Models.ViewModels.OrdersViewModel>
+<div class="col-sm-6">
+    @foreach(var order in @Model)
+    {
+        <h3>OrderID: @order.OrderId</h3>
+        <div class="jumbotron">
+            <ul>
+                @foreach(var orderItems in order.OrderItem)
+                {
+                    <ul>
+                        <li><a asp-action="Details" asp-controller="Book" asp-route-id="@orderItems.BookId" asp-route-userid="@claim">BookName</a></li>
+                        <li>Quantity: @orderItems.Quantity</li>
+                        <li>Price: @orderItems.Price</li>
+                    </ul>
+                }
+            </ul>
+        </div>
+    }
+</div>

@@ -100,6 +100,10 @@ namespace BookCave.Controllers
         }
         public IActionResult OrderComfirmed(CompleteOrderViewModel Model)
         {
+            
+            var ListOfWords = SplitItems();
+            Model.Cart = CreateView(ListOfWords);
+            _cartService.AddOrder(Model);
             Response.Cookies.Delete("Cart");
             return RedirectToAction("Index", "Cart");
         }

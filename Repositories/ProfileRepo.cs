@@ -150,5 +150,34 @@ namespace BookCave.Repositories
                               }).FirstOrDefault();
             return Information;
         }
+        public List<OrdersViewModel> GetAllOrders(int Id)
+        {
+            var Orders = (from Od in _db.OrderTable
+                            where Od.UserId == Id
+                            select new OrdersViewModel
+                            {
+                                OrderId = Od.Id,
+                                OrderPrice = Od.OrderPrice
+                            }).ToList();
+            foreach(var order in Orders)
+            {
+                var OrderItem = (from Oi in _db.OrderItemTable
+                                where Oi.OrderId == order.OrderId
+                                select new OrderItemViewModel
+                                {
+                                    BookId = Oi.BookId,
+                                    OrderId = Oi.OrderId,
+                                    Quantity = Oi.Quantity,
+                                    Price = Oi.Price
+                                }).ToList();
+                foreach (var item in OrderItem)
+                {
+                    Console.WriteLine("Orderitem: " + item.BookId);
+                }
+                Console.WriteLine("passed");
+                order.OrderItem = OrderItem;
+            }
+            return Orders;
+        }
     }
 }
