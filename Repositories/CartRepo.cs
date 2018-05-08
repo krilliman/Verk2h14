@@ -32,9 +32,24 @@ namespace BookCave.Repositories
             ItemToString.Add(Item.Price.ToString());
             ItemToString.Add(Item.Quantity.ToString());
             ItemToString.Add(Item.TotalPrice.ToString());
-            var dataAsString = ItemToString.Aggregate((a, b) => a = a + "," + b);
-            dataAsString += "|";
-            return dataAsString;
+            
+            var RetVal = ItemToString.Aggregate((a, b) => a = a + "," + b);
+            RetVal += "|";
+            return RetVal;
+            
+        }
+        public string CreateString(List<string> Cart)
+        {
+            string RetVal = "";
+            for(var i = 0; i < Cart.Count();i++)
+            {
+                RetVal += Cart[i];
+                if(!(i == Cart.Count-1))
+                {
+                    RetVal += "|";
+                }
+            }
+            return RetVal;
         }
     }
 }
