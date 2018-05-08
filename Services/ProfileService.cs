@@ -49,5 +49,11 @@ namespace BookCave.Services
             var UserId = _profileRepo.AddAddress(Model);
             return UserId;
         }
+        public UserViewModel GetInformation(int Id)
+        {
+            var Information = _profileRepo.GetInformation(Id);
+
+            return Information;
+        }
     }
 }

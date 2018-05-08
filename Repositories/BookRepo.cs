@@ -31,6 +31,20 @@ namespace BookCave.Repositories
         }
 
         
+        public List<BookViewModel> GetAllBooks(string search)
+        {
+            var Books = (from Cg in _db.BookTable
+                        where Cg.Name.Contains(search)
+                        select new BookViewModel
+                        {
+                            ID = Cg.ID,
+                            Name = Cg.Name,
+                            Description = Cg.Description,
+                            Rating = Cg.Rating 
+                        }).ToList();
+            Console.WriteLine(Books.Count);
+            return Books;
+        }  
         public List<BookViewModel> GetAllBooks()
         {
             var Books = (from Cg in _db.BookTable
@@ -41,6 +55,7 @@ namespace BookCave.Repositories
                             Description = Cg.Description,
                             Rating = Cg.Rating 
                         }).ToList();
+            Console.WriteLine(Books.Count);
             return Books;
         }  
         public void UpdateRating(List<RateViewModel> ratings)

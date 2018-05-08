@@ -139,5 +139,16 @@ namespace BookCave.Repositories
             _db.Remove(Address);
             _db.SaveChanges();
         }
+        public UserViewModel GetInformation(int Id)
+        {
+            var Information = (from Usr in _db.UserInformationTable
+                              where Usr.Id == Id
+                              select new UserViewModel
+                              {
+                                  Description = Usr.Description,
+                                  Image = Usr.ProfileImage
+                              }).FirstOrDefault();
+            return Information;
+        }
     }
 }

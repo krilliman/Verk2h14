@@ -21,6 +21,12 @@ namespace BookCave.Services
             return Book;
         }
 
+        public List<BookViewModel> GetAllBooks(string search)
+        {  
+            var Book = _bookRepo.GetAllBooks(search);
+            return Book;
+            
+        }
         public List<BookViewModel> GetAllBooks()
         {  
             var Book = _bookRepo.GetAllBooks();

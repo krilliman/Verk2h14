@@ -51,8 +51,10 @@
     <input type="submit" value="Add To Cart" class="btn btn-default">
 </form>
 
-<!-- This is the Area where you type in your comment and your rating for the book -->
-<div Id="RateArea">
+@if(@claim != null)
+{
+<!-- This is the Area where you type in your comment and your rating for the book --> 
+<div Id="RateArea"> 
     <form asp-action="SaveRate" asp-controller="Book" >
         <div class="form-group">
             <label asp-for="Comment">Comment</label>
@@ -67,11 +69,12 @@
                 </label>
             </div>
             <input type="hidden" name="BookId" value=@Model.ID asp-for="BookId">
+            <input type="hidden" name="UserId" value=@claim asp-for="UserId">
             <input type="submit" value="Rate" class="btn btn-default">
         </div>
     </form>
 </div>
-
+}
 <!-- Prints out all the ratings in the model -->
 <div id="RatedArea">
     <div>

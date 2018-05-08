@@ -9,5 +9,6 @@ namespace BookCave.Models.ViewModels
         public int ID { get; set; }
         public string Name { get; set; }
         //public List<SubCategoryViewModel> SubCateGoryList { get; set; }
+        public List<List<BookViewModel>> Books{ get; set;}
     }
 }

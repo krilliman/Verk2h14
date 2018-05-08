@@ -25,7 +25,6 @@ namespace BookCave.Repositories
         //Selects all the ratings from the DB with the bookid ID. and then returns them to RatingService.
         public List<RateViewModel> GetRatingsById(int Id)
         {
-            Console.WriteLine("Getting all the ratings by " + Id);
             var Rating = (from rt in _db.RatingTable
                          where rt.BookId == Id
                          select new RateViewModel

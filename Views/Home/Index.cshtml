@@ -1,5 +1,9 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
 <div>
+<form asp-action="Index" asp-controller="Home">
+    <input type="text" name="search">
+    <input type="submit" value="Search" class="">
+</form>
     @foreach(var book in @Model)
     {   
         <div>

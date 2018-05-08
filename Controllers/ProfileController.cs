@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
 using BookCave.Services;
 using BookCave.Models.ViewModels;
+using BookCave.Models.InputModels;
 
 namespace BookCave.Controllers
 {
@@ -45,9 +46,11 @@ namespace BookCave.Controllers
         }
         public IActionResult Edit(int Id)
         {
-            return View();
-        }
+            var UserInformation = _profileService.GetInformation(Id);
+            
 
+            return View(UserInformation);
+        }
         public IActionResult AddPayment(PaymentListViewModel Model)
         {
             var UserId = _profileService.AddPayment(Model);
