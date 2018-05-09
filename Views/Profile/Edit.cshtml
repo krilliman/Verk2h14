@@ -14,14 +14,14 @@
             <label asp-for="Image">Profile Picture</label><br>
             @if(Model != null)
             {
-                <img src"~/images/temp_profile.jpg" height="120" width="120" alt="No Photo">
+                <img src="~/images/temp_profile.jpg" height="120" width="120" alt="No Photo">
                 <textarea asp-for="Description">@Model.Description</textarea>
                 <input type="submit" value="Edit" class="btn btn-default">
                 Console.WriteLine("Found a account within the database");
             }
             else
             {
-                <img src"~/images/temp_profile.jpg" height="120" width="120" alt="No Photo">
+                <img src="~/images/temp_profile.jpg" height="120" width="120" alt="No Photo">
                 <input type="hidden" value="@claim"/>
                 <textarea asp-for="Description">Enter description here...</textarea><br>
                 <input type="file" name="Image"/>

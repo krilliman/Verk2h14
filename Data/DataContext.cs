@@ -20,6 +20,7 @@ namespace BookCave.Data
         public DbSet<UserInformation> UserInformationTable { get; set; }
         public DbSet<WishListItem> WishListItemTable { get; set;}
         public DbSet<Order> OrderTable { get; set; }
+        public DbSet<Country>  CountryTable { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

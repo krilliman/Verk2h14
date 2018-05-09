@@ -4,7 +4,7 @@ namespace BookCave.Models.ViewModels
     {
         public int Id { get; set; }
         public string StreetLine { get; set; }
-        public int PostalCode { get; set; }
+        public string PostalCode { get; set; }
         public string Country { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace BookCave.Models.ViewModels
         public string Name { get; set; }
         public string Author { get; set; }
         public string Description { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public double TotalPrice { get; set; }
         public int Stock { get; set; }
         public double Rating { get; set; }
