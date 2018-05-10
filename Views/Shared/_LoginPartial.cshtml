@@ -10,7 +10,6 @@
 
 @if(SignInManager.IsSignedIn(User))
 {
-    <form class="form-inline my-2 my-lg-0" asp-action="LogOut" asp-controller="Account" method="POST">
         <ul class="hugetext navbar-nav pull-right">
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Cart" asp-action="Index">Cart</a>
@@ -18,10 +17,9 @@
             <li class="nav-item">
                 <a class="nav-link" asp-action="Index" asp-controller="Profile" asp-route-id="@claim" class="navbar-link">Profile</a>
             </li>
-            <li>
-                <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Log Out</button>
-            </li>
         </ul>
+    <form class="extra-space form-inline my-2 my-lg-0" asp-action="LogOut" asp-controller="Account" method="POST">
+                <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Log Out</button>
     </form>
 }
 else
