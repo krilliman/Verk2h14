@@ -18,5 +18,6 @@ namespace  BookCave.Models.EntityModels
         public int MainCategoryID { get; set; }
         public int SubCategoryID { get; set; }
         public int PublisherId { get; set; }
+        public int CopiesSold { get; set; }
     }
 }

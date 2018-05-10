@@ -33,7 +33,9 @@ namespace BookCave.Repositories
             }
             var UserInfo = new UserInformation()
             {
-                Username = Model.Email
+                Username = Model.Email,
+                ProfileImage = Model.Image,
+                Name = Model.Name
             };
             _db.UserInformationTable.Add(UserInfo);
             _db.SaveChanges();

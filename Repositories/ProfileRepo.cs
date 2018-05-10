@@ -146,7 +146,9 @@ namespace BookCave.Repositories
                               select new UserViewModel
                               {
                                   Description = Usr.Description,
-                                  Image = Usr.ProfileImage
+                                  Image = Usr.ProfileImage,
+                                  Name = Usr.Name,
+                                  FavBook = Usr.FavBook
                               }).FirstOrDefault();
             return Information;
         }
