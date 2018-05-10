@@ -153,7 +153,8 @@ namespace BookCave.Controllers
                     BookId = Int32.Parse(ListOfVars[0]),
                     Price = Double.Parse(ListOfVars[1]),
                     Quantity = Int32.Parse(ListOfVars[2]),
-                    TotalPrice = Double.Parse(ListOfVars[3])
+                    TotalPrice = Double.Parse(ListOfVars[3]),
+                    BookName = ListOfVars[4]
                 };
                 CartList.Add(CartItem);
                 CartTotal += CartItem.TotalPrice;

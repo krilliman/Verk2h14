@@ -26,6 +26,7 @@ namespace BookCave.Repositories
                         {
                             BookId = BookId,
                             Price = Bk.TotalPrice,
+                            BookName = Bk.Name,
                             Quantity = Quantity,
                             TotalPrice = Bk.TotalPrice * Quantity
                         }).SingleOrDefault();
@@ -34,6 +35,8 @@ namespace BookCave.Repositories
             ItemToString.Add(Item.Price.ToString());
             ItemToString.Add(Item.Quantity.ToString());
             ItemToString.Add(Item.TotalPrice.ToString());
+            ItemToString.Add(Item.BookName.ToString());
+
             
             var RetVal = ItemToString.Aggregate((a, b) => a = a + "," + b);
             RetVal += "|";
