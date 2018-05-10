@@ -57,7 +57,19 @@ namespace BookCave.Repositories
                         }).ToList();
             Console.WriteLine(Books.Count);
             return Books;
-        }  
+        }
+        public List<BookViewModel> FilterByName()
+        {
+            return (from Bk in _db.BookTable
+                        orderby Bk.Name
+                        select new BookViewModel
+                        {
+                            ID = Bk.ID,
+                            Name = Bk.Name,
+                            Description = Bk.Description,
+                            Rating = Bk.Rating 
+                        }).ToList();
+        }
         public void UpdateRating(List<RateViewModel> ratings)
         {
             var book = ratings[0].BookId;

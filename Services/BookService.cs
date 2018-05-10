@@ -30,8 +30,11 @@ namespace BookCave.Services
         public List<BookViewModel> GetAllBooks()
         {  
             var Book = _bookRepo.GetAllBooks();
-            return Book;
-            
+            return Book;   
+        }
+        public List<BookViewModel> FilterByName()
+        {
+            return _bookRepo.FilterByName();
         }
         public void UpdateRating(List<RateViewModel> ratings)
         {

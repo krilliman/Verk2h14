@@ -7,5 +7,6 @@ namespace BookCave.Models.ViewModels
     {
         public List<AddressViewModel> AddressBook { get; set; }
         public AddressInputModel NewAddress { get; set; }
+        public List<CountryVieWModel> Countries { get; set; }
     }
 }

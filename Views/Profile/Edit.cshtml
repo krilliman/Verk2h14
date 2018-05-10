@@ -7,17 +7,20 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model BookCave.Models.ViewModels.UserViewModel
-{
-<div Id="EditArea">
+<div Id="EditArea"  class="col-sm-6">
         <div class="form-group">
+        <form asp-action="SaveEdit" asp-controller="Profile" class="form-horizontal from-control">
             <label asp-for="Image">Profile Picture</label><br>
 
                 <img src=@Model.Image height="120" width="120" alt="No Photo">
                 <p>@Model.Name</p>
-                //<input type="text" asp-for="FavBook">
-                //<textarea asp-for="Description">@Model.Description</textarea>
-                //<input type="submit" value="Edit" class="btn btn-default">
-                <input type="hidden" value="@claim"/>
+                <label for="FavBook">Favourite Book</label>
+                <input type="text" asp-for="FavBook" class="form-control">
+
+                <label for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
+                <input type="hidden" value="@claim" asp-for="Id"/>
+                <input type="submit" value="Edit" class="btn btn-default">
+                </form>
         </div>
 </div>
-}

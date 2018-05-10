@@ -21,19 +21,30 @@ namespace BookCave.Controllers
             _categoryService = new CategoryService();
             
         } 
-        public IActionResult Index(string search)
+        public IActionResult Index(string Search, string FilterByName)
         {
-            if(search == null)
+            if(Search != null)
             {
-                var Books = _categoryService.GetCategoryViewModel(null);
+                var Books = _bookService.GetAllBooks(Search);
                 return View(Books);
+            }
+            else if(FilterByName != null)
+            {
+                var Books = _bookService.FilterByName();
+                return View(Books);  
             }
             else
             {
-                //var Books = _bookService.GetAllBooks(search);
-                var Books = _categoryService.GetBookSearch(search);
-                return View(Books);    
+                var Books = _bookService.GetAllBooks();
+                return View(Books);
             }
         }
+        /* 
+        public IActionResult FilterByName()
+        {
+            var Books = _bookService.FilterByName();
+            return Json(Books);
+        }
+        */
     }
 }
