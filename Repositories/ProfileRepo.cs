@@ -191,5 +191,14 @@ namespace BookCave.Repositories
             }
             return Orders;
         }
+        public void EditUserInformation(UserViewModel Model)
+        {
+            var User = (from Usr in _db.UserInformationTable
+                            where Usr.Id == Model.Id
+                            select Usr).FirstOrDefault();
+            User.Description = Model.Description;
+            User.FavBook = Model.FavBook;
+            _db.SaveChanges();
+        }
     }
 }
