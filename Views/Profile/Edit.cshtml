@@ -7,28 +7,17 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model BookCave.Models.ViewModels.UserViewModel
-@using (Html.BeginForm("SaveEdit", "Profile", FormMethod.Post, new {enctype = "multipart/form-data" }))
 {
 <div Id="EditArea">
         <div class="form-group">
             <label asp-for="Image">Profile Picture</label><br>
-            @if(Model != null)
-            {
-                <img src="~/images/temp_profile.jpg" height="120" width="120" alt="No Photo">
-                <textarea asp-for="Description">@Model.Description</textarea>
-                <input type="submit" value="Edit" class="btn btn-default">
-                Console.WriteLine("Found a account within the database");
-            }
-            else
-            {
-                <img src="~/images/temp_profile.jpg" height="120" width="120" alt="No Photo">
+
+                <img src=@Model.Image height="120" width="120" alt="No Photo">
+                <p>@Model.Name</p>
+                //<input type="text" asp-for="FavBook">
+                //<textarea asp-for="Description">@Model.Description</textarea>
+                //<input type="submit" value="Edit" class="btn btn-default">
                 <input type="hidden" value="@claim"/>
-                <textarea asp-for="Description">Enter description here...</textarea><br>
-                <input type="file" name="Image"/>
-                <input type="submit" value="Edit" class="btn btn-default">
-                Console.WriteLine("Did not find a account within the database");
-            }
-            
         </div>
 </div>
 }
