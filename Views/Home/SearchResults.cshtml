@@ -1,0 +1,17 @@
+@model List<BookCave.Models.ViewModels.BookViewModel>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="row">
+    @foreach (var b in @Model)
+    {
+        <div class="card">
+                                <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
+                                <div class="card-body">
+                                    <h4 class="card-title">@b.Name</h4>
+                                    <h5 class="card-text">@b.Author</h5>
+                                    <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
+                                </div>
+                            </div>
+    }
+    </div>    
+</div>
