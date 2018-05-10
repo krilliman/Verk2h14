@@ -10,14 +10,16 @@
 {
 <div Id="EditArea">
         <div class="form-group">
+        <form asp-action="SaveEdit" asp-controller="Profile" class="form-horizontal from-control">
             <label asp-for="Image">Profile Picture</label><br>
 
                 <img src=@Model.Image height="120" width="120" alt="No Photo">
                 <p>@Model.Name</p>
-                //<input type="text" asp-for="FavBook">
-                //<textarea asp-for="Description">@Model.Description</textarea>
-                //<input type="submit" value="Edit" class="btn btn-default">
-                <input type="hidden" value="@claim"/>
+                <input type="text" asp-for="FavBook">
+                <textarea asp-for="Description">@Model.Description</textarea>
+                <input type="hidden" value="@claim" asp-for="Id"/>
+                <input type="submit" value="Edit" class="btn btn-default">
+                </form>
         </div>
 </div>
 }

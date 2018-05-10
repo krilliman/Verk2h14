@@ -22,7 +22,8 @@ namespace BookCave.Controllers
 
         public IActionResult Index(int Id)
         {
-            return View();
+            var UserInformation = _profileService.GetInformation(Id);
+            return View(UserInformation);
         }
         public IActionResult PaymentInformation(int Id)
         {
@@ -52,7 +53,12 @@ namespace BookCave.Controllers
 
             return View(UserInformation);
         }
-        
+        public IActionResult SaveEdit(UserViewModel Model)
+        {
+            _profileService.EditUserInformation(Model);
+
+            return RedirectToAction("Edit","Profile", new {Id = Model.Id});
+        }
         public IActionResult AddPayment(PaymentListViewModel Model)
         {
               

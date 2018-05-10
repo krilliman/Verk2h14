@@ -59,5 +59,9 @@ namespace BookCave.Services
         {
             return _profileRepo.GetAllOrders(Id);
         }
+        public void EditUserInformation(UserViewModel Model)
+        {
+            _profileRepo.EditUserInformation(Model);
+        }
     }
 }
