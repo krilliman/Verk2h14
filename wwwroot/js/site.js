@@ -1,4 +1,5 @@
 // Write your JavaScript code.
+console.log("js up and running");
 $("#CreatePayment").click(function(){
     console.log("clicked");
     $("#AddPaymentDiv").show();
@@ -58,8 +59,24 @@ $(document).ready(function () {
             console.log(err);
         })
     })
+    /*
+    $("#FilterByName").click(function(){
+        console.log("clicked before filter");
+        $.get("Home/FilterByName", function(data,status){
+            console.log("clicked");
+            var markup = "";
+            for(var i = 0; i < data.length; i++){
+                markup = "<a asp-action=""Details"" asp-controller=""Book"" asp-route-id="data[i].ID" asp-route-userid=""1""> </a>";
+                //markup = "<p>Book Rateing: @book.Rating.ToString("0.0")</p>"
+            }
+            $("#BooksIndex").html(markup);
+        }).fail(function (err) {
+            alert("Something Went Wrong");
+            console.log(err);
+        })
+    })
 
-
+    */
     /////////////
 
     $('#testTop10-carousel').carousel({

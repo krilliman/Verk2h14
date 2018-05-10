@@ -98,6 +98,8 @@
                                             <li>StreetLine: @Model.UserAddresses.AddressBook[i-1].StreetLine</li>
                                             <li>PostalCode: @Model.UserAddresses.AddressBook[i-1].PostalCode</li>
                                             <li>Country: @Model.UserAddresses.AddressBook[i-1].Country</li>
+                                            <li>City: @Model.UserAddresses.AddressBook[i-1].City</li>
+                                            <li>Province: @Model.UserAddresses.AddressBook[i-1].Province</li>
                                          </div>
                                     </ul>
                                 </li>
@@ -114,6 +116,12 @@
                         </div>
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserAddresses.NewAddress.Country" placeholder="Enter Country" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.City" placeholder="Enter Country" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.Province" placeholder="Enter Province" class="form-control">
                         </div>
                     </div>
                     <input type="hidden" asp-for="@Model.ExtraInfo.UserId" value="@Model.Cart.UserId">

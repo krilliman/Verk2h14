@@ -52,11 +52,14 @@ namespace BookCave.Controllers
 
             return View(UserInformation);
         }
+        
         public IActionResult AddPayment(PaymentListViewModel Model)
         {
+              
             var UserId = _profileService.AddPayment(Model);
             return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
         }
+         
         public IActionResult DeletePayment(int PaymentId, int UserId)
         {
             _profileService.DeletePayment(PaymentId);
@@ -70,7 +73,7 @@ namespace BookCave.Controllers
         public IActionResult AddAddress(AddressListViewModel Model)
         {
             var UserId = _profileService.AddAddress(Model);
-            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+            return RedirectToAction("AddressBook", "Profile", new {Id = Model.NewAddress.UserId});
         }
 
        

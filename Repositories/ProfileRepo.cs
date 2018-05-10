@@ -59,6 +59,11 @@ namespace BookCave.Repositories
         }
         public AddressListViewModel GetMyAddressBook(int Id)
         {
+            var Countries = (from Ct in _db.CountryTable
+                            select new CountryVieWModel
+                            {
+                                Name = Ct.Name
+                            }).ToList();
             var ListItems = (from Ab in _db.AddressTable
                             where Ab.UserId == Id
                             select new AddressViewModel
@@ -71,7 +76,8 @@ namespace BookCave.Repositories
 
             var List = new AddressListViewModel()
             {
-                AddressBook = ListItems
+                AddressBook = ListItems,
+                Countries = Countries
             };
             return List;
         }
@@ -97,14 +103,16 @@ namespace BookCave.Repositories
         {
             var Address = new Address
             {
-                UserId = Model.NewAddress.UserId,
+                UserId = Model.NewAddress.UserId.Value,
                 StreetLine = Model.NewAddress.StreetLine,
                 PostalCode = Model.NewAddress.PostalCode,
                 Country = Model.NewAddress.Country,
+                City = Model.NewAddress.City,
+                Province = Model.NewAddress.Province
             };
             _db.Add(Address);
             _db.SaveChanges();
-            return Model.NewAddress.UserId;
+            return Model.NewAddress.UserId.Value;
         }
         public void DeletePayment(int PaymentId)
         {
@@ -134,7 +142,9 @@ namespace BookCave.Repositories
                                 UserId = Ad.UserId,
                                 StreetLine = Ad.StreetLine,
                                 PostalCode = Ad.PostalCode,
-                                Country = Ad.Country
+                                Country = Ad.Country,
+                                City = Ad.City,
+                                Province = Ad.Province
                             }).FirstOrDefault();
             _db.Remove(Address);
             _db.SaveChanges();
