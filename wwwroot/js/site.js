@@ -71,7 +71,7 @@ $(document).ready(function () {
     $("#cat-link").one("click", function () {
         $.get("../../Category/GetMainCategoryListJson", function (data, status) {
             for (var i = 0; i < data.length; i++) {
-                var category = "<li><a href=\"/Category/SubCategory/" + data[i].id + "\" >" + data[i].name + "</a></li>"; // held thetta thurfi ad vera svona thvi aspdotid hledst bara a fyrsta loadi?
+                var category = "<a class=\"dropdown-item\" href=\"/Category/SubCategory/" + data[i].id + "\" >" + data[i].name + "</a>"; // held thetta thurfi ad vera svona thvi aspdotid hledst bara a fyrsta loadi?
                 $("#cat-list").append(category);
             }
         })

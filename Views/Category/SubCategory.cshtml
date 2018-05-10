@@ -1,49 +1,34 @@
 @model BookCave.Models.ViewModels.CategoryViewModel
-<div>
-<form asp-action="Index" asp-controller="Home">
-    <input type="text" name="search">
-    <input type="submit" value="Search" class="">
-</form>
+<div class="jumbotron jumbotron-fluid">
     <div>
-        <ul>
-        <li>
-           Book of the week @Model.BOTW.Name
-        </li>
-        <li>
-            User Favorite @Model.UserFav.Name
-        </li>
-        <li>
-            Newest release @Model.NewestRelease.Name
-        </li>
-        <li>
-            Best deal @Model.CheapestBook.Name
-        </li>
-        <li><h2>@Model.Name</h2></li>
-            @foreach(var m in @Model.Top10AllCategories)
-            {
-                <ul>
-                <h3><a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h3>
+        @foreach(var m in @Model.Top10AllCategories)
+        {
+            <ul>
+                <li><h2>Top 10 <a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h2></li>
                 <ul>
                     @foreach(var b in m.Top10Books)
                     {
                         <li>@b.Name</li>
                     }
                 </ul>
-                </ul>
-            }
-            <h3>SubCategories</h3>
-            @foreach(var m in @Model.SubCategories)
-            {
+            </ul>
+            
+        }
+        <h3>Top 10 in SubCategories</h3>
+        @foreach(var m in @Model.SubCategories)
+        {
+            
+            <ul>
+            <li><h4>Top 10 <a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h4></li>
                 <ul>
-                <h4><a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h4>
-                <ul>
-                    @foreach(var b in m.Top10Books)
-                    {
-                        <li><a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID">@b.Name</a></li>
-                    }
+                @foreach(var b in m.Top10Books)
+                {
+                    <li><a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID">@b.Name</a></li>
+                }
                 </ul>
-                </ul>
-            }
-    </ul>
+            </ul>
+        
+        }
+        
     </div>
 </div>

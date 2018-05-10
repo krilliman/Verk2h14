@@ -94,7 +94,7 @@ namespace BookCave.Services
                                                     Name = m.Name,
                                                     Top10Books = (from b in GetBookList(null)
                                                                   where b.MainCategoryID == m.ID
-                                                                  select b).OrderByDescending(x => x.Rating).Take(2).ToList()
+                                                                  select b).OrderByDescending(x => x.Rating).Take(10).ToList()
                                                 }).ToList();
             return MainCategoriesWithTop10Books;
         }
@@ -108,7 +108,7 @@ namespace BookCave.Services
                                                     Name = m.Name,
                                                     Top10Books = (from b in GetBookList(null)
                                                                   where b.MainCategoryID == m.ID
-                                                                  select b).OrderByDescending(x => x.Rating).Take(2).ToList()
+                                                                  select b).OrderByDescending(x => x.Rating).Take(10).ToList()
                                                 }).ToList();
             return SubCategoriesWithTop10Books;
         }
@@ -129,7 +129,7 @@ namespace BookCave.Services
                                                      Name = s.Name,
                                                      CategoryID = s.CategoryID,
                                                      Top10Books = (from b in GetBookList(s.ID) //herna vel
-                                                                   select b).OrderByDescending(x => x.Rating).Take(2).ToList(),
+                                                                   select b).OrderByDescending(x => x.Rating).Take(10).ToList(),
                                                      BookList = (from b in GetBookList(s.ID)
                                                                  select b).OrderBy(x => x.Name).ToList()
                                                  }).ToList();
@@ -142,7 +142,7 @@ namespace BookCave.Services
             //                                                    Name = s.Name,
             //                                                    CategoryID = s.CategoryID,
             //                                                    Top10Books = (from b in GetBookList(s.ID)
-            //                                                                select b).OrderByDescending(x => x.Rating).Take(2).ToList(),
+            //                                                                select b).OrderByDescending(x => x.Rating).Take(10).ToList(),
             //                                                    BookList = (from b in GetBookList(s.ID)
             //                                                                select b).OrderBy(x => x.Name).ToList()
             //                                                }).ToList();
