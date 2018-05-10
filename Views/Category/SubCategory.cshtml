@@ -1,17 +1,49 @@
-@model List<BookCave.Models.ViewModels.SubCategoryViewModel>
-
-<div class="jumbotron">
-    <div></div>
-    <ul>
-        @foreach(var c in @Model)
-        {
-            <ul>
-            @foreach (var b in @c.Top10Books)
+@model BookCave.Models.ViewModels.CategoryViewModel
+<div>
+<form asp-action="Index" asp-controller="Home">
+    <input type="text" name="search">
+    <input type="submit" value="Search" class="">
+</form>
+    <div>
+        <ul>
+        <li>
+           Book of the week @Model.BOTW.Name
+        </li>
+        <li>
+            User Favorite @Model.UserFav.Name
+        </li>
+        <li>
+            Newest release @Model.NewestRelease.Name
+        </li>
+        <li>
+            Best deal @Model.CheapestBook.Name
+        </li>
+        <li><h2>@Model.Name</h2></li>
+            @foreach(var m in @Model.Top10AllCategories)
             {
-                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID"> --- @b.Name</a></li>
+                <ul>
+                <h3><a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h3>
+                <ul>
+                    @foreach(var b in m.Top10Books)
+                    {
+                        <li>@b.Name</li>
+                    }
+                </ul>
+                </ul>
             }
-            </ul>
-        }
+            <h3>SubCategories</h3>
+            @foreach(var m in @Model.SubCategories)
+            {
+                <ul>
+                <h4><a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h4>
+                <ul>
+                    @foreach(var b in m.Top10Books)
+                    {
+                        <li><a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID">@b.Name</a></li>
+                    }
+                </ul>
+                </ul>
+            }
     </ul>
+    </div>
 </div>
-

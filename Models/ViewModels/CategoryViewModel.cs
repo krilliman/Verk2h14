@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using BookCave.Models.ViewModels;
 
 namespace BookCave.Models.ViewModels
 {
@@ -8,7 +6,11 @@ namespace BookCave.Models.ViewModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        //public List<SubCategoryViewModel> SubCateGoryList { get; set; }
-        public List<List<BookViewModel>> Books{ get; set;}
+        public BookViewModel BOTW { get; set; }
+        public BookViewModel UserFav { get; set; }
+        public BookViewModel NewestRelease { get; set; }
+        public BookViewModel CheapestBook { get; set; }
+        public List<MainCategoryTop10ListViewModel> Top10AllCategories { get; set; } 
+        public List<SubCategoryViewModel> SubCategories { get; set; }
     }
 }

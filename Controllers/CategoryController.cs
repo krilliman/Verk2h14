@@ -22,14 +22,20 @@ namespace BookCave.Controllers
         [HttpGet]
         public IActionResult Index(int? id)
         {
-            var AllCategories = _categoryService.GetIndexViewModel();
+            var AllCategories = _categoryService.GetCategoryViewModel(null);
             return View(AllCategories);
         }
 
-        public IActionResult SubCategory(int? id)
+        public IActionResult SubCategory(int id)
         {
-            var SubCategories = _categoryService.GetSubCategoryAndChildList(id);
+            var SubCategories = _categoryService.GetSubCategoryIndex(id);
             return View(SubCategories); ///etta er json utaf testi
+        }
+
+        public IActionResult SingleCat(int id)
+        {
+            var SingleSubCategory = _categoryService.GetSubCategoryViewModel(id).FirstOrDefault();
+            return View(SingleSubCategory); 
         }
 
         public IActionResult Books(int? id)

@@ -16,20 +16,36 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<MainCategoryViewModel> GetMainCategoryList(int? id)
+        public List<BookViewModel> GetBookSearch(string search)
         {
-            List<MainCategoryViewModel> Categories;
+            var Books = (from Cg in _db.BookTable
+                        where Cg.Name.Contains(search)
+                        select new BookViewModel
+                        {
+                            ID = Cg.ID,
+                            Name = Cg.Name,
+                            Description = Cg.Description,
+                            Rating = Cg.Rating 
+                        }).ToList();
+            Console.WriteLine(Books.Count);
+            return Books;
+        }  
+
+
+        public List<CategoryViewModel> GetMainCategoryList(int? id)
+        {
+            List<CategoryViewModel> Categories;
             if(id != null){
                  Categories = (from c in _db.CategoryTable
                     where c.ID == id
-                    select new MainCategoryViewModel
+                    select new CategoryViewModel
                     {
                         ID = c.ID,
                         Name = c.Name
                     }).ToList();
             }else{
                 Categories = (from c in _db.CategoryTable
-                    select new MainCategoryViewModel
+                    select new CategoryViewModel
                     {
                         ID = c.ID,
                         Name = c.Name
@@ -43,7 +59,7 @@ namespace BookCave.Repositories
             List<SubCategoryViewModel> SubCategoryList;
             if(id != null){
                 SubCategoryList = (from s in _db.SubCategoryTable
-                    where s.CategoryID == id
+                    where s.ID == id
                     select new SubCategoryViewModel
                     {
                         ID = s.ID,

@@ -1,14 +1,47 @@
-@model List<BookCave.Models.ViewModels.BookViewModel>
+@model BookCave.Models.ViewModels.CategoryViewModel
 <div>
 <form asp-action="Index" asp-controller="Home">
     <input type="text" name="search">
     <input type="submit" value="Search" class="">
 </form>
-    @foreach(var book in @Model)
-    {   
-        <div>
-            <a asp-action="Details" asp-controller="Book" asp-route-id="@book.ID" asp-route-userid="1">@book.Name</a>
-            <p>Book Rateing: @book.Rating.ToString("0.0")</p>
-        </div>
-    }
+    <div>
+        <ul>
+        <li>
+           Book of the week @Model.BOTW.Name
+        </li>
+        <li>
+            User Favorite @Model.UserFav.Name
+        </li>
+        <li>
+            Newest release @Model.NewestRelease.Name
+        </li>
+        <li>
+            Best deal @Model.CheapestBook.Name
+        </li>
+            @foreach(var m in @Model.Top10AllCategories)
+            {
+                <ul>
+                <li>@m.Name</li>
+                <ul>
+                    @foreach(var b in m.Top10Books)
+                    {
+                        <li>@b.Name</li>
+                    }
+                </ul>
+                </ul>
+            }
+            @foreach(var m in @Model.SubCategories)
+            {
+                <ul>
+                <li>@m.Name</li>
+                <ul>
+                    @foreach(var b in m.Top10Books)
+                    {
+                        <li>@b.Name</li>
+                    }
+                </ul>
+                </ul>
+            }
+    </ul>
+    </div>
 </div>

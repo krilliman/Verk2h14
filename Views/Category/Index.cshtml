@@ -1,8 +1,11 @@
-@model BookCave.Models.ViewModels.CategoryIndexViewModel;
-
-
-<div class="jumbotron">
-    <ul>
+@model BookCave.Models.ViewModels.CategoryViewModel
+<div>
+<form asp-action="Index" asp-controller="Home">
+    <input type="text" name="search">
+    <input type="submit" value="Search" class="">
+</form>
+    <div>
+        <ul>
         <li>
            Book of the week @Model.BOTW.Name
         </li>
@@ -15,31 +18,32 @@
         <li>
             Best deal @Model.CheapestBook.Name
         </li>
-        @foreach(var m in @Model.Top10AllCategories)
-        {
-            <ul>
-            <li>@m.Name</li>
-            <ul>
-                @foreach(var b in m.Top10Books)
-                {
-                    <li>@b.Name</li>
-                    <li>@b.Author</li>
-                }
-            </ul>
-            </ul>
-        }
-        @foreach(var m in @Model.Top10SubCategories)
-        {
-            <ul>
-            <li>@m.Name</li>
-            <ul>
-                @foreach(var b in m.Top10Books)
-                {
-                    <li>@b.Name</li>
-                    <li>@b.Author</li>
-                }
-            </ul>
-            </ul>
-        }
+        <li><h2>Categories</h2></li>
+            @foreach(var m in @Model.Top10AllCategories)
+            {
+                <ul>
+                <h3><a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h3>
+                <ul>
+                    @foreach(var b in m.Top10Books)
+                    {
+                        <li>@b.Name</li>
+                    }
+                </ul>
+                </ul>
+            }
+            <h3>SubCategories</h3>
+            @foreach(var m in @Model.SubCategories)
+            {
+                <ul>
+                <h4><a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h4>
+                <ul>
+                    @foreach(var b in m.Top10Books)
+                    {
+                        <li><a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID">@b.Name</a></li>
+                    }
+                </ul>
+                </ul>
+            }
     </ul>
+    </div>
 </div>
