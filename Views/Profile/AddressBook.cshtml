@@ -7,7 +7,6 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model BookCave.Models.ViewModels.AddressListViewModel
-
 <div class="col-sm-6">
     @for(var i = 1; i <= @Model.AddressBook.Count; i++)
     {

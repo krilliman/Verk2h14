@@ -1,14 +1,29 @@
-@await Html.PartialAsync("_ProfilePartial")
 @using Microsoft.AspNetCore.Identity;
 @using System.Security.Claims;
 @using BookCave.Models.ViewModels;
 @using BookCave.Models.EntityModels;
 @model BookCave.Models.ViewModels.UserViewModel
-<div Id="EditArea">
-        <div class="form-group">
-                <img src=@Model.Image height="120" width="120" alt="No Photo">
-                <p>@Model.Name</p>
-                <p>Favorite Book: @Model.FavBook</p>
-                <p>Description: @Model.Description</p>
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
+@if(@Model.Id.ToString() == @claim)
+{
+        @await Html.PartialAsync("_ProfilePartial")
+}
+@{
+        Console.WriteLine(@Model.Id.ToString() + " == " + @claim);
+}
+<div class="col-sm-8">
+        <div class="col-sm-6">
+                <h4>@Model.Name</h4>
+                <img src=@Model.Image height="300" width="300" alt="No Photo">
+                <h4>Favorite Book: @Model.FavBook</h4>
+        </div>
+                <div class="col-sm-4">
+                        <h4>User Description</h4>
+                        <div>
+                                <p>@Model.Description</p>
+                        </div>
+                </div>
         </div>
 </div>

@@ -12,11 +12,13 @@ namespace BookCave.Repositories
     {
         private DataContext _db;
         //public CartViewModel Cart;
+        private CookieOptions _options;
 
         public CartRepo()
         {
             _db = new DataContext();
             //Cart = new CartViewModel();
+            _options = new CookieOptions();
         }
         public string AddToCart(int BookId, int Quantity)
         {
@@ -38,8 +40,8 @@ namespace BookCave.Repositories
             ItemToString.Add(Item.BookName.ToString());
 
             
-            var RetVal = ItemToString.Aggregate((a, b) => a = a + "," + b);
-            RetVal += "|";
+            var RetVal = ItemToString.Aggregate((a, b) => a = a + "|" + b);
+            RetVal += "<";
             return RetVal;
             
         }
@@ -49,10 +51,7 @@ namespace BookCave.Repositories
             for(var i = 0; i < Cart.Count();i++)
             {
                 RetVal += Cart[i];
-                if(!(i == Cart.Count-1))
-                {
-                    RetVal += "|";
-                }
+                RetVal += "<";
             }
             return RetVal;
         }
@@ -91,7 +90,6 @@ namespace BookCave.Repositories
         }
         public AddressViewModel GetAddressById(int AddressId)
         {
-            Console.WriteLine("AddressID: " + AddressId);
             var Address = (from Ad in _db.AddressTable
                             where Ad.Id == AddressId
                             select new AddressViewModel
@@ -149,6 +147,98 @@ namespace BookCave.Repositories
             };
             _db.Add(Order);
             _db.SaveChanges();
+        }
+        
+        public List<string> SplitItems(string Cart)
+        {
+            Console.WriteLine("Cart: "+ Cart);
+            var ListOfWords = new List<string>();
+            if(Cart != null )
+            {
+                ListOfWords.AddRange(Cart.Split(new char[] { '<' }, StringSplitOptions.RemoveEmptyEntries));
+            }
+            return ListOfWords;
+        }
+        public CartViewModel CreateView(List<string> ItemList)
+        {
+            var Cart = new CartViewModel();
+            var CartList = new List<CartItemViewModel>();
+            double CartTotal = 0.0;
+            for(var i = 0; i < ItemList.Count();i++)
+            {
+                var ListOfVars = new List<string>();
+                ListOfVars.AddRange(ItemList[i].Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
+                var CartItem = new CartItemViewModel()
+                {
+                    Id = i+1,
+                    BookId = Int32.Parse(ListOfVars[0]),
+                    Price = Double.Parse(ListOfVars[1]),
+                    Quantity = Int32.Parse(ListOfVars[2]),
+                    TotalPrice = Double.Parse(ListOfVars[3]),
+                    BookName = ListOfVars[4]
+                };
+                CartList.Add(CartItem);
+                CartTotal += CartItem.TotalPrice;
+            }
+            Cart.Cart = CartList;
+            Cart.CartTotalPrice = CartTotal;
+            return Cart;
+        }
+        public CompleteOrderViewModel CompleteOrder(CheckOutViewModel Model, int AddressId, int PaymentId)
+        {
+            var CompleteOrder = new CompleteOrderViewModel();
+            if(PaymentId != 0 && AddressId != 0)
+            {
+                var Payment = GetPaymentById(PaymentId);
+                var Address = GetAddressById(AddressId);
+                CompleteOrder.UserAddress = Address;
+                CompleteOrder.UserPayment = Payment;
+            }
+            else if(PaymentId != 0 && AddressId == 0)
+            {
+                var Payment = GetPaymentById(PaymentId);
+                var Address = new AddressViewModel()
+                {
+                    StreetLine = Model.UserAddresses.NewAddress.StreetLine,
+                    PostalCode = Model.UserAddresses.NewAddress.PostalCode,
+                    Country = Model.UserAddresses.NewAddress.Country
+                };
+
+                CompleteOrder.UserAddress = Address;
+                CompleteOrder.UserPayment = Payment;
+            }
+            else if(PaymentId == 0 && AddressId != 0)
+            {
+                var Address = GetAddressById(AddressId);
+                var Payment = new PaymentInfoViewModel()
+                {
+                    CardHolder = Model.UserPayments.NewPayment.CardHolder,
+                    CardNumber = Model.UserPayments.NewPayment.CardNumber,
+                    ExpireMonth = Model.UserPayments.NewPayment.ExpireMonth,
+                    ExpireYear = Model.UserPayments.NewPayment.ExpireYear
+                };
+                CompleteOrder.UserAddress = Address;
+                CompleteOrder.UserPayment = Payment;
+            }
+            else
+            {
+                var Address = new AddressViewModel()
+                {
+                    StreetLine = Model.UserAddresses.NewAddress.StreetLine,
+                    PostalCode = Model.UserAddresses.NewAddress.PostalCode,
+                    Country = Model.UserAddresses.NewAddress.Country
+                };
+                var Payment = new PaymentInfoViewModel()
+                {
+                    CardHolder = Model.UserPayments.NewPayment.CardHolder,
+                    CardNumber = Model.UserPayments.NewPayment.CardNumber,
+                    ExpireMonth = Model.UserPayments.NewPayment.ExpireMonth,
+                    ExpireYear = Model.UserPayments.NewPayment.ExpireYear
+                };
+                CompleteOrder.UserAddress = Address;
+                CompleteOrder.UserPayment = Payment;
+            }
+            return CompleteOrder;
         }
     }
 }

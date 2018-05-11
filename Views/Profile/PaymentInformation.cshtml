@@ -25,12 +25,11 @@
             </div>
         }
     <button class="btn btn-default" id="CreatePayment">Add Payment</button>
-    <div class="jumbotron" hidden id="AddPaymentDiv">
+    <div class="jumbotron hidden" id="AddPaymentDiv">
         <form asp-action="PaymentInformation" asp-controller="Profile" class="form-horizontal" class="form-control">
             <div class="form-group">
                 <input type="text" asp-for="@Model.NewPayment.CardNumber" placeholder="Enter Card Number" class="form-control">
                 <span asp-validation-for="@Model.NewPayment.CardNumber" class="text-danger"></span>
-           
             </div>
             <div class="form-group">
                 <input type="text" asp-for="@Model.NewPayment.CardHolder" placeholder="Enter Card Holder Name" class="form-control">

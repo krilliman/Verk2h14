@@ -26,14 +26,17 @@ namespace BookCave.Repositories
         public List<RateViewModel> GetRatingsById(int Id)
         {
             var Rating = (from rt in _db.RatingTable
-                         where rt.BookId == Id
+                         where rt.BookId == Id 
+                         join Usr in _db.UserInformationTable on rt.UserId equals Usr.Id
                          select new RateViewModel
                          {
                              Id = rt.Id,
                              BookId = rt.BookId,
                              Comment = rt.Comment,
                              Rate = rt.Rate,
-                             UserId = rt.UserId
+                             UserId = rt.UserId,
+                             Name = Usr.Username,
+                             Image = Usr.ProfileImage
                          }).ToList();
             return Rating;
         }

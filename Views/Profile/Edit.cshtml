@@ -7,26 +7,64 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model BookCave.Models.ViewModels.UserViewModel
+<style>
+    label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+  height=120px;
+  width=120px;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  background:gray;
+}
+#ProfImage{
+  height: 120px;
+  width: 120px;
+}
+}
+</style>
 <div Id="EditArea"  class="col-sm-6">
         <div class="form-group">
         <form asp-action="SaveEdit" asp-controller="Profile" class="form-horizontal from-control">
-            <label asp-for="Image">Profile Picture</label><br>
-                <div class="col-sm-6 form-group">
-                    <img src=@Model.Image height="120" width="120" alt="No Photo">
-                    <input type="file" asp-for="@Model.Image">
-                </div>
-                <div class="col-sm-6 form-group">
-                    <p>@Model.Name</p>
-                    <label for="FavBook">Favourite Book</label>
-                    <input type="text" asp-for="FavBook" class="form-control">
+                <h4>Current Profile Photo</h4>
+                <img src=@Model.Image height="120" width="120" alt="No Photo"><br>
+                <h4>Choose New Photo</h4>
+                <label>
+                    <input type="radio" value="http://wellington-altus.ca/wp-content/themes/wellingtonaltus/img/tempprofile.png" asp-for="Image" />
+                    <img src="http://wellington-altus.ca/wp-content/themes/wellingtonaltus/img/tempprofile.png" id="ProfImage">
+                </label>
+                <label>
+                    <input type="radio" value="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Pig-512.png" asp-for="Image"/>
+                    <img src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Pig-512.png" id="ProfImage">
+                </label>
+                <label>
+                    <input type="radio" value="http://www.lettersource.com/painted_avatars/joe_large.jpg" asp-for="Image"/>
+                    <img src="http://www.lettersource.com/painted_avatars/joe_large.jpg" id="ProfImage">
+                </label>
+                <label>
+                    <input type="radio" value="https://orig00.deviantart.net/f8b6/f/2015/151/b/a/csgo_profile_pic_by_nakedgrizzlybear-d8vfpdq.png" asp-for="Image"/>
+                    <img src="https://orig00.deviantart.net/f8b6/f/2015/151/b/a/csgo_profile_pic_by_nakedgrizzlybear-d8vfpdq.png" id="ProfImage">
+                </label>
+                <label>
+                    <input type="radio" value="https://pickaface.net/assets/images/slides/slide2.png" asp-for="Image"/>
+                    <img src="https://pickaface.net/assets/images/slides/slide2.png" id="ProfImage">
+                </label>
+                <label>
+                    <input type="radio" value="https://i1.sndcdn.com/avatars-000339972396-5qb057-t500x500.jpg" asp-for="Image"/>
+                    <img src="https://i1.sndcdn.com/avatars-000339972396-5qb057-t500x500.jpg" id="ProfImage">
+                </label>
+                <p>@Model.Name</p>
+                <label for="FavBook">Favourite Book</label>
+                <input type="text" asp-for="FavBook" class="form-control">
 
-                    <label for="Description">Description</label>
-                    <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
-                    <input type="hidden" value="@claim" asp-for="Id"/>
-                    <input type="submit" value="Edit" class="btn btn-default">
-                </div>
-        
-        </form>
-                
+                <label for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
+                <input type="hidden" value="@claim" asp-for="Id"/>
+                <input type="submit" value="Edit" class="btn btn-default">
+                </form>
         </div>
 </div>

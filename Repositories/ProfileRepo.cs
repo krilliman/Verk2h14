@@ -103,7 +103,8 @@ namespace BookCave.Repositories
                                   Description = Usr.Description,
                                   Image = Usr.ProfileImage,
                                   Name = Usr.Name,
-                                  FavBook = Usr.FavBook
+                                  FavBook = Usr.FavBook,
+                                  Id = Usr.Id
                               }).FirstOrDefault();
             return Information;
         }
@@ -141,8 +142,14 @@ namespace BookCave.Repositories
             var User = (from Usr in _db.UserInformationTable
                             where Usr.Id == Model.Id
                             select Usr).FirstOrDefault();
-            User.Description = Model.Description;
-            User.FavBook = Model.FavBook;
+            if(User.ProfileImage != Model.Image)
+            {
+                User.ProfileImage = Model.Image;
+            }
+            else{}
+                User.Description = Model.Description;
+                User.FavBook = Model.FavBook;
+
             _db.SaveChanges();
         }
         public AddressListViewModel GetMyAddressBook(int Id)
