@@ -78,15 +78,12 @@
                                 <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                                 <div class="card-body">
                                     <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
-                                    @if(@b.Name.Length < 20)
+                                    @if(@b.Name.Length < 30)
                                     {
                                         @b.Name 
                                     }else
                                     {
-                                        
-                                            var printName = @b.Name.Take(20).ToList();
-                                            
-                                            \@printName
+                                            @b.Name.Substring(0,30)<html>...</html>
                                     } 
                                     </a></h4>
                                     <h5 class="card-text">@b.Author</h5>
