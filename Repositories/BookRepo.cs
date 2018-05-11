@@ -69,28 +69,27 @@ namespace BookCave.Repositories
         }  
         public List<BookViewModel> GetAllBooks()
         {
-            var Books = (from Cg in _db.BookTable
+            var Books = (from b in _db.BookTable
                         select new BookViewModel
                         {
-                            ID = Cg.ID,
-                            Name = Cg.Name,
-                            Description = Cg.Description,
-                            Rating = Cg.Rating 
+                            ID = b.ID,
+                            MainCategoryID = b.MainCategoryID,
+                            SubCategoryID = b.SubCategoryID,
+                            Name = b.Name,
+                            Author = (from a in _db.AuthorTable
+                                        where a.Id == b.AuthorId
+                                        select a.Name).FirstOrDefault(),
+                            Description = b.Description,
+                            Image = b.Image,
+                            TotalPrice = b.TotalPrice,
+                            Rating = b.Rating,
+                            Views = b.Views,
+                            PublishDate = b.PublishDate,
+                            Stock = b.Stock,
+                            Isbn = b.Isbn,
                         }).ToList();
             Console.WriteLine(Books.Count);
             return Books;
-        }
-        public List<BookViewModel> FilterByName()
-        {
-            return (from Bk in _db.BookTable
-                        orderby Bk.Name
-                        select new BookViewModel
-                        {
-                            ID = Bk.ID,
-                            Name = Bk.Name,
-                            Description = Bk.Description,
-                            Rating = Bk.Rating 
-                        }).ToList();
         }
         public void UpdateRating(List<RateViewModel> ratings)
         {
