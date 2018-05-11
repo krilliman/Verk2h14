@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    height:100%;
 }
 
 /* Wrapping element */
@@ -8,6 +9,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    min-height: 100%;
 }
 
 /* Carousel */
@@ -57,6 +59,7 @@
 html, body{ 
     margin:0px;
     padding:0px;
+    height:100%;
 }
 .navbar {
     -webkit-border-radius: 0;
@@ -145,7 +148,7 @@ ul {
     text-align: center; 
 }
 .list-heading {
-    font-style: bold; 
+    font-style: bold;
 }
 .hidden {
     display: none;
@@ -173,3 +176,12 @@ ul {
 .book-view-image {
     border: groove; 
 }
+#footer {
+    position: static;
+    bottom:0;
+    text-align: center;
+    padding-top: 20px;
+    width:100%;
+    height:60px; /* Height of the footer */
+    color: white;
+ }

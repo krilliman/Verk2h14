@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BookCave.Models;
+using BookCave.Models.ViewModels;
 using BookCave.Services;
 
 namespace BookCave.Controllers
@@ -22,6 +22,10 @@ namespace BookCave.Controllers
         {
             var IndexView = _categoryService.GetCategoryViewModel(null);
             return View(IndexView);
+        }
+        public IActionResult Contact()
+        {
+            return View();
         }
     }
 }
