@@ -68,7 +68,40 @@ html, body{
     height: 300px;
 }
 
+/*book details site*/
+.book-container{
+    height: 350px;
+}
 
+.book-floatbox{
+    width: 30%;
+    max-height: 300px;
+}
+
+.book-text{
+    margin: 50px 0px;
+    max-width: 70%;
+}
+
+.book-image{
+    margin: 20px 0px 10px 0px;
+    max-width: 80%;
+    max-height: 290px;
+}
+
+.book-text h3, .book-text h4{
+    margin:  20px 0px;
+}
+.book-description{
+    border-top: solid 2px #c1c1c1;
+    padding-top: 20px;
+    width: 50%;
+}
+
+
+.wishlist-btn{
+    margin: 10px 0px 0px 0px;
+}
 /* background for carousel and index containers*/
 .gray-background{
     background-color: #c1c1c1;

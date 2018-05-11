@@ -6,75 +6,84 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model BookCave.Models.ViewModels.BookViewModel
-
 <div class="jumbotron">
-    <p>@Model.Name</p>
-    <p>@Model.Description</p>
-    <p>@Model.Rating.ToString("0.0")</p>
-</div>
+    <div class="book-container gray-background rounded">
+        <div class="floatleft text-center book-floatbox">
+            <img class="book-image" src="@Model.Image" alt="@Model.Image">
+            <h5> User Rating: @Model.Rating.ToString() out of 5</h5>
+        </div>
+        <div class="floatleft book-text">
+            <h2>@Model.Name</h2>
+            <h4>by @Model.Author</h4>
+            <h5 class="book-description">Description: @Model.Description</h5>
+                <div class="wishlist-btn">
+                    @if(@claim != null)
+                    {
+                        <form asp-action="AddToWishList" asp-controller="Book">
+                            <input type="hidden" name="BookId" value="@Model.ID">
+                            <input type="hidden" name="WishListId" value="@claim">
+                        @if(Model.WishListToggle == true)
+                        {
+                            <input type="submit" value="RemoveFromWishList" class="btn btn-default">
+                        }else
+                        {
+                            <input type="submit" value="AddToWishList" class="btn btn-default">
+                        }
+                        </form>
+                    }
+                </div>
+        </div>
+    </div>
 <!-- 
 <form asp-action="AddToWisList" asp-controller="Book">
-    <img src="~/images/WishList.png">
+<img src="~/images/WishList.png">
 </form>
 -->
-@if(@claim != null)
-{
-    <form asp-action="AddToWishList" asp-controller="Book">
+
+
+    <br>
+    <form asp-action="AddToCart" asp-controller="Cart" class="from-group">
         <input type="hidden" name="BookId" value="@Model.ID">
-        <input type="hidden" name="WishListId" value="@claim">
-        @if(Model.WishListToggle == true)
-        {
-            <input type="submit" value="RemoveFromWishList" class="btn btn-default">
-        }
-        else
-        {
-            <input type="submit" value="AddToWishList" class="btn btn-default">
-        }
+        <label for="Quantity">Quantity</label>
+        <select name="Quantity" class="form-group">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <input type="submit" value="Add To Cart" class="btn btn-default">
     </form>
-}
 
-<br>
-<form asp-action="AddToCart" asp-controller="Cart" class="from-group">
-    <input type="hidden" name="BookId" value="@Model.ID">
-    <label for="Quantity">Quantity</label>
-    <select name="Quantity" class="form-group">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-    </select>
-    <input type="submit" value="Add To Cart" class="btn btn-default">
-</form>
-
-@if(@claim != null)
-{
-<!-- This is the Area where you type in your comment and your rating for the book --> 
-<div Id="RateArea"> 
-    <form asp-action="SaveRate" asp-controller="Book" >
-        <div class="form-group">
-            <label asp-for="Comment">Comment</label>
-            <textarea asp-for="Comment" class="form-control">Enter comment here...</textarea>
-            <div class="form-check from-check-inline">
-                <label class="form-check input"> Rate
-                    <input type="radio" class="form-check-input" asp-for="Rate" value=1>1
-                    <input type="radio" class="form-check-input" asp-for="Rate" value=2>2
-                    <input type="radio" class="form-check-input" asp-for="Rate" value=3>3
-                    <input type="radio" class="form-check-input" asp-for="Rate" value=4>4
-                    <input type="radio" class="form-check-input" asp-for="Rate" value=5>5
-                </label>
-            </div>
-            <input type="hidden" name="BookId" value=@Model.ID asp-for="BookId">
-            <input type="hidden" name="UserId" value=@claim asp-for="UserId">
-            <input type="submit" value="Rate" class="btn btn-default">
+    @if(@claim != null)
+    {
+    <!-- This is the Area where you type in your comment and your rating for the book --> 
+        <div Id="RateArea"> 
+            <form asp-action="SaveRate" asp-controller="Book" >
+                <div class="form-group">
+                    <label asp-for="Comment">Comment</label>
+                    <textarea asp-for="Comment" class="form-control">Enter comment here...</textarea>
+                    <div class="form-check from-check-inline">
+                        <label class="form-check input"> Rate
+                            <input type="radio" class="form-check-input" asp-for="Rate" value=1>1
+                            <input type="radio" class="form-check-input" asp-for="Rate" value=2>2
+                            <input type="radio" class="form-check-input" asp-for="Rate" value=3>3
+                            <input type="radio" class="form-check-input" asp-for="Rate" value=4>4
+                            <input type="radio" class="form-check-input" asp-for="Rate" value=5>5
+                        </label>
+                    </div>
+                    <input type="hidden" name="BookId" value=@Model.ID asp-for="BookId">
+                    <input type="hidden" name="UserId" value=@claim asp-for="UserId">
+                    <input type="submit" value="Rate" class="btn btn-default">
+                </div>
+            </form>
         </div>
-    </form>
+    }
 </div>
-}
 <!-- Prints out all the ratings in the model -->
 <div id="RatedArea">
     <div>
@@ -83,3 +92,4 @@
             <p>@book.Id: @book.Comment , @book.Rate</p>
         }
     </div>
+</div>

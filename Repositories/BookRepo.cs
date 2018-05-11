@@ -18,14 +18,25 @@ namespace BookCave.Repositories
 
         public BookViewModel GetBook(int id)
         {
-            var Book = (from Bk in _db.BookTable
-                        where Bk.ID == id
+            var Book = (from b in _db.BookTable
+                        where b.ID == id
                         select new BookViewModel
                         {
-                            ID = Bk.ID,
-                            Name = Bk.Name,
-                            Description = Bk.Description,
-                            Rating = Bk.Rating
+                            ID = b.ID,
+                            MainCategoryID = b.MainCategoryID,
+                            SubCategoryID = b.SubCategoryID,
+                            Name = b.Name,
+                            Author = (from a in _db.AuthorTable
+                                        where a.Id == b.AuthorId
+                                        select a.Name).FirstOrDefault(),
+                            Description = b.Description,
+                            Image = b.Image,
+                            TotalPrice = b.TotalPrice,
+                            Rating = b.Rating,
+                            Views = b.Views,
+                            PublishDate = b.PublishDate,
+                            Stock = b.Stock,
+                            Isbn = b.Isbn,
                         }).FirstOrDefault();
             return Book;
         }
@@ -33,14 +44,25 @@ namespace BookCave.Repositories
         
         public List<BookViewModel> GetAllBooks(string search)
         {
-            var Books = (from Cg in _db.BookTable
-                        where Cg.Name.Contains(search)
+            var Books = (from b in _db.BookTable
+                        where b.Name.Contains(search)
                         select new BookViewModel
                         {
-                            ID = Cg.ID,
-                            Name = Cg.Name,
-                            Description = Cg.Description,
-                            Rating = Cg.Rating 
+                            ID = b.ID,
+                            MainCategoryID = b.MainCategoryID,
+                            SubCategoryID = b.SubCategoryID,
+                            Name = b.Name,
+                            Author = (from a in _db.AuthorTable
+                                        where a.Id == b.AuthorId
+                                        select a.Name).FirstOrDefault(),
+                            Description = b.Description,
+                            Image = b.Image,
+                            TotalPrice = b.TotalPrice,
+                            Rating = b.Rating,
+                            Views = b.Views,
+                            PublishDate = b.PublishDate,
+                            Stock = b.Stock,
+                            Isbn = b.Isbn,
                         }).ToList();
             Console.WriteLine(Books.Count);
             return Books;
