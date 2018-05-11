@@ -1,9 +1,18 @@
-@await Html.PartialAsync("_ProfilePartial")
 @using Microsoft.AspNetCore.Identity;
 @using System.Security.Claims;
 @using BookCave.Models.ViewModels;
 @using BookCave.Models.EntityModels;
 @model BookCave.Models.ViewModels.UserViewModel
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+}
+@if(@Model.Id.ToString() == @claim)
+{
+        @await Html.PartialAsync("_ProfilePartial")
+}
+@{
+        Console.WriteLine(@Model.Id.ToString() + " == " + @claim);
+}
 <div Id="EditArea">
         <div class="form-group">
                 <img src=@Model.Image height="120" width="120" alt="No Photo">
