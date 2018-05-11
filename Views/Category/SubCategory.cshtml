@@ -1,71 +1,78 @@
 @model BookCave.Models.ViewModels.CategoryViewModel
 <div class="jumbotron jumbotron-fluids">
 
-                <div id="demo" class="carousel slide" data-ride="carousel">
+    <!-- Carousel -->
 
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                    <li data-target="#demo" data-slide-to="3"></li>
-                </ul>
+<div id="demo" class="carousel slide" data-ride="carousel">
 
-                <!-- The slideshow -->
-                <div class="carousel-inner gray-background rounded">
-                        <div class="carousel-item active">
-                            <img class="carimg floatleft mr-3" src="@Model.BOTW.Image" alt="@Model.BOTW.Name Photo">
-                            <div class="media-body">
-                                <h2 class="mt-0">@Model.BOTW.Name</h2>
-                                <h4 class="mt-0">@Model.BOTW.Description</h4>
-                                <h3 class="mt-0">@Model.BOTW.Author</h3>
-                                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.BOTW.ID" class="btn btn-primary">View Book</a>
-                            </div>
-                        </div>
-                        <div class=" carousel-item">
-                            <img class="carimg floatleft mr-3" src="@Model.UserFav.Image" alt="@Model.UserFav.Name Photo">
-                            <div class="media-body">
-                                <h3 class="mt-1">@Model.UserFav.Name</h3>
-                                <h4 class="mt-0">@Model.UserFav.Description</h4>
-                                <h3 class="mt-0">@Model.UserFav.Author</h3>
-                                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.UserFav.ID" class="btn btn-primary">View Book</a>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="carimg floatleft mr-3" src="@Model.CheapestBook.Image" alt="@Model.CheapestBook.Name Photo">
-                            <div class="media-body">
-                                <h2 class="mt-0">@Model.CheapestBook.Name</h2>
-                                <h4 class="mt-0">@Model.CheapestBook.Description</h4>
-                                <h3 class="mt-0">@Model.CheapestBook.Author</h3>
-                                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.CheapestBook.ID" class="btn btn-primary">View Book</a>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="carimg floatleft mr-3" src="@Model.NewestRelease.Image" alt="@Model.NewestRelease.Name Photo">
-                            <div class="media-body">
-                                <h2 class="mt-0">@Model.NewestRelease.Name</h2>
-                                <h4 class="mt-0">@Model.NewestRelease.Description</h4>
-                                <h3 class="mt-0">@Model.NewestRelease.Author</h3>
-                                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.NewestRelease.ID" class="btn btn-primary">View Book</a>
-                            </div>
-                        </div>
-                </div>
+
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li>
+    </ul>
+
+
+    <div class="carousel-inner gray-background rounded">
+        <div class="carousel-item active">
+            <img class="carimg floatleft mr-3" src="@Model.BOTW.Image" alt="@Model.BOTW.Name Photo">
+            <div class="media-body">
+                <h2 class="mt-0">@Model.BOTW.Name</h2>
+                <h4 class="mt-0">@Model.BOTW.Description</h4>
+                <h3 class="mt-0">@Model.BOTW.Author</h3>
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.BOTW.ID" class="btn btn-primary">View Book</a>
             </div>
-            <div>
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
+        </div>
+        <div class=" carousel-item">
+            <img class="carimg floatleft mr-3" src="@Model.UserFav.Image" alt="@Model.UserFav.Name Photo">
+            <div class="media-body">
+                <h3 class="mt-1">@Model.UserFav.Name</h3>
+                <h4 class="mt-0">@Model.UserFav.Description</h4>
+                <h3 class="mt-0">@Model.UserFav.Author</h3>
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.UserFav.ID" class="btn btn-primary">View Book</a>
             </div>
+        </div>
+        <div class="carousel-item">
+            <img class="carimg floatleft mr-3" src="@Model.CheapestBook.Image" alt="@Model.CheapestBook.Name Photo">
+            <div class="media-body">
+                <h2 class="mt-0">@Model.CheapestBook.Name</h2>
+                <h4 class="mt-0">@Model.CheapestBook.Description</h4>
+                <h3 class="mt-0">@Model.CheapestBook.Author</h3>
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.CheapestBook.ID" class="btn btn-primary">View Book</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="carimg floatleft mr-3" src="@Model.NewestRelease.Image" alt="@Model.NewestRelease.Name Photo">
+            <div class="media-body">
+                <h2 class="mt-0">@Model.NewestRelease.Name</h2>
+                <h4 class="mt-0">@Model.NewestRelease.Description</h4>
+                <h3 class="mt-0">@Model.NewestRelease.Author</h3>
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.NewestRelease.ID" class="btn btn-primary">View Book</a>
+            </div>
+        </div>
+    </div>
+    <div>
+  
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</div> 
 
-    <div class="eitthvaddot">
+<!-- Top 10 in MainCategory -->
+
+    <div class="top-10-all">
         @foreach(var m in @Model.Top10AllCategories)
         {
             <ul>
-            <li><h2>Top 10 <a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h2></li>            
+            <div class="top-10-banner">
+            <h2 class="list-heading">Top 10</h2>
+            <li><h3><a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h3></li>
+            </div>            
                 <ul>
                     <div class="row">
                         @foreach(var b in m.Top10Books)
@@ -73,9 +80,16 @@
                             <div class="card">
                                 <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                                 <div class="card-body">
-                                    <h4 class="card-title">@b.Name</h4>
+                                    <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
+                                    @if(@b.Name.Length < 30)
+                                    {
+                                        @b.Name 
+                                    }else
+                                    {
+                                            @b.Name.Substring(0,30)<html>...</html>
+                                    } 
+                                    </a></h4>
                                     <h5 class="card-text">@b.Author</h5>
-                                    <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
                                 </div>
                             </div>
                         }
@@ -84,32 +98,38 @@
             </ul>
             
     
+<!-- Top 10 in Subcategories -->
 
         }
-        <h3>Top 10 in SubCategories</h3>
         @foreach(var m in @Model.SubCategories)
         {
             
             <ul>
-            <li><h4>Top 10 <a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h4></li>
-                
+            <div class="top-10-banner">
+            <h2 class="list-heading">Top 10</h2>
+            <li><h3><a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h3></li>
+            </div>  
                 <div class="row">
                     @foreach(var b in m.Top10Books)
                     {
                         <div class="card">
                             <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                             <div class="card-body">
-                                <h4 class="card-title">@b.Name</h4>
+                                <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
+                                    @if(@b.Name.Length < 30)
+                                    {
+                                        @b.Name 
+                                    }else
+                                    {
+                                            @b.Name.Substring(0,30)<html>...</html>
+                                    } 
+                                    </a></h4>
                                 <h5 class="card-text">@b.Author</h5>
-                                <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
                             </div>
                         </div>
-
                     }
                 </div>
             </ul>
-        
         }
-        
     </div>
 </div>
