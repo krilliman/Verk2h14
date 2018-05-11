@@ -114,6 +114,8 @@ html, body{
 /*set size of bookcards to 5 per row*/
 .card{
     width: 20%;
+    margin-top: 5px; 
+    margin-bottom: 5px; 
 }
 
 .card-img-top {
@@ -169,6 +171,27 @@ li a:hover{
     font-family:Verdana, Geneva, sans-serif;
     cursor:pointer;
 }
+li a, a:visited {
+    background:none;
+    border:none;
+    color:black;
+    font-family:Verdana, Geneva, sans-serif;
+    cursor:pointer;
+}
+ul {
+    list-style-type: none; 
+}
 #WishListButton{
     background-color: #151719;
+}
+.top-10-banner {
+    margin-top: 5px; 
+    padding: 5px; 
+    text-align: center; 
+}
+.list-heading {
+    font-style: bold; 
+}
+.hidden {
+    display: none;
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookCave.Data;
 using BookCave.Models.EntityModels;
+using BookCave.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +26,7 @@ namespace BookCave
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IAddressService, AddressService>();
             services.AddDbContext<AuthenticationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"))); ///bætt við fyrir auth
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

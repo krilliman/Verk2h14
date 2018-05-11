@@ -3,7 +3,7 @@
 
 <div id="demo" class="carousel slide" data-ride="carousel">
 
-<!-- Indicators -->
+
     <ul class="carousel-indicators">
         <li data-target="#demo" data-slide-to="0" class="active"></li>
         <li data-target="#demo" data-slide-to="1"></li>
@@ -11,7 +11,7 @@
         <li data-target="#demo" data-slide-to="3"></li>
     </ul>
 
-    <!-- The slideshow -->
+
     <div class="carousel-inner gray-background rounded">
         <div class="carousel-item active">
             <img class="carimg floatleft mr-3" src="@Model.BOTW.Image" alt="@Model.BOTW.Name Photo">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div>
-        <!-- Left and right controls -->
+  
         <a class="carousel-control-prev" href="#demo" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </a>
@@ -59,13 +59,17 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-</div>
+</div> 
 
-    <div class="eitthvaddot">
+<!-- Top 10 for each Main category -->
+    <div class="top-10-all">
         @foreach(var m in @Model.Top10AllCategories)
         {
             <ul>
-            <li><h2>Top 10 <a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h2></li>            
+            <div class="top-10-banner">
+            <h2 class="list-heading">Top 10</h2>
+            <li class="subcategory-name"><h3><a asp-controller="Category" asp-action="SubCategory" asp-route-id="@m.ID">@m.Name</a></h3></li>            
+            </div>  
                 <ul>
                     <div class="row">
                         @foreach(var b in m.Top10Books)
@@ -73,9 +77,8 @@
                             <div class="card">
                                 <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                                 <div class="card-body">
-                                    <h4 class="card-title">@b.Name</h4>
+                                    <h4 class="card-title"><a asp-action="Details" asp-controller="b" asp-route-id="@b.BookId">@b.Name</a></h4>
                                     <h5 class="card-text">@b.Author</h5>
-                                    <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
                                 </div>
                             </div>
                         }
@@ -83,25 +86,25 @@
                 </ul>
             </ul>
             
-    
-
+    <!-- Top 10 for each SUBcategory -->
         }
-        <h3>Top 10 in SubCategories</h3>
         @foreach(var m in @Model.SubCategories)
         {
-            
+            <!-- This is the top banner for each top list -->
             <ul>
-            <li><h4>Top 10 <a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h4></li>
-                
+            <div class="top-10-banner">
+            <h2 class="list-heading">Top 10</h2>
+            <li><h3><a asp-controller="Category" asp-action="SingleCat" asp-route-id="@m.ID">@m.Name</a></h3></li>
+            </div>  
+                <!-- This is where each list is printed out in a card -->
                 <div class="row">
                     @foreach(var b in m.Top10Books)
                     {
                         <div class="card">
                             <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                             <div class="card-body">
-                                <h4 class="card-title">@b.Name</h4>
+                                <h4 class="card-title"><a asp-action="Details" asp-controller="b" asp-route-id="@b.BookId">@b.Name</a></h4>
                                 <h5 class="card-text">@b.Author</h5>
-                                <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
                             </div>
                         </div>
 
