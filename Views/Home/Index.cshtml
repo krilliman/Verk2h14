@@ -13,9 +13,9 @@
 
     <div class="carousel-inner gray-background rounded">
         <div class="carousel-item active">
-            <h3>Top Rated</h3>
             <img class="carimg floatleft mr-3" src="@Model.UserFav.Image" alt="@Model.UserFav.Name Photo">
             <div class="media-body">
+            <h4>Top Rated</h4>
                 <h3 class="mt-1">@Model.UserFav.Name</h3>
                 <h4 class="mt-0">@Model.UserFav.Description</h4>
                 <h3 class="mt-0">@Model.UserFav.Author</h3>
@@ -23,9 +23,9 @@
             </div>
         </div>
         <div class="carousel-item">
-            <h3>Best Deal!</h3>
             <img class="carimg floatleft mr-3" src="@Model.CheapestBook.Image" alt="@Model.CheapestBook.Name Photo">
             <div class="media-body">
+            <h4>Best Deal!</h4>
                 <h2 class="mt-0">@Model.CheapestBook.Name</h2>
                 <h4 class="mt-0">@Model.CheapestBook.Description</h4>
                 <h3 class="mt-0">@Model.CheapestBook.Author</h3>
@@ -33,9 +33,9 @@
             </div>
         </div>
         <div class="carousel-item">
-            <h3>Most Recent Release</h3>
             <img class="carimg floatleft mr-3" src="@Model.NewestRelease.Image" alt="@Model.NewestRelease.Name Photo">
             <div class="media-body">
+            <h4>Most Recent Release</h4>
                 <h2 class="mt-0">@Model.NewestRelease.Name</h2>
                 <h4 class="mt-0">@Model.NewestRelease.Description</h4>
                 <h3 class="mt-0">@Model.NewestRelease.Author</h3>
