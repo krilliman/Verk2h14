@@ -7,7 +7,7 @@ namespace BookCave.Models.InputModels
     {
         [Required]
         public string CardNumber { get; set; }
-         [Required]
+        [Required]
         public int CardHolder { get; set; }
         [MaxLength(3)]
         [MinLength(3)]
