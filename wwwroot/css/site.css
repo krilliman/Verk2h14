@@ -20,6 +20,16 @@
     float: left;
 }
 
+.floatright{
+    float: right;
+}
+
+.navbar-brand{
+    padding: 7px;
+}
+
+
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;

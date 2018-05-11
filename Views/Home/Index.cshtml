@@ -77,7 +77,7 @@
                             <div class="card">
                                 <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                                 <div class="card-body">
-                                    <h4 class="card-title"><a asp-action="Details" asp-controller="b" asp-route-id="@b.BookId">@b.Name</a></h4>
+                                    <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">@b.Name</a></h4>
                                     <h5 class="card-text">@b.Author</h5>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                         <div class="card">
                             <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
                             <div class="card-body">
-                                <h4 class="card-title"><a asp-action="Details" asp-controller="b" asp-route-id="@b.BookId">@b.Name</a></h4>
+                                <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">@b.Name</a></h4>
                                 <h5 class="card-text">@b.Author</h5>
                             </div>
                         </div>
