@@ -5,10 +5,11 @@
 @using BookCave.Models.EntityModels
 @{
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+    var i = 1;
 }
 @model BookCave.Models.ViewModels.PaymentListViewModel
 <div class="col-sm-6">
-    @for(var i = 1; i <= @Model.Payments.Count;i++)
+    @foreach(var Payments in @Model.Payments)
         {  
             <div class="jumbotron">
                 <h3>Payment Information @i</h3>
@@ -23,6 +24,7 @@
                     <input type="submit" class="btn btn-danger" value="Delete">
                 </form>
             </div>
+            {i++;}
         }
     <button class="btn btn-default" id="CreatePayment">Add Payment</button>
     <div class="jumbotron hidden" id="AddPaymentDiv">
@@ -69,4 +71,4 @@
             <input type="submit" value="Add Payment" class="btn btn-default">
         </form>
 </div>
-
+</div>
