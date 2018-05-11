@@ -21,21 +21,6 @@ namespace BookCave.Services
             return Book;
         }
 
-        public List<BookViewModel> GetAllBooks(string search)
-        {  
-            var Book = _bookRepo.GetAllBooks(search);
-            return Book;
-            
-        }
-        public List<BookViewModel> GetAllBooks()
-        {  
-            var Book = _bookRepo.GetAllBooks();
-            return Book;   
-        }
-        public List<BookViewModel> FilterByName()
-        {
-            return _bookRepo.FilterByName();
-        }
         public void UpdateRating(List<RateViewModel> ratings)
         {
             _bookRepo.UpdateRating(ratings);

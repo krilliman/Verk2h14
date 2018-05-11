@@ -35,11 +35,14 @@ namespace BookCave.Services
 
         // Þessi föll sækja hina og þessa lista
 
-        public List<BookViewModel> GetBookSearch(string search)
-        {
-            var Books = GetBookSearch(search);
-            return Books;
+        public List<BookViewModel> SearchBooks(string search)
+        {  
+            var BookResults = (from b in _categoryRepo.GetAllBooks(null)
+                                where b.Name.ToLower().Contains(search.ToLower())
+                                select b).OrderBy(x => x.Name).ToList();
+                return BookResults;
         }
+
         public CategoryViewModel GetSubCategoryIndex(int id)
         {
             var IndexViewModel = new CategoryViewModel
@@ -134,22 +137,6 @@ namespace BookCave.Services
                                                                  select b).OrderBy(x => x.Name).ToList()
                                                  }).ToList();
             return SubCategoryViewModelWithTop10;
-            //            }else{
-            //            var SubCategoryViewModelWithTop10 = (from s in GetSubCategoryList(null)
-            //                                                select new SubCategoryViewModel
-            //                                                {
-            //                                                    ID = s.ID,
-            //                                                    Name = s.Name,
-            //                                                    CategoryID = s.CategoryID,
-            //                                                    Top10Books = (from b in GetBookList(s.ID)
-            //                                                                select b).OrderByDescending(x => x.Rating).Take(10).ToList(),
-            //                                                    BookList = (from b in GetBookList(s.ID)
-            //                                                                select b).OrderBy(x => x.Name).ToList()
-            //                                                }).ToList();
-            //            return SubCategoryViewModelWithTop10; 
-
-            //            }
         }
-
     }
 }

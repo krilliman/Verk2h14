@@ -16,19 +16,29 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<BookViewModel> GetBookSearch(string search)
+        public List<BookViewModel> SearchBooks(string search)
         {
-            var Books = (from Cg in _db.BookTable
-                        where Cg.Name.Contains(search)
+            List<BookViewModel> BookResults = (from b in _db.BookTable
+                        where b.Name.Contains(search)
                         select new BookViewModel
                         {
-                            ID = Cg.ID,
-                            Name = Cg.Name,
-                            Description = Cg.Description,
-                            Rating = Cg.Rating 
+                            ID = b.ID,
+                            MainCategoryID = b.MainCategoryID,
+                            SubCategoryID = b.SubCategoryID,
+                            Name = b.Name,
+                            Author = (from a in _db.AuthorTable
+                                        where a.Id == b.AuthorId
+                                        select a.Name).FirstOrDefault(),
+                            Description = b.Description,
+                            Image = b.Image,
+                            TotalPrice = b.TotalPrice,
+                            Rating = b.Rating,
+                            Views = b.Views,
+                            PublishDate = b.PublishDate,
+                            Stock = b.Stock,
+                            Isbn = b.Isbn,
                         }).ToList();
-            Console.WriteLine(Books.Count);
-            return Books;
+                return BookResults;
         }  
 
 

@@ -35,19 +35,34 @@ namespace BookCave.Controllers
         public IActionResult SingleCat(int id)
         {
             var SingleSubCategory = _categoryService.GetSubCategoryViewModel(id).FirstOrDefault();
-            return View(SingleSubCategory); 
+            return View(SingleSubCategory);
         }
 
         public IActionResult Books(int? id)
         {
             var books = _categoryService.GetBookList(id);
-            return View(books);  
+            return View(books);
+        }
+
+        public IActionResult SearchResults(string Search)
+        {
+            if (Search != null)
+            {
+                var Books = _categoryService.SearchBooks(Search);
+                return View(Books);
+            }
+            else
+            {
+                var Books = _categoryService.GetBookList(null);
+                return View(Books);
+            }
         }
 
 
-//Hér fyrir neðan eru föll til að sækja lista í Service
+        //Hér fyrir neðan eru föll til að sækja lista í Service
 
-        public JsonResult GetMainCategoryListJson(){
+        public JsonResult GetMainCategoryListJson()
+        {
             var MainCategories = _categoryService.GetMainCategoryList(null);
             return Json(MainCategories);
         }
