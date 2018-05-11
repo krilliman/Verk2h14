@@ -27,19 +27,21 @@ namespace BookCave.Controllers
        {
            var Book = _bookService.GetBook(id);
            var ratings = _ratingService.GetRatings(id);
-           Book.Ratings = ratings;
+           if(ratings == null)
+           {
+
+           }
+           else
+           {
+               Book.Ratings = ratings; 
+           }
            Book.WishListToggle = _bookService.CheckIfInWishList(userid,id);
            return View(Book);
        }
 
         public IActionResult AddToWishList(int BookId, int WishListId)
         {
-            var WishListItem = new WishListItem()
-            {
-                BookId = BookId,
-                UserId = WishListId
-            };
-            _bookService.AddToWishList(WishListItem);
+            _bookService.AddToWishList(BookId, WishListId);
 
             return RedirectToAction("Details", "Book", new { id = BookId, userid = WishListId});
         }

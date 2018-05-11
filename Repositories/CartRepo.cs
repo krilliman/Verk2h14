@@ -76,7 +76,12 @@ namespace BookCave.Repositories
                                 ExpireMonth = Pm.ExpireMonth,
                                 ExpireYear = Pm.ExpireYear
                             }).ToList();
-            var AddressBook = new AddressListViewModel(){AddressBook = Addresses};
+            var CountriesView = (from Ct in _db.CountryTable
+                            select new CountryViewModel
+                            {
+                                Name = Ct.Name
+                            }).ToList();
+            var AddressBook = new AddressListViewModel(){AddressBook = Addresses, Countries = CountriesView};
             var PaymentBook = new PaymentListViewModel(){Payments = Payments};
 
             var CheckOutModel = new CheckOutViewModel()

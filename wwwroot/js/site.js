@@ -1,24 +1,10 @@
 // Write your JavaScript code.
 console.log("js up and running");
 
-$("#MyPayments").click(function(){
-    console.log("PaymentButton clicked")
-    $("#UserPayments").removeClass("hidden");
-    $("#NewPayment").addClass("hidden");
-
+/*
+$("#PayButton").click(function(){
 })
-$("#ToggleNewPayment").click(function(){
-    $("#NewPayment").removeClass("hidden");
-    $("#UserPayments").addClass("hidden");
-})
-$("#MyAddresses").click(function(){
-    $("#UserAddresses").removeClass("hidden");
-    $("#NewAddress").addClass("hidden");
-})
-$("#ToggleNewAddress").click(function(){
-    $("#UserAddresses").addClass("hidden");
-    $("#NewAddress").removeClass("hidden");
-})
+*/
 /*
 $("#AddToWishList").click(function(){
     $.get("AddToWishList", function(data, status){
@@ -34,6 +20,39 @@ $("#AddToWishList").click(function(){
 })
 */
 $(document).ready(function () {
+    $("#CheckOutForm").submit(function(e){
+
+        var check = true;
+        $("input:radio").each(function(){
+            var name = $(this).attr("name");
+            if($("input:radio[name="+name+"]:checked").length == 0){
+                check = false;
+            }
+        });
+        var AddressClass = $("#UserAddresses").hasClass("hidden");
+        var PaymentClass = $("#UserPayments").hasClass("hidden");
+        if(!check && !AddressClass && !PaymentClass){
+            e.preventDefault();
+            alert('Please Select An Option');
+        }
+    });   
+    $("#MyPayments").click(function(){
+        console.log("PaymentButton clicked")
+        $("#UserPayments").removeClass("hidden");
+        $("#NewPayment").addClass("hidden");
+    })
+    $("#ToggleNewPayment").click(function(){
+        $("#NewPayment").removeClass("hidden");
+        $("#UserPayments").addClass("hidden");
+    })
+    $("#MyAddresses").click(function(){
+        $("#UserAddresses").removeClass("hidden");
+        $("#NewAddress").addClass("hidden");
+    })
+    $("#ToggleNewAddress").click(function(){
+        $("#UserAddresses").addClass("hidden");
+        $("#NewAddress").removeClass("hidden");
+    })
     $("#CreateAddress").click(function(){
         console.log("clicked");
         $("#AddAddressDiv").removeClass("hidden");
@@ -64,7 +83,7 @@ $(document).ready(function () {
             console.log("clicked");
             var markup = "";
             for(var i = 0; i < data.length; i++){
-                markup = "<a asp-action=""Details"" asp-controller=""Book"" asp-route-id="data[i].ID" asp-route-userid=""1""> </a>";
+                markup = "<a asp-action='Details'asp-controller='Book' asp-route-id="+data[i].ID+" asp-route-userid='1'></a>";
                 //markup = "<p>Book Rateing: @book.Rating.ToString("0.0")</p>"
             }
             $("#BooksIndex").html(markup);
@@ -73,10 +92,8 @@ $(document).ready(function () {
             console.log(err);
         })
     })
-
-    */
     /////////////
-
+    */
     $('#testTop10-carousel').carousel({
         pause: "hover",
         interval: 4000,

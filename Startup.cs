@@ -27,7 +27,6 @@ namespace BookCave
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IPaymentService, PaymentSerivce>();
-            services.AddTransient<IAddressService, AddressService>();
             services.AddDbContext<AuthenticationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"))); ///bætt við fyrir auth
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

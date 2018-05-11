@@ -10,7 +10,7 @@
 <div class="col-sm-6">
     @for(var i = 1; i <= @Model.AddressBook.Count; i++)
     {
-        <div class="jumbotron">
+        <div class="jumbotron col-sm-4" >
             <h3>Address @i</h3>
             <ul>
                 <li>StreetLine: @Model.AddressBook[i-1].StreetLine</li>
@@ -26,7 +26,6 @@
             </form>
         </div>
     }
-    <button class="btn btn-default" id="CreateAddress">Add Address</button>
     <div class="jumbotron hidden" id="AddAddressDiv" >
         <form asp-action="AddressBook" asp-controller="Profile" class="form-horizontal from-control">
             <div class="form-group">
@@ -52,9 +51,11 @@
             </div>
             <div class="form-group">
                 <input type="text" asp-for="@Model.NewAddress.Province" placeholder="Enter Province" class="form-control">
+                <span asp-validation-for="@Model.NewAddress.Province" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="@Model.NewAddress.UserId" value="@claim">
             <input type="submit" value="Add Address" class="btn btn-default">
         </form>
         <div class="text-danger">@ViewData["ErrorMessage"]</div>
 </div>
+<button class="btn btn-success" id="CreateAddress">Add Address</button>

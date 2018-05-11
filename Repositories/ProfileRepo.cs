@@ -30,7 +30,12 @@ namespace BookCave.Repositories
                             {
                                 Id = Wl.Id,
                                 BookId = Bk.ID,
-                                BookName = Bk.Name
+                                BookName = Bk.Name,
+                                UserId = Id,
+                                Image = Bk.Image,
+                                Description = Bk.Description,
+                                Rating = Bk.Rating
+
                             }).ToList();
             var MyWishList = new WishListViewModel(){Id = Id, Items = ListItems};
             return MyWishList;
@@ -155,7 +160,7 @@ namespace BookCave.Repositories
         public AddressListViewModel GetMyAddressBook(int Id)
         {
             var Countries = (from Ct in _db.CountryTable
-                            select new CountryVieWModel
+                            select new CountryViewModel
                             {
                                 Name = Ct.Name
                             }).ToList();

@@ -1,6 +1,6 @@
 namespace BookCave.Models.ViewModels
 {
-    public class CountryVieWModel
+    public class CountryViewModel
     {
         public string Name { get; set; }
     }

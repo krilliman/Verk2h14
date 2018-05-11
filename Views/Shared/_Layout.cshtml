@@ -53,9 +53,6 @@
 </nav>
     <div class="body-content">
         @RenderBody()
-        <footer>
-            <p>&copy; 2018 - BookCave</p>
-        </footer>
     </div>
     
 
@@ -85,4 +82,9 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
+<div id="footer" class="bg-dark">
+  <footer>
+    2018 - BookCave <a asp-controller="Home" asp-action="Contact" style="color:white">Contact us!</a>
+  </footer>
+</div>
 </html>

@@ -17,11 +17,9 @@ namespace BookCave.Controllers
         private CartService _cartService;
         private CookieOptions _options;
         private IPaymentService _paymentService;
-        private IAddressService _addressService;
 
-        public CartController(IPaymentService Payment, IAddressService Address)
+        public CartController(IPaymentService Payment)
         {
-            _addressService = Address;
             _paymentService = Payment;
             _cartService = new CartService();
             _options = new CookieOptions();
