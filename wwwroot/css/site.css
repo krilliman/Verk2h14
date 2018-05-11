@@ -66,6 +66,11 @@ html, body{
     -moz-border-radius: 0;
     border-radius: 0;
 }
+.book-in-cart{
+    margin: 20px 0px;
+    border: solid 2px #151719;
+    padding: 10px ;
+}
 /*til ad staekka textann i navbar*/
 .hugetext{
     font-size: 15px;

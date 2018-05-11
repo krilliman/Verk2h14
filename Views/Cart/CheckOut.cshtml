@@ -1,17 +1,41 @@
 @model BookCave.Models.ViewModels.CheckOutViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using BookCave.Models.ViewModels
+@using BookCave.Models.EntityModels
+@{
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+    var u = 0;
+}
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">
             <h3>Cart</h3>
-            @foreach(var CartItem in @Model.Cart.Cart)
+            @foreach(var i in @Model.Cart.Cart)
             {
-                <div class=" jumbotron">
-                    <ul>
-                        <li>Id: @CartItem.BookId</li>
-                        <li>Price: @CartItem.Price</li>
-                        <li>Quantity: @CartItem.Quantity</li>
-                        <li>TotalPrice: @CartItem.TotalPrice<li>
-                    </ul>
+                 <div class="book-in-cart">
+                    <img class="card-img-top" src="@i.Image" alt="@i.Image">
+                    <div class="card-body">
+                        <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@i.BookId" asp-route-userid="@claim">
+                        @if(@i.BookName.Length < 30)
+                        {
+                            @i.BookName 
+                        }else
+                        {
+                                @i.BookName.Substring(0,30)<html>...</html>
+                        } 
+                        </a></h4>
+                    </div>
+                    <h5 class="card-text">Price: @i.Price</h5>
+                    <h5 class="card-text">Quantity: @i.Quantity</h5>
+                    <h5 class="card-text">TotalPrice: @i.TotalPrice</h5>
+                    <form asp-action="DeleteFromCart" asp-controller="Cart">
+                        <input type="hidden" name="CartItemId">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
                 </div>
             }
             <p>TotalPrice: @Model.Cart.CartTotalPrice</p>
@@ -113,11 +137,11 @@
                     </div>
                     <div id="NewAddress" class="hidden">
                         <div class="form-group">
-                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.StreetLine" placeholder="Enter SteetLine" class="form-control">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.StreetLine" placeholder="Enter Street Name" class="form-control">
                             <span asp-validation-for="@Model.UserAddresses.NewAddress.StreetLine" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.PostalCode" placeholder="Enter PostalCode" class="form-control">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.PostalCode" placeholder="Enter Postcode" class="form-control">
                             <span asp-validation-for="@Model.UserAddresses.NewAddress.PostalCode" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -130,7 +154,7 @@
                             <span asp-validation-for="@Model.UserAddresses.NewAddress.Country" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.City" placeholder="Enter Country" class="form-control">
+                            <input type="text" asp-for="@Model.UserAddresses.NewAddress.City" placeholder="Enter City" class="form-control">
                             <span asp-validation-for="@Model.UserAddresses.NewAddress.City" class="text-danger"></span>
                         </div>
                         <div class="form-group">

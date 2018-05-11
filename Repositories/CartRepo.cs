@@ -66,7 +66,9 @@ namespace BookCave.Repositories
                                 Id = Ab.Id,
                                 StreetLine = Ab.StreetLine,
                                 PostalCode = Ab.PostalCode,
-                                Country = Ab.Country
+                                City = Ab.City,
+                                Country = Ab.Country,
+                                Province = Ab.Province
                             }).ToList();
             var Payments = (from Pm in _db.CardInformationTable
                             where Pm.UserId == Model.UserId
@@ -104,7 +106,9 @@ namespace BookCave.Repositories
                                 Id = Ad.Id,
                                 StreetLine = Ad.StreetLine,
                                 PostalCode = Ad.PostalCode,
-                                Country = Ad.Country
+                                City = Ad.City,
+                                Country = Ad.Country,
+                                Province = Ad.Province,
                             }).FirstOrDefault();
             return Address;
         }
