@@ -17,7 +17,7 @@ namespace BookCave.Models.InputModels
         [RegularExpression("[a-zA-Z]+", ErrorMessage="Only Chars Allowed")]
         public string Province { get; set; }
         [Required(ErrorMessage="City Is Required")]
-        [RegularExpression("[a-zA-Z]+",ErrorMessage="Only Chars Allowed")]
+        [RegularExpression("[a-zA-Z]+",ErrorMessage="English Chars Only Allowed")]
         public string City { get; set; }
     }
 }

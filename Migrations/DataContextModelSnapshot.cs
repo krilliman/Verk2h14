@@ -257,6 +257,12 @@ namespace BookCave.Migrations
 
                     b.Property<int>("BookId");
 
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<double>("Rating");
+
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");

@@ -27,14 +27,15 @@
             </div>
             <br>
             <div id="CheckOutFormDiv" style="margin-top:50px">
-                <form asp-action="CompletePayment" asp-controller="Cart" class="form-horizontal" class="form-control">
+                <form asp-action="CompletePayment" asp-controller="Cart" class="form-horizontal" class="form-control" id="CheckOutForm">
                     <div id="UserPayments" class="form-group">
                         <fieldset>
                             <ul>
                             @for(int i = 1; i <= @Model.UserPayments.Payments.Count; i++)
                             {
                                 <li>
-                                    <p>Payment @i <input type="radio" name="PaymentId" value="@Model.UserPayments.Payments[i-1].Id" class="form-check-input"></p>
+                                    <p>Payment @i <input type="radio" name="PaymentId" value="@Model.UserPayments.Payments[i-1].Id" class="form-check-input" id="PaymentsRadio"></p>
+                                    <p class="hidden" id="Radio-Payment"></p>
                                     <ul>
                                         <div class="jumbotron">
                                             <li>ID: @Model.UserPayments.Payments[i-1].Id</li>
@@ -95,7 +96,8 @@
                             @for(int i = 1; i <= @Model.UserAddresses.AddressBook.Count; i++)
                             {
                                 <li>
-                                    <p>Address @i <input type="radio" name="AddressId"  value="@Model.UserAddresses.AddressBook[i-1].Id" class="form-check-input" id=""></p>
+                                    <p>Address @i <input type="radio" name="AddressId"  value="@Model.UserAddresses.AddressBook[i-1].Id" class="form-check-input" id="AddressRadio"></p>
+                                    <p class="hidden" id="Radio-Address"></p>
                                     <ul>
                                         <div class="jumbotron">
                                             <li>ID: @Model.UserAddresses.AddressBook[i-1].Id</li>
@@ -135,7 +137,7 @@
                     </div>
                     <input type="hidden" asp-for="@Model.ExtraInfo.UserId" value="@Model.Cart.UserId">
                     <input type="hidden" asp-for="@Model.ExtraInfo.CartTotal" value="@Model.Cart.CartTotalPrice">
-                    <input type="submit" value="Pay" class="btn btn-success">
+                    <input type="submit" value="Pay" class="btn btn-success" id="PayButton">
                 </form>
             </div>
         </div>

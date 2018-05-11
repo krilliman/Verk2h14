@@ -25,9 +25,9 @@ namespace BookCave.Services
         {
             _bookRepo.UpdateRating(ratings);
         }
-        public void AddToWishList(WishListItem Model)
+        public void AddToWishList(int BookId, int WishListId)
         {
-            _bookRepo.AddToWishList(Model);
+            _bookRepo.AddToWishList(BookId, WishListId);
         }
         public bool CheckIfInWishList(int UserId, int BookId)
         {

@@ -41,12 +41,7 @@ namespace BookCave.Controllers
 
         public IActionResult AddToWishList(int BookId, int WishListId)
         {
-            var WishListItem = new WishListItem()
-            {
-                BookId = BookId,
-                UserId = WishListId
-            };
-            _bookService.AddToWishList(WishListItem);
+            _bookService.AddToWishList(BookId, WishListId);
 
             return RedirectToAction("Details", "Book", new { id = BookId, userid = WishListId});
         }

@@ -1,13 +1,15 @@
 @await Html.PartialAsync("_ProfilePartial")
 @model BookCave.Models.ViewModels.WishListViewModel
-<div class="col-sm-6">
-    <h3>Wishlist</h3>
-    <div class="jumbotron">
-        <ul>
+    <div class="row">
             @foreach(var Book in @Model.Items)
             {
-                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@Book.BookId">@Book.BookName</a></li>
+                <div class="card">
+                    <img class="card-img-top" src="@Book.Image" alt="@Book.BookName Photo">
+                    <div class="card-body">
+                        <h4 class="card-title">@Book.BookName</h4>
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@Book.BookId" asp-route-userid="@Book.UserId" class="btn btn-dark">View Book</a>
+                    </div>
+                </div>
             }
-        </ul>
     </div>
 </div>

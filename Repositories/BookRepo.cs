@@ -101,18 +101,28 @@ namespace BookCave.Repositories
             TheBook.Rating = totalrating;
             _db.SaveChanges();
         }
-        public void AddToWishList(WishListItem Model)
+        public void AddToWishList(int BookId, int UserId)
         {  
 
-            var Book = _db.WishListItemTable.SingleOrDefault(b => b.BookId == Model.BookId);
+            var Book = (from Bk in _db.BookTable
+                        where Bk.ID == BookId
+                        select new WishListItem
+                        {
+                            BookId = Bk.ID,
+                            UserId = UserId,
+                            Image = Bk.Image,
+                            Description = Bk.Description,
+                            Rating = Bk.Rating 
+                        }).FirstOrDefault();
+            var BookInWishList = _db.WishListItemTable.SingleOrDefault(b => b.BookId == BookId);
             
-            if(Book == null)
+            if(BookInWishList == null)
             {
-                _db.WishListItemTable.Add(Model);
+                _db.WishListItemTable.Add(Book);
             }
             else
             {
-                _db.Remove(Book);
+                _db.Remove(BookInWishList);
             }
             _db.SaveChanges();
         }
