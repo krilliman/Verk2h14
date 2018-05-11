@@ -163,3 +163,13 @@ ul {
     padding: 15px 10px;
     border-bottom: 1px solid rgba(100,100,100,0.3);
 }
+.book-info {
+    float: right; 
+}
+.book-wishlist {
+    float: center;
+    margin-top: 5px;  
+}
+.book-view-image {
+    border: groove; 
+}
