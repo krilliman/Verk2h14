@@ -42,7 +42,7 @@ namespace BookCave.Controllers
                 //the user is successfuly registered
                 // Add the concatenated Id and Email as claims
                 await _userManager.AddClaimAsync(user, new Claim("Email", $"{model.Email}"));
-                await _userManager.AddClaimAsync(user, new Claim("Id", $"{UserTableID}"));
+                await _userManager.AddClaimAsync(user, new Claim("Id", $"{UserTableID }"));
                 await _signInManager.SignInAsync(user, false);
 
 

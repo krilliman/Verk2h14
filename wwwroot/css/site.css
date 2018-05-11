@@ -139,3 +139,6 @@ li a:hover{
 #WishListButton{
     background-color: #151719;
 }
+.hidden {
+    display: none;
+}

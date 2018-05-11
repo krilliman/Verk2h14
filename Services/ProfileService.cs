@@ -9,7 +9,6 @@ namespace BookCave.Services
     {
 
         private ProfileRepo _profileRepo;
-
         public ProfileService()
         {
             _profileRepo = new ProfileRepo();
@@ -35,20 +34,6 @@ namespace BookCave.Services
         {
             _profileRepo.DeletePayment(PaymentId);
         }
-        public void DeleteAddress(int AddressId)
-        {
-            _profileRepo.DeleteAddress(AddressId);
-        }
-        public AddressListViewModel GetMyAddressBook(int Id)
-        {
-            var MyAddressBook = _profileRepo.GetMyAddressBook(Id);
-            return MyAddressBook;
-        }
-        public int AddAddress(AddressListViewModel Model)
-        {
-            var UserId = _profileRepo.AddAddress(Model);
-            return UserId;
-        }
         public UserViewModel GetInformation(int Id)
         {
             var Information = _profileRepo.GetInformation(Id);
@@ -62,6 +47,20 @@ namespace BookCave.Services
         public void EditUserInformation(UserViewModel Model)
         {
             _profileRepo.EditUserInformation(Model);
+        }
+         public int AddAddress(AddressListViewModel Model)
+        {
+            var UserId = _profileRepo.AddAddress(Model);
+            return UserId;
+        }
+        public void DeleteAddress(int AddressId)
+        {
+            _profileRepo.DeleteAddress(AddressId);
+        }
+        public AddressListViewModel GetMyAddressBook(int Id)
+        {
+            var MyAddressBook = _profileRepo.GetMyAddressBook(Id);
+            return MyAddressBook;
         }
     }
 }
