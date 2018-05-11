@@ -136,11 +136,6 @@ namespace BookCave.Repositories
                                     Name = Bk.Name,
                                     Image = Bk.Image
                                 }).ToList();
-                foreach (var item in OrderItem)
-                {
-                    Console.WriteLine("Orderitem: " + item.BookId);
-                }
-                Console.WriteLine("passed");
                 order.OrderItem = OrderItem;
             }
             return Orders;

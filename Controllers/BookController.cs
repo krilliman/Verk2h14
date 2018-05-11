@@ -50,7 +50,6 @@ namespace BookCave.Controllers
         //This is called when somebody submits a rating for a book.
        public IActionResult SaveRate(RateViewModel Model)
        {
-           Console.WriteLine("This is the userId: " + Model.UserId);
            var NewRate = new Rating
            {
                BookId = Model.BookId,

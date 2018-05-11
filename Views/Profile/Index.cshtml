@@ -10,9 +10,6 @@
 {
         @await Html.PartialAsync("_ProfilePartial")
 }
-@{
-        Console.WriteLine(@Model.Id.ToString() + " == " + @claim);
-}
 <div class="col-sm-8">
         <div class="col-sm-6">
                 <h4>@Model.Name</h4>

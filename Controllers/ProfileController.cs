@@ -72,7 +72,6 @@ namespace BookCave.Controllers
         }
         public IActionResult SaveEdit(UserViewModel Model)
         {
-            Console.WriteLine(Model.Image);
             _profileService.EditUserInformation(Model);
 
             return RedirectToAction("Index","Profile", new {Id = Model.Id});

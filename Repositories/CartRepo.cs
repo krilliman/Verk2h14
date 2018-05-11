@@ -155,10 +155,8 @@ namespace BookCave.Repositories
             _db.Add(Order);
             _db.SaveChanges();
         }
-        
         public List<string> SplitItems(string Cart)
         {
-            Console.WriteLine("Cart: "+ Cart);
             var ListOfWords = new List<string>();
             if(Cart != null )
             {
@@ -168,10 +166,6 @@ namespace BookCave.Repositories
         }
         public CartViewModel CreateView(List<string> ItemList)
         {
-            foreach (var item in ItemList)
-            {
-                Console.WriteLine("item"+item);
-            }
             var Cart = new CartViewModel();
             var CartList = new List<CartItemViewModel>();
             double CartTotal = 0.0;

@@ -5,9 +5,7 @@ namespace BookCave.Models.InputModels
     public class PaymentInfoInputModel
     {
         [Required(ErrorMessage="CarNumber Is Required")]
-        [CreditCard(ErrorMessage = "Please enter a valid credit card number")]
-        //[DataType(DataType.CreditCard, ErrorMessage="Enter a valid Credit card")] 
-        //[CreditCard]
+        [RegularExpression("[0-9]{12,16}",ErrorMessage="Only digits from of the length 12-16")]
         public string CardNumber { get; set; }
         [Required(ErrorMessage="CardHolder Is Required")]
         [RegularExpression("[a-zA-Z ]+",ErrorMessage="Only Char Allowed")]
