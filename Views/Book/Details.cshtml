@@ -6,11 +6,103 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model BookCave.Models.ViewModels.BookViewModel
-<div class="jumbotron">
-    <p>@Model.Name</p>
+<div class="book-view-style">
+    <img src="@Model.Image" alt="Book Cover Image" class="book-view-image">
+    <div class="book-info">
+    <h2 class="book-title">@Model.Name</h2>
     <p>@Model.Description</p>
-    <p>@Model.Rating.ToString("0.0")</p>
+    <p>Rating: @Model.Rating.ToString("0.0")</p>
+    </div>
 </div>
+<!-- Add to Wishlist -->
+@if(@claim != null)
+{
+    <div class="book-wishlist">
+    <form asp-action="AddToWishList" asp-controller="Book">
+        <input type="hidden" name="BookId" value="@Model.ID">
+        <input type="hidden" name="WishListId" value="@claim">
+        @if(Model.WishListToggle == true)
+        {
+            <input type="submit" value="Remove from Wishlist" class="btn btn-default">
+        }
+        else
+        {
+           <input type="submit" value="Add to Wishlist" class="btn btn-default">
+        }
+    </form>
+    </div>
+<!-- 
+<form asp-action="AddToWisList" asp-controller="Book">
+<img src="~/images/WishList.png">
+</form>
+-->
+
+<!-- Buttons for book view, add to cart -->    
+<div class="book-buttons">
+    <br>
+    <form asp-action="AddToCart" asp-controller="Cart" class="from-group">
+        <input type="hidden" name="BookId" value="@Model.ID">
+        <label for="Quantity">Quantity</label>
+        <select name="Quantity" class="form-group">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <input type="submit" value="Add to Cart" class="btn btn-default">
+    </form>
+</div>
+
+
+<!-- This is the Area where you type in your comment and your rating for the book --> 
+<div Id="RateArea"> 
+    <form asp-action="SaveRate" asp-controller="Book">
+        <div class="form-group">
+            <label asp-for="Comment">Comment</label>
+            <textarea asp-for="Comment" class="form-control">Enter comment here...</textarea>
+            <div class="rate">
+                <input type="radio" id="star5" value="5" asp-for="Rate"/>
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" value="4" asp-for="Rate"/>
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3"  value="3" asp-for="Rate"/>
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" value="2" asp-for="Rate"/>
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" value="1" asp-for="Rate"/>
+                <label for="star1" title="text">1 star</label>
+            </div><br><br><br>
+            <input type="hidden" name="BookId" value=@Model.ID asp-for="BookId">
+            <input type="hidden" name="UserId" value=@claim asp-for="UserId">
+            <input type="submit" value="Submit" class="btn btn-default">
+        </div>
+        </form>
+</div>
+}
+<!-- Prints out all the ratings in the model -->
+<div id="RatedArea">
+            <div class="grid">  
+        @foreach(var book in @Model.Ratings)
+        {
+            <div class="col-sm-12">
+                <img src=@book.Image alt="No Photo" class="col-sm-2">
+                <a class="nav-link" asp-action="Index" asp-controller="Profile" asp-route-id=@book.UserId class="col-sm-6">@book.Name</a>
+                <p>@for(int i = 1; i <= @book.Rate;i++)
+                {
+                    <img src="https://image.freepik.com/free-icon/pointed-star-silhouette_318-35987.jpg" height="12" width="12">
+                }</p>
+                <p>@book.Comment</p>
+            </div>
+        }
+        </div>
+    </div>
+<!-- The only way to get this CSS to work was to have it inside the cshtml file.. -->
+
 <style>
 .rate {
     float: left;
@@ -50,83 +142,3 @@
 
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
 </style>
-<!-- 
-<form asp-action="AddToWisList" asp-controller="Book">
-<img src="~/images/WishList.png">
-</form>
--->
-
-
-    <br>
-    <form asp-action="AddToCart" asp-controller="Cart" class="from-group">
-        <input type="hidden" name="BookId" value="@Model.ID">
-        <label for="Quantity">Quantity</label>
-        <select name="Quantity" class="form-group">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-        </select>
-        <input type="submit" value="Add To Cart" class="btn btn-default">
-    </form>
-@if(@claim != null)
-{
-    <form asp-action="AddToWishList" asp-controller="Book">
-        <input type="hidden" name="BookId" value="@Model.ID">
-        <input type="hidden" name="WishListId" value="@claim">
-        @if(Model.WishListToggle == true)
-        {
-            <input type="submit" value="RemoveFromWishList" class="btn btn-default">
-        }
-        else
-        {
-            <input type="submit" value="AddToWishList" class="btn btn-default">
-        }
-    </form>
-<!-- This is the Area where you type in your comment and your rating for the book --> 
-<div Id="RateArea"> 
-    <form asp-action="SaveRate" asp-controller="Book">
-        <div class="form-group">
-            <label asp-for="Comment">Comment</label>
-            <textarea asp-for="Comment" class="form-control">Enter comment here...</textarea>
-            <div class="rate">
-                <input type="radio" id="star5" value="5" asp-for="Rate"/>
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" value="4" asp-for="Rate"/>
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3"  value="3" asp-for="Rate"/>
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" value="2" asp-for="Rate"/>
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" value="1" asp-for="Rate"/>
-                <label for="star1" title="text">1 star</label>
-            </div><br><br><br>
-            <input type="hidden" name="BookId" value=@Model.ID asp-for="BookId">
-            <input type="hidden" name="UserId" value=@claim asp-for="UserId">
-            <input type="submit" value="Rate" class="btn btn-default">
-        </div>
-        </form>
-</div>
-}
-<!-- Prints out all the ratings in the model -->
-<div id="RatedArea">
-            <div class="grid">  
-        @foreach(var book in @Model.Ratings)
-        {
-            <div class="col-sm-12">
-                <img src=@book.Image alt="No Photo" class="col-sm-2">
-                <a class="nav-link" asp-action="Index" asp-controller="Profile" asp-route-id=@book.UserId class="col-sm-6">@book.Name</a>
-                <p>@for(int i = 1; i <= @book.Rate;i++)
-                {
-                    <img src="https://image.freepik.com/free-icon/pointed-star-silhouette_318-35987.jpg" height="12" width="12">
-                }</p>
-                <p>@book.Comment</p>
-            </div>
-        }
-        </div>
-    </div>
