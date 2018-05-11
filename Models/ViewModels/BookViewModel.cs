@@ -21,7 +21,7 @@ namespace BookCave.Models.ViewModels
         public string Isbn { get; set; }
 
         // ma alveg kommenta eitthvad ef 
-        public List<RateViewModel> Ratings {get; set; } // hvad gerir thetta?
+        public List<RateViewModel> Ratings {get; set; } // Þetta er listi af ratings sem BookViewModel tekur inn þegar þú ferð á details í book.
         public bool WishListToggle { get; set; }
         public int BookId { get; set; }
         public string Comment { get; set; }

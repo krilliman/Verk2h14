@@ -7,5 +7,7 @@ namespace BookCave.Models.ViewModels
         public string Comment { get; set; }
         public double Rate { get; set; }
         public int UserId {get; set; }
+        public string Name { get; set; }
+        public string Image { get; set; }
     }
 }

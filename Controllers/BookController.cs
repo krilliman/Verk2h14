@@ -28,7 +28,8 @@ namespace BookCave.Controllers
            var Book = _bookService.GetBook(id);
            var ratings = _ratingService.GetRatings(id);
            Book.Ratings = ratings;
-           Book.WishListToggle = _bookService.CheckIfInWishList(userid, id);
+           Console.WriteLine(Book.Ratings[0].Image);
+           Book.WishListToggle = _bookService.CheckIfInWishList(userid,id);
            return View(Book);
        }
 

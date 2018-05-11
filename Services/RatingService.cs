@@ -24,7 +24,6 @@ namespace BookCave.Services
         //Requests all ratings from the repo with the selected bookID.
         public List<RateViewModel> GetRatings(int Id)
         {
-            Console.WriteLine("This is the GetRating function");
             var rating = _ratingRepo.GetRatingsById(Id);
             return rating;
         }
