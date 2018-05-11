@@ -7,21 +7,33 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 @model List<BookCave.Models.ViewModels.OrdersViewModel>
-<div class="col-sm-6">
+<div class="container">
+    <div class="row">
     @foreach(var order in @Model)
     {
         <h3>OrderID: @order.OrderId</h3>
-        <div class="jumbotron">
+        <div class="jumbotron col-sm-12">
             <ul>
                 @foreach(var orderItems in order.OrderItem)
                 {
-                    <ul>
-                        <li><a asp-action="Details" asp-controller="Book" asp-route-id="@orderItems.BookId" asp-route-userid="@claim">BookName</a></li>
-                        <li>Quantity: @orderItems.Quantity</li>
-                        <li>Price: @orderItems.Price</li>
-                    </ul>
+                    <div class="card col-sm-6">
+                        <img class="card-img-top" src="@orderItems.Image" alt="@orderItems.Image">
+                        <div class="card-body">
+                            <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@orderItems.BookId" asp-route-userid="@claim">
+                                @if(@orderItems.Name.Length < 30)
+                                {
+                                    @orderItems.Name
+                                }else
+                                {
+                                        @orderItems.Name.Substring(0,30)<html>...</html>
+                                } 
+                        </a></h4>
+                        </div>
+                        <h5 class="card-text">Price: @orderItems.Price</h5>
+                    </div>
                 }
             </ul>
         </div>
     }
+    </div>
 </div>

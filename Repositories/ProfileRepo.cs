@@ -126,12 +126,15 @@ namespace BookCave.Repositories
             {
                 var OrderItem = (from Oi in _db.OrderItemTable
                                 where Oi.OrderId == order.OrderId
+                                join Bk in _db.BookTable on Oi.BookId equals Bk.ID
                                 select new OrderItemViewModel
                                 {
                                     BookId = Oi.BookId,
                                     OrderId = Oi.OrderId,
                                     Quantity = Oi.Quantity,
-                                    Price = Oi.Price
+                                    Price = Oi.Price,
+                                    Name = Bk.Name,
+                                    Image = Bk.Image
                                 }).ToList();
                 foreach (var item in OrderItem)
                 {

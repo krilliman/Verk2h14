@@ -168,6 +168,10 @@ namespace BookCave.Repositories
         }
         public CartViewModel CreateView(List<string> ItemList)
         {
+            foreach (var item in ItemList)
+            {
+                Console.WriteLine("item"+item);
+            }
             var Cart = new CartViewModel();
             var CartList = new List<CartItemViewModel>();
             double CartTotal = 0.0;
