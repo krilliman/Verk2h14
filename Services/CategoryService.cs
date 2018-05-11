@@ -15,7 +15,7 @@ namespace BookCave.Services
             _categoryRepo = new CategoryRepo();
         }
 
-        public List<CategoryViewModel> GetMainCategoryList(int? id)
+        public List<CategoryViewModel> GetMainCategoryList(int? id) //gets a listof MainCategories, usually to build a table using the functions below
         {
             var MainCategories = _categoryRepo.GetMainCategoryList(id);
             return MainCategories;
@@ -35,7 +35,7 @@ namespace BookCave.Services
 
         // Þessi föll sækja hina og þessa lista
 
-        public List<BookViewModel> SearchBooks(string search)
+        public List<BookViewModel> SearchBooks(string search) //returns the viewmodel to the searchresult view
         {  
             var BookResults = (from b in _categoryRepo.GetAllBooks(null)
                                 where b.Name.ToLower().Contains(search.ToLower())
@@ -43,7 +43,7 @@ namespace BookCave.Services
                 return BookResults;
         }
 
-        public CategoryViewModel GetSubCategoryIndex(int id)
+        public CategoryViewModel GetSubCategoryIndex(int id) //returns a viewmodel which has all the elements to build the index/subcategory views
         {
             var IndexViewModel = new CategoryViewModel
             {
@@ -115,11 +115,6 @@ namespace BookCave.Services
                                                 }).ToList();
             return SubCategoriesWithTop10Books;
         }
-
-        //       public SubCategoryViewModel GetSingleSubCategoryViewModel(int id)
-        //       {
-        //           var SingleCategory = (from s in in)
-        //      }
 
 
         public List<SubCategoryViewModel> GetSubCategoryViewModel(int? id)
