@@ -1,21 +1,60 @@
 @model BookCave.Models.ViewModels.SubCategoryViewModel
-<div>
-    <div>
-        <h2>Top 10 in: @Model.Name</h2>
+
+<div class="jumbotron jumbotron-fluids">
+    <div class="top-10-all">
             <ul>
-            @foreach(var m in @Model.Top10Books)
-            {
-                    <li><a asp-controller="Book" asp-action="Details" asp-route-id="@m.ID">@m.Name</a></li>
-            }
-            </ul>
-            <h3>All Books in: @Model.Name</h3>
-            <ul>
-            @foreach(var b in @Model.BookList)
-            {
-                <li><a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID">@b.Name</a></li>
-            }
+            <div class="top-10-banner">
+            <h2 class="list-heading">Top 10 in @Model.Name</h2>
+            </div>            
+                <ul>
+                    <div class="row">
+                        @foreach(var b in @Model.Top10Books)
+                        {
+                            <div class="card">
+                                <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
+                                <div class="card-body">
+                                    <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
+                                    @if(@b.Name.Length < 30)
+                                    {
+                                        @b.Name 
+                                    }else
+                                    {
+                                            @b.Name.Substring(0,30)<html>...</html>
+                                    } 
+                                    </a></h4>
+                                    <h5 class="card-text">@b.Author</h5>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </ul>
             </ul>
             
-    </ul>
+    
+<!-- Top 10 in Subcategories -->
+            
+            <div class="top-10-banner">
+            <h2 class="list-heading">All Books in @Model.Name Category</h2>
+            </div>  
+                <div class="row">
+                    @foreach(var b in @Model.BookList)
+                    {
+                        <div class="card">
+                            <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
+                            <div class="card-body">
+                                <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
+                                    @if(@b.Name.Length < 30)
+                                    {
+                                        @b.Name 
+                                    }else
+                                    {
+                                            @b.Name.Substring(0,30)<html>...</html>
+                                    } 
+                                    </a></h4>
+                                <h5 class="card-text">@b.Author</h5>
+                            </div>
+                        </div>
+                    }
+                </div>
     </div>
 </div>
