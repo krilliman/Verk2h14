@@ -21,10 +21,11 @@ $("#AddToWishList").click(function(){
 */
 $(document).ready(function () {
     $("#CheckOutForm").submit(function(e){
-
+        var Counter = 0;
         var check = true;
         $("input:radio").each(function(){
             var name = $(this).attr("name");
+            Counter++;
             if($("input:radio[name="+name+"]:checked").length == 0){
                 check = false;
             }
@@ -32,6 +33,14 @@ $(document).ready(function () {
         var AddressClass = $("#UserAddresses").hasClass("hidden");
         var PaymentClass = $("#UserPayments").hasClass("hidden");
         if(!check && !AddressClass && !PaymentClass){
+            e.preventDefault();
+            alert('Please Select An Option');
+        }
+        else if(Counter == 0 && !AddressClass){
+            e.preventDefault();
+            alert('Please Select An Option');
+        }
+        else if(Counter == 0 && !PaymentClass){
             e.preventDefault();
             alert('Please Select An Option');
         }

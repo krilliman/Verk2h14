@@ -59,7 +59,6 @@
                             {
                                 <li>
                                     <p>Payment @i <input type="radio" name="PaymentId" value="@Model.UserPayments.Payments[i-1].Id" class="form-check-input" id="PaymentsRadio"></p>
-                                    <p class="hidden" id="Radio-Payment"></p>
                                     <ul>
                                         <div class="jumbotron">
                                             <li>CardNumber: @Model.UserPayments.Payments[i-1].CardNumber</li>
@@ -120,7 +119,6 @@
                             {
                                 <li>
                                     <p>Address @i <input type="radio" name="AddressId"  value="@Model.UserAddresses.AddressBook[i-1].Id" class="form-check-input" id="AddressRadio"></p>
-                                    <p class="hidden" id="Radio-Address"></p>
                                     <ul>
                                         <div class="jumbotron">
                                             <li>StreetLine: @Model.UserAddresses.AddressBook[i-1].StreetLine</li>

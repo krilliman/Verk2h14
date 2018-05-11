@@ -54,6 +54,11 @@ namespace BookCave.Controllers
         }
         public IActionResult OrderComfirmed(CompleteOrderViewModel Model)
         {
+            if(!ModelState.IsValid)
+            {
+                ViewData["ErrorMessage"] = "Error";
+                return View();
+            }
             var Cart = Request.Cookies["Cart"];
             var ListOfWords = _cartService.SplitItems(Cart);
             Model.Cart = _cartService.CreateView(ListOfWords);

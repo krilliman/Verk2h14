@@ -40,8 +40,11 @@
                 <li>Expires: @Model.UserPayment.ExpireMonth / @Model.UserPayment.ExpireYear</li>
             </div>
         <form asp-action="OrderComfirmed" asp-action="Cart">
-            <label for="Cvc">Enter Cvc</label>
-            <input type="text" asp-for="@Model.Cvc" class="form-control">
+            <div class="form-group">
+                <label for="@Model.Cvc">Enter Cvc</label>
+                <input type="text" asp-for="@Model.Cvc" class="form-control" placeholder="Enter Cvc">
+                <span asp-validation-for="@Model.Cvc" class="text-danger"></span>
+            </div>
             <input type="hidden" asp-for="@Model.UserId" value="@claim">
             <input type="hidden" asp-for="@Model.TotalPrice" value="@Model.Cart.CartTotalPrice">
             <input type="submit" value="Pay" class="btn btn-success">

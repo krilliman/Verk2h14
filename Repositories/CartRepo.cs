@@ -159,10 +159,8 @@ namespace BookCave.Repositories
             _db.Add(Order);
             _db.SaveChanges();
         }
-        
         public List<string> SplitItems(string Cart)
         {
-            Console.WriteLine("Cart: "+ Cart);
             var ListOfWords = new List<string>();
             if(Cart != null )
             {

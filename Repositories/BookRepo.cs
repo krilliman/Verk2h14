@@ -64,7 +64,6 @@ namespace BookCave.Repositories
                             Stock = b.Stock,
                             Isbn = b.Isbn,
                         }).ToList();
-            Console.WriteLine(Books.Count);
             return Books;
         }  
         public List<BookViewModel> GetAllBooks()
@@ -88,7 +87,6 @@ namespace BookCave.Repositories
                             Stock = b.Stock,
                             Isbn = b.Isbn,
                         }).ToList();
-            Console.WriteLine(Books.Count);
             return Books;
         }
         public void UpdateRating(List<RateViewModel> ratings)
