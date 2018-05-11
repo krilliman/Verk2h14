@@ -53,7 +53,7 @@ namespace BookCave.Controllers
             }
             else
             {
-                var Books = _categoryService.GetBookList(null);
+                var Books = _categoryService.GetBookList(null).OrderBy(x => x.Name).ToList();
                 return View(Books);
             }
         }

@@ -76,29 +76,6 @@ $(document).ready(function () {
             console.log(err);
         })
     })
-    /*
-    $("#FilterByName").click(function(){
-        console.log("clicked before filter");
-        $.get("Home/FilterByName", function(data,status){
-            console.log("clicked");
-            var markup = "";
-            for(var i = 0; i < data.length; i++){
-                markup = "<a asp-action='Details'asp-controller='Book' asp-route-id="+data[i].ID+" asp-route-userid='1'></a>";
-                //markup = "<p>Book Rateing: @book.Rating.ToString("0.0")</p>"
-            }
-            $("#BooksIndex").html(markup);
-        }).fail(function (err) {
-            alert("Something Went Wrong");
-            console.log(err);
-        })
-    })
-    /////////////
-    */
-    $('#testTop10-carousel').carousel({
-        pause: "hover",
-        interval: 4000,
-      });
-
 
     $("#cat-link").one("click", function () {
         $.get("../../Category/GetMainCategoryListJson", function (data, status) {
@@ -111,6 +88,34 @@ $(document).ready(function () {
                 alert(err);
             })
     })   
+
+var $divs = $("div.list-items1");
+$('#order-button1').on('click', function () {
+    var nameOrder= $divs.sort(function (a, b) {
+        return $(a).data('sort-name') < $(b).data('sort-name') ? -1 : 1;
+    });
+    
+    $("#ordered-list").html(nameOrder);
+});
+
+$('#order-button2').on('click', function () {
+    var nameOrder= $divs.sort(function (a, b) {
+        return $(a).data('sort-name') > $(b).data('sort-name') ? -1 : 1;
+    });
+    
+    $("#ordered-list").html(nameOrder);
+});
+
+$('#order-button3').on('click', function () {   
+    var ratingOrder = $divs.sort(function (a, b) {
+        return $(a).data('sort-rating') > $(b).data('sort-rating') ? -1 : 1;
+    });
+    $("#ordered-list").html(ratingOrder);
+});
+
+
+
+
 })
 
 

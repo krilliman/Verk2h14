@@ -1,25 +1,38 @@
 @model List<BookCave.Models.ViewModels.BookViewModel>
 
 <div class="jumbotron jumbotron-fluids">
-    <div class="row">
+    <div>
+        
+        <button id="order-button1" type="button" class="btn btn-primary order-by-name" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Order By Name
+        </button>
+        <button id="order-button2" type="button" class="btn btn-primary order-by-name" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Order By Name Descending
+        </button>
+        <button id="order-button3" type="button" class="btn btn-primary order-by-name" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Order By Rating
+        </button>
+
+    <div class="row" id="ordered-list">
+        
     @foreach (var b in @Model)
     {
-        <div class="card">
-                                <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
-                                    @if(@b.Name.Length < 30)
-                                    {
-                                        @b.Name 
-                                    }else
-                                    {
-                                            @b.Name.Substring(0,30)<html>...</html>
-                                    } 
-                                    </a></h4>
-                                    <h5 class="card-text">@b.Author</h5>
-                                    <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
-                                </div>
-                            </div>
+        <div class="card list-items1" data-sort-name="@b.Name" data-sort-rating="@b.Rating">
+            <img class="card-img-top" src="@b.Image" alt="@b.Name Photo">
+            <div class="card-body">
+                <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@b.ID">
+                @if(@b.Name.Length < 30)
+                {
+                    @b.Name 
+                }else
+                {
+                        @b.Name.Substring(0,30)<html>...</html>
+                } 
+                </a></h4>
+                <h5 class="card-text">@b.Author</h5>
+                <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID" class="btn btn-dark">View Book</a>
+            </div>
+        </div>
     }
     </div>
 </div>
