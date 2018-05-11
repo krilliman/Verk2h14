@@ -39,5 +39,17 @@ namespace BookCave.Services
         {
             _cartRepo.AddOrder(Model);
         }
+        public List<string> SplitItems(string Cart)
+        {
+            return _cartRepo.SplitItems(Cart);
+        }
+        public CartViewModel CreateView(List<string> ItemList)
+        {
+            return _cartRepo.CreateView(ItemList);
+        }
+        public CompleteOrderViewModel CompleteOrder(CheckOutViewModel Model, int AddressId, int PaymentId)
+        {
+            return _cartRepo.CompleteOrder(Model, AddressId, PaymentId);
+        }
     }
 }

@@ -15,11 +15,12 @@ namespace BookCave.Controllers
     public class ProfileController : Controller
     {
         private ProfileService _profileService;
-        //private IPaymentService _paymentSerivce;
+        private IPaymentService _paymentSerivce;
 
         private IAddressService _iAddressService;
-        public ProfileController(IAddressService AddressService)
+        public ProfileController(IAddressService AddressService, IPaymentService Payment)
         {
+            _paymentSerivce = Payment;
             _iAddressService = AddressService;
             _profileService = new ProfileService();
         }
@@ -71,8 +72,6 @@ namespace BookCave.Controllers
         public IActionResult Edit(int Id)
         {
             var UserInformation = _profileService.GetInformation(Id);
-            
-
             return View(UserInformation);
         }
         public IActionResult SaveEdit(UserViewModel Model)
@@ -80,7 +79,7 @@ namespace BookCave.Controllers
             Console.WriteLine(Model.Image);
             _profileService.EditUserInformation(Model);
 
-            return RedirectToAction("Edit","Profile", new {Id = Model.Id});
+            return RedirectToAction("Index","Profile", new {Id = Model.Id});
         }
        
          
@@ -97,7 +96,7 @@ namespace BookCave.Controllers
                 ViewData["ErrorMessage"] = "Error";
                 return View();
             }
-            //_paymentSerivce.ProccessPayment(Model.NewPayment);
+            _paymentSerivce.ProccessPayment(Model.NewPayment);
             var UserId = _profileService.AddPayment(Model);
             return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
         }

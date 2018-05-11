@@ -30,7 +30,9 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 <div Id="EditArea"  class="col-sm-6">
         <div class="form-group">
         <form asp-action="SaveEdit" asp-controller="Profile" class="form-horizontal from-control">
+                <h4>Current Profile Photo</h4>
                 <img src=@Model.Image height="120" width="120" alt="No Photo"><br>
+                <h4>Choose New Photo</h4>
                 <label>
                     <input type="radio" value="http://wellington-altus.ca/wp-content/themes/wellingtonaltus/img/tempprofile.png" asp-for="Image" />
                     <img src="http://wellington-altus.ca/wp-content/themes/wellingtonaltus/img/tempprofile.png" id="ProfImage">

@@ -76,6 +76,18 @@
     </form>
 @if(@claim != null)
 {
+    <form asp-action="AddToWishList" asp-controller="Book">
+        <input type="hidden" name="BookId" value="@Model.ID">
+        <input type="hidden" name="WishListId" value="@claim">
+        @if(Model.WishListToggle == true)
+        {
+            <input type="submit" value="RemoveFromWishList" class="btn btn-default">
+        }
+        else
+        {
+            <input type="submit" value="AddToWishList" class="btn btn-default">
+        }
+    </form>
 <!-- This is the Area where you type in your comment and your rating for the book --> 
 <div Id="RateArea"> 
     <form asp-action="SaveRate" asp-controller="Book">

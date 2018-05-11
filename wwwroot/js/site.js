@@ -1,28 +1,23 @@
 // Write your JavaScript code.
 console.log("js up and running");
-$("#CreatePayment").click(function(){
-    console.log("clicked");
-    $("#AddPaymentDiv").show();
-    $("#CreatePayment").hide();
-})
 
 $("#MyPayments").click(function(){
     console.log("PaymentButton clicked")
-    $("#UserPayments").show();
-    $("#NewPayment").hide();
+    $("#UserPayments").removeClass("hidden");
+    $("#NewPayment").addClass("hidden");
 
 })
 $("#ToggleNewPayment").click(function(){
-    $("#NewPayment").show();
-    $("#UserPayments").hide();
+    $("#NewPayment").removeClass("hidden");
+    $("#UserPayments").addClass("hidden");
 })
 $("#MyAddresses").click(function(){
-    $("#UserAddresses").show();
-    $("#NewAddress").hide();
+    $("#UserAddresses").removeClass("hidden");
+    $("#NewAddress").addClass("hidden");
 })
 $("#ToggleNewAddress").click(function(){
-    $("#UserAddresses").hide();
-    $("#NewAddress").show();
+    $("#UserAddresses").addClass("hidden");
+    $("#NewAddress").removeClass("hidden");
 })
 /*
 $("#AddToWishList").click(function(){
@@ -43,6 +38,10 @@ $(document).ready(function () {
         console.log("clicked");
         $("#AddAddressDiv").removeClass("hidden");
         $("#CreateAddress").hide();
+    })
+    $("#CreatePayment").click(function(){
+        $("#AddPaymentDiv").removeClass("hidden");
+        $("CreatePayment").hide();
     })
     $("#payment-info").click(function () {
         console.log("clicked");

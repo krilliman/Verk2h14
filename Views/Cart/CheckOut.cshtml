@@ -49,12 +49,14 @@
                             </ul>
                         </fieldset>
                     </div>
-                    <div id="NewPayment" hidden>
+                    <div id="NewPayment" class="hidden">
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserPayments.NewPayment.CardNumber" placeholder="Enter Card Number" class="form-control">
-                        </div>
+                            <span asp-validation-for="@Model.UserPayments.NewPayment.CardNumber" class="text-danger"></span>
+                    </div>
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserPayments.NewPayment.CardHolder" placeholder="Enter Card Holder Name" class="form-control">
+                            <span asp-validation-for="@Model.UserPayments.NewPayment.CardHolder" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label for="ExpireMonth">ExpireMonth</label>
@@ -73,6 +75,7 @@
                                 <option value='11'>November</option>
                                 <option value='12'>December</option>
                             </select> 
+                            <span asp-validation-for="@Model.UserPayments.NewPayment.ExpireMonth" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label for="ExpireYear">ExpireYear</label>
@@ -82,7 +85,8 @@
                                 <option value='2019'>2019</option>
                                 <option value='2020'>2020</option>
                                 <option value='2021'>2021</option>
-                            </select> 
+                            </select>
+                            <span asp-validation-for="@Model.UserPayments.NewPayment.ExpireYear" class="text-danger"></span>
                         </div>
                     </div><br>
                     <div id="UserAddresses" class="form-group">
@@ -107,21 +111,26 @@
                             </ul>
                         </fieldset>
                     </div>
-                    <div id="NewAddress" hidden>
+                    <div id="NewAddress" class="hidden">
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserAddresses.NewAddress.StreetLine" placeholder="Enter SteetLine" class="form-control">
+                            <span asp-validation-for="@Model.UserAddresses.NewAddress.StreetLine" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserAddresses.NewAddress.PostalCode" placeholder="Enter PostalCode" class="form-control">
+                            <span asp-validation-for="@Model.UserAddresses.NewAddress.PostalCode" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserAddresses.NewAddress.Country" placeholder="Enter Country" class="form-control">
+                            <span asp-validation-for="@Model.UserAddresses.NewAddress.Country" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserAddresses.NewAddress.City" placeholder="Enter Country" class="form-control">
+                            <span asp-validation-for="@Model.UserAddresses.NewAddress.City" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="text" asp-for="@Model.UserAddresses.NewAddress.Province" placeholder="Enter Province" class="form-control">
+                            <span asp-validation-for="@Model.UserAddresses.NewAddress.Province" class="text-danger"></span>
                         </div>
                     </div>
                     <input type="hidden" asp-for="@Model.ExtraInfo.UserId" value="@Model.Cart.UserId">
