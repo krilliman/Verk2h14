@@ -9,15 +9,42 @@ using BookCave.Services;
 using BookCave.Models.ViewModels;
 using BookCave.Models.InputModels;
 
+
 namespace BookCave.Controllers
 {
     public class ProfileController : Controller
     {
         private ProfileService _profileService;
+        //private IPaymentService _paymentSerivce;
 
-        public ProfileController()
+        private IAddressService _iAddressService;
+        public ProfileController(IAddressService AddressService)
         {
+            _iAddressService = AddressService;
             _profileService = new ProfileService();
+        }
+         public IActionResult AddressBook(int Id)
+        {
+            var MyAddressBook = _profileService.GetMyAddressBook(Id);
+            return View(MyAddressBook);
+        }
+        public IActionResult DeleteAddress(int AddressId, int UserId)
+        {
+            _profileService.DeleteAddress(AddressId);
+            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+        }
+
+        [HttpPost]
+        public IActionResult AddressBook(AddressListViewModel Model)
+        {
+            if(!ModelState.IsValid)
+            {
+                ViewData["ErrorMessage"] = "Error";
+                return View();
+            }
+            _iAddressService.ProccessAddress(Model.NewAddress);
+            var UserId = _profileService.AddAddress(Model);
+            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
         }
 
         public IActionResult Index(int Id)
@@ -41,11 +68,6 @@ namespace BookCave.Controllers
             var Orders = _profileService.GetAllOrders(Id);
             return View(Orders);
         }
-        public IActionResult AddressBook(int Id)
-        {
-            var MyAddressBook = _profileService.GetMyAddressBook(Id);
-            return View(MyAddressBook);
-        }
         public IActionResult Edit(int Id)
         {
             var UserInformation = _profileService.GetInformation(Id);
@@ -55,33 +77,26 @@ namespace BookCave.Controllers
         }
         public IActionResult SaveEdit(UserViewModel Model)
         {
-            _profileService.EditUserInformation(Model);
-
             return RedirectToAction("Edit","Profile", new {Id = Model.Id});
         }
-        public IActionResult AddPayment(PaymentListViewModel Model)
-        {
-              
-            var UserId = _profileService.AddPayment(Model);
-            return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
-        }
+       
          
         public IActionResult DeletePayment(int PaymentId, int UserId)
         {
             _profileService.DeletePayment(PaymentId);
             return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
         }
-        public IActionResult DeleteAddress(int AddressId, int UserId)
+        [HttpPost]
+        public IActionResult PaymentInformation(PaymentListViewModel Model)
         {
-            _profileService.DeleteAddress(AddressId);
-            return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
+            if(!ModelState.IsValid)
+            {
+                ViewData["ErrorMessage"] = "Error";
+                return View();
+            }
+            //_paymentSerivce.ProccessPayment(Model.NewPayment);
+            var UserId = _profileService.AddPayment(Model);
+            return RedirectToAction("PaymentInformation", "Profile", new {Id = UserId});
         }
-        public IActionResult AddAddress(AddressListViewModel Model)
-        {
-            var UserId = _profileService.AddAddress(Model);
-            return RedirectToAction("AddressBook", "Profile", new {Id = Model.NewAddress.UserId});
-        }
-
-       
     }
 }

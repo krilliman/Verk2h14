@@ -11,16 +11,22 @@
         <div class="form-group">
         <form asp-action="SaveEdit" asp-controller="Profile" class="form-horizontal from-control">
             <label asp-for="Image">Profile Picture</label><br>
+                <div class="col-sm-6 form-group">
+                    <img src=@Model.Image height="120" width="120" alt="No Photo">
+                    <input type="file" asp-for="@Model.Image">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <p>@Model.Name</p>
+                    <label for="FavBook">Favourite Book</label>
+                    <input type="text" asp-for="FavBook" class="form-control">
 
-                <img src=@Model.Image height="120" width="120" alt="No Photo">
-                <p>@Model.Name</p>
-                <label for="FavBook">Favourite Book</label>
-                <input type="text" asp-for="FavBook" class="form-control">
-
-                <label for="Description">Description</label>
-                <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
-                <input type="hidden" value="@claim" asp-for="Id"/>
-                <input type="submit" value="Edit" class="btn btn-default">
-                </form>
+                    <label for="Description">Description</label>
+                    <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
+                    <input type="hidden" value="@claim" asp-for="Id"/>
+                    <input type="submit" value="Edit" class="btn btn-default">
+                </div>
+        
+        </form>
+                
         </div>
 </div>

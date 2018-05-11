@@ -5,11 +5,6 @@ $("#CreatePayment").click(function(){
     $("#AddPaymentDiv").show();
     $("#CreatePayment").hide();
 })
-$("#CreateAddress").click(function(){
-    console.log("clicked");
-    $("#AddAddressDiv").show();
-    $("#CreateAddress").hide();
-})
 
 $("#MyPayments").click(function(){
     console.log("PaymentButton clicked")
@@ -44,7 +39,11 @@ $("#AddToWishList").click(function(){
 })
 */
 $(document).ready(function () {
-
+    $("#CreateAddress").click(function(){
+        console.log("clicked");
+        $("#AddAddressDiv").removeClass("hidden");
+        $("#CreateAddress").hide();
+    })
     $("#payment-info").click(function () {
         console.log("clicked");
         $.get("PaymentIfno", function (data, status) {

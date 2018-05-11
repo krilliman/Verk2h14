@@ -159,3 +159,6 @@ ul {
 .list-heading {
     font-style: bold; 
 }
+.hidden {
+    display: none;
+}

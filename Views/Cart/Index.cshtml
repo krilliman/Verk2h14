@@ -24,11 +24,19 @@
             </form>
         </div>
     }
-    <p>Cart Total Price: @Model.CartTotalPrice</p>
-    <form asp-action="Checkout" asp-controller="Cart">
-        <input type="hidden" asp-for="@Model.UserId" value="@claim">
-        <input type="hidden" asp-for="@Model.CartTotalPrice" value="@Model.CartTotalPrice">
-        <input type="submit" value="Check Out" class="btn btn-success">
-    </form>
+    @if(!(@Model.Cart.Count == 0))
+    {
+        <h3>Cart Total Price: @Model.CartTotalPrice</h3>
+        <form asp-action="Checkout" asp-controller="Cart">
+            <input type="hidden" asp-for="@Model.UserId" value="@claim">
+            <input type="hidden" asp-for="@Model.CartTotalPrice" value="@Model.CartTotalPrice">
+            <input type="submit" value="Check Out" class="btn btn-success">
+        </form>
+    }
+    else
+    {
+        <h3>Your cart is empty</h3>
+    }
+    
 </div>
 

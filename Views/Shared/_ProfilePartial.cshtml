@@ -6,7 +6,6 @@
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 }
 
-
 <div class="col-sm-2 sidebar-offcanvas">
     <div class="list-group">
         <a asp-action="Index" asp-controller="Profile" asp-route-id="@claim" class="list-group-item active">Account Information</a>
