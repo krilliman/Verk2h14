@@ -4,39 +4,65 @@
 @using BookCave.Models.EntityModels
 @{
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+    var u = 0;
 }
 
 @model BookCave.Models.ViewModels.CartViewModel
-<div class="col-sm-4">
-    @for(var i = 1; i <= @Model.Cart.Count;i++)
-    {
-        <h3>item @i</h3>
-        <div class="jumbotron">
-            <ul>
-                <li><a asp-action="Details" asp-controller="Book" asp-route-id="@Model.Cart[i-1].BookId" asp-route-userid="@claim">@Model.Cart[i-1].BookName</a></li>
-                <li>Price: @Model.Cart[i-1].Price</li>
-                <li>Quantity: @Model.Cart[i-1].Quantity</li>
-                <li>TotalPrice: @Model.Cart[i-1].TotalPrice</li>
-            </ul>
-            <form asp-action="DeleteFromCart" asp-controller="Cart">
-                <input type="hidden" name="CartItemId">
-                <input type="submit" value="Delete" class="btn btn-danger">
+<div class="container">
+        @for(var i = 1; i <= @Model.Cart.Count;i++)
+        {
+            <div class="row">
+            @if(@Model.Cart.Count-i > 3)
+            {
+                 u = 3;
+            }
+            else
+            {
+                u = @Model.Cart.Count-i+1;
+            }
+                @while(u != 0)
+                {
+                    <div class="card col-cm-8">
+                    <img class="card-img-top" src="@Model.Cart[i-1].Image" alt="@Model.Cart[i-1].Image">
+                    <div class="card-body">
+                        <h4 class="card-title"><a asp-action="Details" asp-controller="Book" asp-route-id="@Model.Cart[i-1].BookId" asp-route-userid="@claim">
+                        @if(@Model.Cart[i-1].BookName.Length < 30)
+                        {
+                            @Model.Cart[i-1].BookName 
+                        }else
+                        {
+                                @Model.Cart[i-1].BookName.Substring(0,30)<html>...</html>
+                        } 
+                        </a></h4>
+                    </div>
+                    <h5 class="card-text">Price: @Model.Cart[i-1].Price</h5>
+                    <h5 class="card-text">Quantity: @Model.Cart[i-1].Quantity</h5>
+                    <h5 class="card-text">TotalPrice: @Model.Cart[i-1].TotalPrice</h5>
+                    <form asp-action="DeleteFromCart" asp-controller="Cart">
+                        <input type="hidden" name="CartItemId">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </div>
+                {u--;}
+                if(u != 0)
+                {
+                    i++;
+                }
+              }
+            </div>
+        }
+        @if(!(@Model.Cart.Count == 0))
+        {
+            <h3>Cart Total Price: @Model.CartTotalPrice</h3>
+            <form asp-action="Checkout" asp-controller="Cart">
+                <input type="hidden" asp-for="@Model.UserId" value="@claim">
+                <input type="hidden" asp-for="@Model.CartTotalPrice" value="@Model.CartTotalPrice">
+                <input type="submit" value="Check Out" class="btn btn-success">
             </form>
-        </div>
-    }
-    @if(!(@Model.Cart.Count == 0))
-    {
-        <h3>Cart Total Price: @Model.CartTotalPrice</h3>
-        <form asp-action="Checkout" asp-controller="Cart">
-            <input type="hidden" asp-for="@Model.UserId" value="@claim">
-            <input type="hidden" asp-for="@Model.CartTotalPrice" value="@Model.CartTotalPrice">
-            <input type="submit" value="Check Out" class="btn btn-success">
-        </form>
-    }
-    else
-    {
-        <h3>Your cart is empty</h3>
-    }
-    
-</div>
+        }
+        else
+        {
+            <h3>Your cart is empty</h3>
+        }
+        
 

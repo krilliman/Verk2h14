@@ -30,7 +30,8 @@ namespace BookCave.Repositories
                             Price = Bk.TotalPrice,
                             BookName = Bk.Name,
                             Quantity = Quantity,
-                            TotalPrice = Bk.TotalPrice * Quantity
+                            TotalPrice = Bk.TotalPrice * Quantity,
+                            Image = Bk.Image
                         }).SingleOrDefault();
             var ItemToString = new List<string>();
             ItemToString.Add(Item.BookId.ToString());
@@ -38,6 +39,7 @@ namespace BookCave.Repositories
             ItemToString.Add(Item.Quantity.ToString());
             ItemToString.Add(Item.TotalPrice.ToString());
             ItemToString.Add(Item.BookName.ToString());
+            ItemToString.Add(Item.Image.ToString());
 
             
             var RetVal = ItemToString.Aggregate((a, b) => a = a + "|" + b);
@@ -180,7 +182,8 @@ namespace BookCave.Repositories
                     Price = Double.Parse(ListOfVars[1]),
                     Quantity = Int32.Parse(ListOfVars[2]),
                     TotalPrice = Double.Parse(ListOfVars[3]),
-                    BookName = ListOfVars[4]
+                    BookName = ListOfVars[4],
+                    Image = ListOfVars[5]
                 };
                 CartList.Add(CartItem);
                 CartTotal += CartItem.TotalPrice;

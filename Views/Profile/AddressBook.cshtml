@@ -5,12 +5,13 @@
 @using BookCave.Models.EntityModels
 @{
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+    var i = 1;
 }
 @model BookCave.Models.ViewModels.AddressListViewModel
 <div class="col-sm-6">
-    @for(var i = 1; i <= @Model.AddressBook.Count; i++)
+    @foreach(var Address in @Model.AddressBook)
     {
-        <div class="jumbotron col-sm-4" >
+        <div class="jumbotron" >
             <h3>Address @i</h3>
             <ul>
                 <li>StreetLine: @Model.AddressBook[i-1].StreetLine</li>
@@ -25,6 +26,7 @@
                 <input type="submit" class="btn btn-danger" value="Delete">
             </form>
         </div>
+        {i++;}
     }
     <div class="jumbotron hidden" id="AddAddressDiv" >
         <form asp-action="AddressBook" asp-controller="Profile" class="form-horizontal from-control">
@@ -59,3 +61,4 @@
         <div class="text-danger">@ViewData["ErrorMessage"]</div>
 </div>
 <button class="btn btn-success" id="CreateAddress">Add Address</button>
+</div>

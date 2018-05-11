@@ -166,9 +166,6 @@ ul {
     padding: 15px 10px;
     border-bottom: 1px solid rgba(100,100,100,0.3);
 }
-.book-info {
-    float: right; 
-}
 .book-wishlist {
     float: center;
     margin-top: 5px;  
@@ -177,6 +174,8 @@ ul {
     border: groove; 
 }
 #footer {
+    display:block;
+    clear: both;
     position: static;
     bottom:0;
     text-align: center;
