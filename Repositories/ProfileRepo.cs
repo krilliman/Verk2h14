@@ -160,7 +160,7 @@ namespace BookCave.Repositories
         public AddressListViewModel GetMyAddressBook(int Id)
         {
             var Countries = (from Ct in _db.CountryTable
-                            select new CountryVieWModel
+                            select new CountryViewModel
                             {
                                 Name = Ct.Name
                             }).ToList();

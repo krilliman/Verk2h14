@@ -16,12 +16,9 @@ namespace BookCave.Controllers
     {
         private ProfileService _profileService;
         private IPaymentService _paymentSerivce;
-
-        private IAddressService _iAddressService;
-        public ProfileController(IAddressService AddressService, IPaymentService Payment)
+        public ProfileController(IPaymentService Payment)
         {
             _paymentSerivce = Payment;
-            _iAddressService = AddressService;
             _profileService = new ProfileService();
         }
          public IActionResult AddressBook(int Id)
@@ -42,12 +39,6 @@ namespace BookCave.Controllers
             {
                 ViewData["ErrorMessage"] = "Error";
                 return View();
-            }
-            try{
-                _iAddressService.ProccessAddress(Model.NewAddress);
-            }
-            catch(Exception e){
-                Console.WriteLine("Error: " + e);
             }
             var UserId = _profileService.AddAddress(Model);
             return RedirectToAction("AddressBook", "Profile", new {Id = UserId});
